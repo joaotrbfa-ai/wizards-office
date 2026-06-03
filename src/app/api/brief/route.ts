@@ -76,10 +76,31 @@ export async function POST(req: Request) {
       html,
     })
     if (error) {
-      return NextResponse.json({ error: 'Falha ao enviar o e-mail.' }, { status: 502 })
+      console.error('[brief] Resend error:', error)
+      return NextResponse.json(
+        {
+          error: 'Falha ao enviar o e-mail.',
+          // DEBUG temporário — remover depois que estabilizar
+          detail: {
+            name: error.name,
+            message: error.message,
+            from,
+            to,
+          },
+        },
+        { status: 502 },
+      )
     }
-  } catch {
-    return NextResponse.json({ error: 'Falha ao enviar o e-mail.' }, { status: 502 })
+  } catch (err) {
+    console.error('[brief] Unexpected error:', err)
+    return NextResponse.json(
+      {
+        error: 'Falha ao enviar o e-mail.',
+        // DEBUG temporário — remover depois que estabilizar
+        detail: err instanceof Error ? { name: err.name, message: err.message } : String(err),
+      },
+      { status: 502 },
+    )
   }
 
   return NextResponse.json({ ok: true })
