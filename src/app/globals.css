@@ -1,0 +1,133 @@
+/* Fallback de sans-serif (Neue Montreal substituta) — General Sans / Fontshare.
+   Quando migrar para Neue Montreal self-host, remova este @import. */
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tokens de cor — HSL para alpha compatível com Tailwind */
+    --color-cream: 35 32% 87%; /* #EAE1D3 */
+    --color-sand: 41 17% 69%; /* #BFB6A2 */
+    --color-olive: 47 11% 31%; /* #575549 */
+    --color-terracotta: 16 51% 47%; /* #B65A3A */
+    --color-ink: 0 0% 18%; /* #2D2D2D */
+
+    /* Variável de fonte sans — apontamos para General Sans (fallback).
+       Ao trocar para Neue Montreal self-host, esta variável é sobrescrita
+       automaticamente pelo next/font/local no <html>. */
+    --font-sans: 'General Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Lenis cuida do smooth scroll; o nativo conflita com o scrub. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-olive text-cream font-sans;
+    font-feature-settings: 'ss01', 'cv01';
+  }
+
+  ::selection {
+    background-color: hsl(var(--color-terracotta) / 0.85);
+    color: hsl(var(--color-cream));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--color-cream));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reset de margens em headings — controlamos via utilitários */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-medium;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-eyebrow uppercase tracking-widest text-sand;
+  }
+
+  .display {
+    @apply font-sans text-display uppercase tracking-wider;
+  }
+
+  .editorial {
+    @apply font-serif italic;
+  }
+
+  .script {
+    @apply font-script;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Compensa o header fixo. Aplicar SÓ em páginas cuja primeira seção NÃO é
+     full-bleed (hoje todas as aberturas são full-bleed e ficam sob o header). */
+  .page-pad-top {
+    @apply pt-24 sm:pt-28;
+  }
+
+  /* Scroll-snap opt-in: aplicar .scene-snap no wrapper que contém as cenas.
+     NÃO usar globalmente — só onde o snap for desejado. */
+  .scene-snap {
+    scroll-snap-type: y mandatory;
+  }
+
+  .scene-snap > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* ---- Lenis (smooth scroll) ----
+   Regras recomendadas pelo Lenis. Aplicadas via classe que o próprio Lenis
+   adiciona ao <html> ao inicializar. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Respeitar prefers-reduced-motion globalmente */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

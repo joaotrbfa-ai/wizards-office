@@ -1,0 +1,4 @@
+# Coloque aqui os arquivos da Neue Montreal quando disponíveis:
+#   NeueMontreal-Medium.woff2
+#   NeueMontreal-Bold.woff2
+# Depois, ative o bloco self-host em src/lib/fonts.ts.
