@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import type { ReactNode } from 'react'
 
-export type SceneTone = 'olive' | 'ink' | 'transparent'
+export type SceneTone = 'olive' | 'ink' | 'transparent' | 'sand'
 export type SceneMinHeight = 'screen' | 'tall' | 'auto'
 
 export interface SceneProps {
@@ -26,6 +26,7 @@ const toneClass: Record<SceneTone, string> = {
   olive: 'bg-background',
   ink: 'bg-background-alt',
   transparent: 'bg-transparent',
+  sand: 'bg-sand',
 }
 
 const minHeightClass: Record<SceneMinHeight, string> = {
