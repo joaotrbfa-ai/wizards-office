@@ -1,19 +1,21 @@
-import { Section } from '@/components/layout/Section'
-import { Button } from '@/components/ui/Button'
+import { Footer } from '@/components/layout/Footer'
+import { Header } from '@/components/layout/Header'
+import { NotFoundContent } from '@/components/NotFoundContent'
+import { MotionProvider } from '@/components/providers/MotionProvider'
 
+// 404 global: capturado para URLs que não casam com nenhuma rota.
+// Renderiza só dentro do root layout (mínimo), então embute o chrome do site
+// para manter Header/Footer — espelha o (site)/layout.tsx.
 export default function NotFound() {
   return (
-    <Section tone="olive" spacing="lg" className="page-pad-top">
-      <p className="eyebrow">404</p>
-      <h1 className="display mt-6 text-balance">Página não encontrada.</h1>
-      <p className="mt-8 max-w-prose text-lg text-cream/80">
-        O endereço que você procura não existe ou foi movido.
-      </p>
-      <div className="mt-10">
-        <Button href="/" variant="outline" size="lg">
-          Voltar ao início
-        </Button>
-      </div>
-    </Section>
+    <div className="min-h-screen">
+      <MotionProvider>
+        <Header />
+        <main id="conteudo">
+          <NotFoundContent />
+        </main>
+        <Footer />
+      </MotionProvider>
+    </div>
   )
 }

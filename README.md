@@ -84,16 +84,24 @@ Cores e fontes vivem em `tailwind.config.ts` + `src/app/globals.css`.
 ├── src/
 │   ├── app/
 │   │   ├── globals.css                tokens + base styles
-│   │   ├── layout.tsx                 root layout (Header, Footer, MotionProvider)
-│   │   ├── page.tsx                   home placeholder (demo do DS)
+│   │   ├── layout.tsx                 root layout mínimo (<html>/<body>, fontes)
 │   │   ├── not-found.tsx
-│   │   ├── sobre/page.tsx
-│   │   ├── servicos/page.tsx
-│   │   ├── projetos/
-│   │   │   ├── page.tsx
-│   │   │   └── [slug]/page.tsx
-│   │   ├── galeria/page.tsx
-│   │   └── contato/page.tsx
+│   │   ├── sitemap.ts · robots.ts · icon.svg
+│   │   ├── api/brief/route.ts         endpoint do formulário de brief
+│   │   ├── (site)/                    route group do site público
+│   │   │   ├── layout.tsx             Header + Footer + MotionProvider + skip-link
+│   │   │   ├── page.tsx               home
+│   │   │   ├── sobre/page.tsx
+│   │   │   ├── servicos/page.tsx
+│   │   │   ├── projetos/page.tsx · projetos/[slug]/page.tsx
+│   │   │   ├── galeria/page.tsx
+│   │   │   ├── contato/page.tsx
+│   │   │   └── dev/scroll-demo/page.tsx
+│   │   └── (studio)/                  route group do admin (sem chrome do site)
+│   │       └── admin/[[...tool]]/      Sanity Studio (NextStudio)
+│   ├── sanity/
+│   │   ├── env.ts                     projectId/dataset/apiVersion
+│   │   └── client.ts                  cliente de fetching (uso na Fase D)
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Container.tsx
@@ -111,6 +119,7 @@ Cores e fontes vivem em `tailwind.config.ts` + `src/app/globals.css`.
 │       ├── motion.ts                  variants reutilizáveis
 │       ├── nav.ts                     items de nav + contato
 │       └── utils.ts                   cn()
+├── sanity.config.ts                   config do Sanity Studio (basePath /admin)
 ├── tailwind.config.ts
 ├── next.config.mjs
 ├── tsconfig.json
@@ -180,7 +189,45 @@ Nunca commite `.env.local` (já ignorado no `.gitignore`). Use `.env.example` co
 
 ---
 
+## Admin (Sanity)
+
+O conteúdo editável do site é gerido pelo **Sanity Studio**, embutido na própria aplicação Next em `/admin` (route group `(studio)`, isolado do Header/Footer/MotionProvider do site).
+
+- **URL:** `https://wizardsoffice.com/admin` (produção) · `http://localhost:3000/admin` (local)
+- **Login:** SSO da Sanity (Google ou e-mail convidado).
+- **Rodar localmente:** `npm run dev` → abra [http://localhost:3000/admin](http://localhost:3000/admin).
+
+> **Status:** fundação (Fase B). O Studio carrega vazio — schemas reais e migração de conteúdo entram na Fase C/D.
+
+### Variáveis de ambiente
+
+| Variável | Descrição |
+| -------- | --------- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | ID do projeto Sanity (dashboard → Project settings). Obrigatória. |
+| `NEXT_PUBLIC_SANITY_DATASET` | Dataset — use `production`. |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | Versão da API (data, `YYYY-MM-DD`). |
+
+Configure as três em `.env.local` (local) e nas **Environment Variables** do Vercel (produção). Veja `.env.example`.
+
+### Adicionar um novo editor
+
+Dashboard Sanity → **Members** → **Invite** → e-mail do editor.
+
+### Configurar CORS
+
+Para o Studio autenticar a partir do navegador, libere as origens em
+dashboard Sanity → **API** → **CORS Origins** → **Add**:
+
+- `https://wizardsoffice.com`
+- `https://wizards-office.vercel.app`
+- `http://localhost:3000`
+
+Marque **Allow credentials** em cada uma.
+
+---
+
 ## Próximas etapas
 
 - Self-host de Neue Montreal.
 - OG image, favicon, sitemap, robots.
+- Schemas reais do Sanity + migração de conteúdo (Fase C/D).

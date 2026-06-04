@@ -1,7 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import { Footer } from '@/components/layout/Footer'
-import { Header } from '@/components/layout/Header'
-import { MotionProvider } from '@/components/providers/MotionProvider'
 import { script, serif } from '@/lib/fonts'
 import './globals.css'
 
@@ -46,20 +43,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${serif.variable} ${script.variable}`}>
-      <body className="min-h-screen antialiased">
-        <a
-          href="#conteudo"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-cream focus:px-4 focus:py-2 focus:text-olive"
-        >
-          Pular para o conteúdo
-        </a>
-
-        <MotionProvider>
-          <Header />
-          <main id="conteudo">{children}</main>
-          <Footer />
-        </MotionProvider>
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }
