@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from './Container'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
@@ -44,9 +45,13 @@ export async function Footer() {
 
           <div className="flex flex-col items-start justify-between gap-6 border-t border-cream/10 pt-8 text-[0.72rem] uppercase tracking-widest text-sand sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">
-              <span className="font-serif text-xl normal-case tracking-normal text-cream">
-                wzds<span className="text-terracotta">.</span>
-              </span>
+              <Image
+                src="/brand/logo-light.png"
+                alt="wzds."
+                width={1250}
+                height={404}
+                className="h-6 w-auto"
+              />
               <span>{address}</span>
             </div>
 

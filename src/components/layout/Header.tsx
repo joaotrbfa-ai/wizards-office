@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -48,9 +49,16 @@ export function Header() {
           <Link
             href="/"
             aria-label="wzds. — Wizards Office"
-            className="font-serif text-2xl leading-none text-cream transition-opacity hover:opacity-80 sm:text-3xl"
+            className="block transition-opacity hover:opacity-80"
           >
-            wzds<span className="text-terracotta">.</span>
+            <Image
+              src="/brand/logo-light.png"
+              alt="wzds."
+              width={1250}
+              height={404}
+              priority
+              className="h-7 w-auto sm:h-9"
+            />
           </Link>
 
           <nav aria-label="Principal" className="hidden md:block">
