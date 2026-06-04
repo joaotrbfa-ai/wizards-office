@@ -1,13 +1,16 @@
 import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
-import type { Projeto } from '@/data/projetos'
+import { imageProps } from '@/sanity/image'
+import type { Projeto } from '@/sanity/types'
 
 export function CaseHero({ projeto }: { projeto: Projeto }) {
+  const cover = imageProps(projeto.coverImage, 2400)
   return (
     <Scene minHeight="screen">
       <FullBleedMedia
-        src={projeto.coverImage}
-        alt={projeto.nome}
+        src={cover.src}
+        alt={cover.alt || projeto.nome}
+        blurDataURL={cover.blurDataURL}
         overlay="strong"
         parallax
         priority

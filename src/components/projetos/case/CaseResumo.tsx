@@ -1,10 +1,10 @@
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
-import type { Projeto } from '@/data/projetos'
+import type { Projeto } from '@/sanity/types'
 
 export function CaseResumo({ projeto }: { projeto: Projeto }) {
-  const paragrafos = projeto.descricao.split('\n\n')
+  const paragrafos = (projeto.descricao ?? '').split('\n\n')
 
   return (
     <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">

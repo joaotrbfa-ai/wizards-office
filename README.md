@@ -244,10 +244,46 @@ dashboard Sanity → **API** → **CORS Origins** → **Add**:
 
 Marque **Allow credentials** em cada uma.
 
+### Webhook de revalidação (on-demand)
+
+O site lê o conteúdo do Sanity em build (SSG) com revalidação por _tag_. Quando
+um documento é publicado no Studio, um webhook avisa o site para revalidar só as
+páginas afetadas — sem novo deploy.
+
+**Fluxo:** publicar no Studio → webhook → `POST /api/revalidate` → `revalidateTag('sanity:<tipo>')`.
+
+**Variáveis de ambiente** (local + Vercel):
+
+| Variável | Descrição |
+| -------- | --------- |
+| `SANITY_API_READ_TOKEN` | Token de leitura (Viewer). Dataset é público, então **opcional**; recomendado. |
+| `SANITY_REVALIDATE_SECRET` | Segredo do webhook. Mesmo valor aqui e no Sanity. |
+
+**Configurar o webhook** (após o deploy): dashboard Sanity → **API** → **Webhooks** → **Create webhook**:
+
+- **URL:** `https://wizards-office.vercel.app/api/revalidate` (depois `https://wizardsoffice.com/api/revalidate`)
+- **Trigger on:** Create + Update + Delete
+- **Filter:**
+  ```
+  _type in ["projeto","pilar","servico","etapaProcesso","membro","parceiro","paginaHome","paginaSobre","paginaServicos","paginaProjetos","paginaGaleria","paginaContato","config"]
+  ```
+- **Secret:** o mesmo valor de `SANITY_REVALIDATE_SECRET`
+
+O handler valida a assinatura HMAC do Sanity; requisições sem assinatura válida recebem `401`.
+
+### `src/data/*.ts` — histórico
+
+Os arquivos em `src/data/` (`projetos`, `equipe`, `processo`, `servicos`,
+`pilares`, `parceiros`, `galeria`) eram a fonte de conteúdo antes do Sanity.
+Desde a **Fase D** o site lê via `src/sanity/queries.ts` e esses arquivos estão
+marcados `@deprecated` — mantidos apenas como **referência histórica / rollback**
+e porque o script `scripts/migrate-to-sanity.ts` ainda os usa como seed.
+Nenhum componente do site os importa.
+
 ---
 
 ## Próximas etapas
 
 - Self-host de Neue Montreal.
-- OG image, favicon, sitemap, robots.
-- Schemas reais do Sanity + migração de conteúdo (Fase C/D).
+- OG image (singleton `config.seo.ogImage`), favicon.
+- Codegen de tipos do Sanity (`sanity typegen`) no lugar dos tipos manuais.

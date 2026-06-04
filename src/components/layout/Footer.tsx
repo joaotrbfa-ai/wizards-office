@@ -1,9 +1,21 @@
 import Link from 'next/link'
 import { Container } from './Container'
-import { CONTACT } from '@/lib/nav'
+import { sanityFetch, TAGS } from '@/sanity/fetch'
+import { configQuery } from '@/sanity/queries'
+import type { Config } from '@/sanity/types'
 
-export function Footer() {
+export async function Footer() {
+  const config = await sanityFetch<Config>({ query: configQuery, tags: [TAGS.config] })
   const year = new Date().getFullYear()
+
+  const siteName = config?.siteName ?? 'Wizards Office'
+  const brandDescription =
+    config?.brandDescription ??
+    'Estúdio de visualização arquitetônica. Balneário Camboriú, Santa Catarina.'
+  const email = config?.contact?.email ?? 'contato@wizardsoffice.com'
+  const instagramUrl = config?.contact?.instagramUrl ?? 'https://www.instagram.com/wizards.office/'
+  const instagramHandle = config?.contact?.instagramHandle ?? '@wizards.office'
+  const address = config?.contact?.address ?? 'Balneário Camboriú · SC'
 
   return (
     <footer className="border-t border-cream/10 bg-olive">
@@ -11,18 +23,18 @@ export function Footer() {
         <div className="flex flex-col gap-12">
           <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
             <div className="max-w-xl">
-              <p className="text-eyebrow text-sand">Wizards Office</p>
+              <p className="text-eyebrow text-sand">{siteName}</p>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
-                Estúdio de visualização arquitetônica. Balneário Camboriú, Santa Catarina.
+                {brandDescription}
               </p>
             </div>
 
             <Link
-              href={`mailto:${CONTACT.email}`}
+              href={`mailto:${email}`}
               className="group inline-flex items-center gap-3 font-sans text-base uppercase tracking-widest text-cream transition-colors hover:text-terracotta sm:text-lg"
             >
               <span className="border-b border-cream/40 pb-1 group-hover:border-terracotta">
-                {CONTACT.email}
+                {email}
               </span>
               <span aria-hidden className="transition-transform duration-500 ease-soft group-hover:translate-x-1">
                 →
@@ -35,19 +47,19 @@ export function Footer() {
               <span className="font-serif text-xl normal-case tracking-normal text-cream">
                 wzds<span className="text-terracotta">.</span>
               </span>
-              <span>Balneário Camboriú · SC</span>
+              <span>{address}</span>
             </div>
 
             <a
-              href={CONTACT.instagram}
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-cream"
             >
-              {CONTACT.instagramHandle}
+              {instagramHandle}
             </a>
 
-            <span>© {year} Wizards Office</span>
+            <span>© {year} {siteName}</span>
           </div>
         </div>
       </Container>

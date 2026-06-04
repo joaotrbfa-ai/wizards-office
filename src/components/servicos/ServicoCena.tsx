@@ -1,8 +1,23 @@
 import { Scene } from '@/components/scroll/Scene'
-import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
+import { FullBleedMedia, type MediaOverlay } from '@/components/scroll/FullBleedMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
-import type { ServicoData, ServicoPosition } from '@/data/servicos'
+
+export type ServicoPosition = 'bottom-left' | 'center' | 'bottom-right'
+
+export interface ServicoCenaProps {
+  numero: string
+  titulo: string
+  subitems?: string[]
+  descricao: string
+  image: string
+  alt: string
+  /** Placeholder LQIP (base64) da imagem do Sanity. */
+  blurDataURL?: string
+  position?: ServicoPosition
+  featured?: boolean
+  overlay?: MediaOverlay
+}
 
 /**
  * Posições assimétricas só a partir de `md`. No mobile tudo vira bottom-left
@@ -23,21 +38,22 @@ const hAlign: Record<ServicoPosition, string> = {
 export function ServicoCena({
   numero,
   titulo,
-  subitems,
+  subitems = [],
   descricao,
   image,
   alt,
+  blurDataURL,
   position = 'bottom-left',
   featured = false,
   overlay = 'strong',
-}: ServicoData) {
+}: ServicoCenaProps) {
   const label = featured
     ? `${numero} — ${subitems[0] ?? 'Serviço'}`
     : `${numero} — Serviço`
 
   return (
     <Scene minHeight="screen">
-      <FullBleedMedia src={image} alt={alt} overlay={overlay} parallax>
+      <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay={overlay} parallax>
         <div
           className={cn(
             'flex h-full w-full flex-col p-8 pb-20 md:p-16 md:pb-32',

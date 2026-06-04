@@ -3,17 +3,12 @@ import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/Button'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 
-const SERVICOS = [
-  'Fotografia',
-  'Design de fachada',
-  'Design de interiores',
-  'Filmes',
-  'Plantas humanizadas',
-  'Tour 360',
-  'Design',
-]
+export interface ServicosListaProps {
+  /** Títulos dos serviços, na ordem de exibição. */
+  servicos: string[]
+}
 
-export function ServicosLista() {
+export function ServicosLista({ servicos }: ServicosListaProps) {
   return (
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
@@ -25,7 +20,7 @@ export function ServicosLista() {
         </Reveal>
 
         <RevealGroup className="mt-12 border-t border-sand/20">
-          {SERVICOS.map((servico, i) => (
+          {servicos.map((servico, i) => (
             <Reveal key={servico}>
               <div className="group flex cursor-default items-baseline gap-6 border-b border-sand/20 py-6 md:py-8">
                 <span className="text-sm uppercase tracking-widest text-sand transition-colors duration-300 group-hover:text-terracotta">

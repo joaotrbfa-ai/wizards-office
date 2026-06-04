@@ -11,6 +11,8 @@ export interface PilarSceneProps {
   descricao: string
   image: string
   alt: string
+  /** Placeholder LQIP (base64) da imagem do Sanity. */
+  blurDataURL?: string
   position?: PilarPosition
   overlay?: MediaOverlay
 }
@@ -35,12 +37,13 @@ export function PilarScene({
   descricao,
   image,
   alt,
+  blurDataURL,
   position = 'bottom-left',
   overlay = 'strong',
 }: PilarSceneProps) {
   return (
     <Scene minHeight="screen">
-      <FullBleedMedia src={image} alt={alt} overlay={overlay} parallax>
+      <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay={overlay} parallax>
         <div
           className={cn(
             'group flex h-full w-full flex-col p-8 pb-20 md:p-16 md:pb-32',

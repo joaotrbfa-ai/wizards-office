@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia, type MediaOverlay } from '@/components/scroll/FullBleedMedia'
-import type { Projeto } from '@/data/projetos'
+import { imageProps } from '@/sanity/image'
+import type { ProjetoCard } from '@/sanity/types'
 
 export interface ProjetoCenaProps {
-  projeto: Projeto
+  projeto: ProjetoCard
   index: number
   total: number
   overlay?: MediaOverlay
@@ -12,10 +13,17 @@ export interface ProjetoCenaProps {
 
 export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: ProjetoCenaProps) {
   const contador = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`
+  const cover = imageProps(projeto.coverImage, 2400)
 
   return (
     <Scene minHeight="screen">
-      <FullBleedMedia src={projeto.coverImage} alt={projeto.nome} overlay={overlay} parallax>
+      <FullBleedMedia
+        src={cover.src}
+        alt={cover.alt || projeto.nome}
+        blurDataURL={cover.blurDataURL}
+        overlay={overlay}
+        parallax
+      >
         <div className="group relative flex h-full w-full items-end justify-between gap-8 p-8 pb-16 md:p-16 md:pb-24">
           {/* Cena inteira clicável */}
           <Link

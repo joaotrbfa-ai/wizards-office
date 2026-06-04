@@ -3,16 +3,11 @@ import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/Button'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 
-const PARAGRAFOS = [
-  'A Wizards Office é um estúdio criativo de visualização arquitetônica fundado para transformar arquitetura em experiência visual, emoção e desejo.',
-  'Criamos imagens, filmes e narrativas visuais que dão forma ao que ainda não existe. Nosso trabalho nasce da união entre arquitetura, direção artística e tecnologia para traduzir a essência de cada projeto com precisão, atmosfera e identidade própria.',
-  'Acreditamos que uma grande visualização vai além da representação técnica. Ela antecipa sensações, desperta conexão emocional e amplia a percepção de valor de um empreendimento antes mesmo de sua construção.',
-  'Cada imagem é construída com intenção. Cada detalhe — da luz à materialidade, da composição ao ritmo visual — existe para ser sentido.',
-  'Movidos por storytelling, estética e inovação, desenvolvemos experiências visuais capazes de transformar espaços em objetos de desejo.',
-  'A Wizards Office cria o que as pessoas sentem antes mesmo de um espaço existir.',
-]
+export interface ManifestoTextProps {
+  paragrafos: string[]
+}
 
-export function ManifestoText() {
+export function ManifestoText({ paragrafos }: ManifestoTextProps) {
   return (
     <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">
       <Container>
@@ -31,7 +26,7 @@ export function ManifestoText() {
 
           <div className="lg:col-span-7">
             <RevealGroup className="flex flex-col gap-6">
-              {PARAGRAFOS.map((p, i) => (
+              {paragrafos.map((p, i) => (
                 <Reveal key={i}>
                   <p className="max-w-prose text-base leading-relaxed text-sand md:text-lg">
                     {p}

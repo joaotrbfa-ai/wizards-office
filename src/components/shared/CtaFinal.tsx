@@ -7,6 +7,8 @@ import { cn } from '@/lib/utils'
 export interface CtaFinalProps {
   image: string
   alt: string
+  /** Placeholder LQIP (base64) da imagem do Sanity. */
+  blurDataURL?: string
   /** Linhas do título (cada item vira uma linha). */
   titulo: string[]
   href: string
@@ -19,11 +21,12 @@ export interface CtaFinalProps {
 
 /**
  * Cena cinematic de chamada final (call to brief).
- * Compartilhada entre Serviços, Projetos e Galeria.
+ * Compartilhada entre Home, Serviços, Projetos e Galeria.
  */
 export function CtaFinal({
   image,
   alt,
+  blurDataURL,
   titulo,
   href,
   ctaLabel,
@@ -32,7 +35,7 @@ export function CtaFinal({
 }: CtaFinalProps) {
   return (
     <Scene minHeight="screen">
-      <FullBleedMedia src={image} alt={alt} overlay="strong" parallax>
+      <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay="strong" parallax>
         <div className="flex h-full w-full items-center justify-center px-6 text-center">
           <RevealGroup className="flex max-w-4xl flex-col items-center">
             {script && (

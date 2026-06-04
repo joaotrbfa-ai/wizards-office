@@ -5,16 +5,34 @@ import { CaseHero } from '@/components/projetos/case/CaseHero'
 import { CaseResumo } from '@/components/projetos/case/CaseResumo'
 import { CaseGaleria } from '@/components/projetos/case/CaseGaleria'
 import { CaseNext } from '@/components/projetos/case/CaseNext'
-import { PROJETOS } from '@/data/projetos'
+import { sanityFetch, TAGS } from '@/sanity/fetch'
+import {
+  projetoBySlugQuery,
+  projetoSlugsQuery,
+  projetosListQuery,
+} from '@/sanity/queries'
+import type { Projeto, ProjetoCard } from '@/sanity/types'
 
 type Params = { slug: string }
 
-export function generateStaticParams() {
-  return PROJETOS.map((p) => ({ slug: p.slug }))
+export async function generateStaticParams() {
+  const slugs = await sanityFetch<string[]>({
+    query: projetoSlugsQuery,
+    tags: [TAGS.projeto],
+  })
+  return slugs.map((slug) => ({ slug }))
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const projeto = PROJETOS.find((p) => p.slug === params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: Params
+}): Promise<Metadata> {
+  const projeto = await sanityFetch<Projeto | null>({
+    query: projetoBySlugQuery,
+    params: { slug: params.slug },
+    tags: [TAGS.projeto],
+  })
   if (!projeto) return { title: { absolute: 'Projeto — Wizards Office' } }
   return {
     title: { absolute: `${projeto.nome} — Wizards Office` },
@@ -22,12 +40,27 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   }
 }
 
-export default function CasePage({ params }: { params: Params }) {
-  const projeto = PROJETOS.find((p) => p.slug === params.slug)
+export default async function CasePage({ params }: { params: Params }) {
+  const [projeto, lista] = await Promise.all([
+    sanityFetch<Projeto | null>({
+      query: projetoBySlugQuery,
+      params: { slug: params.slug },
+      tags: [TAGS.projeto],
+    }),
+    sanityFetch<ProjetoCard[]>({
+      query: projetosListQuery,
+      tags: [TAGS.projeto],
+    }),
+  ])
+
   if (!projeto) notFound()
 
-  const idx = PROJETOS.findIndex((p) => p.slug === projeto.slug)
-  const proximo = PROJETOS[(idx + 1) % PROJETOS.length]
+  // Próximo projeto: índice circular dentro da lista ordenada (replica a lógica original).
+  const idx = lista.findIndex((p) => p.slug === projeto.slug)
+  const proximo =
+    lista.length > 0
+      ? lista[(Math.max(idx, 0) + 1) % lista.length]
+      : undefined
 
   return (
     <>
@@ -35,7 +68,7 @@ export default function CasePage({ params }: { params: Params }) {
       <CaseHero projeto={projeto} />
       <CaseResumo projeto={projeto} />
       <CaseGaleria projeto={projeto} />
-      <CaseNext proximo={proximo} />
+      {proximo && <CaseNext proximo={proximo} />}
     </>
   )
 }

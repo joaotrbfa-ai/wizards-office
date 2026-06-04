@@ -1,12 +1,20 @@
 import Link from 'next/link'
 import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
-import type { Projeto } from '@/data/projetos'
+import { imageProps } from '@/sanity/image'
+import type { ProjetoCard } from '@/sanity/types'
 
-export function CaseNext({ proximo }: { proximo: Projeto }) {
+export function CaseNext({ proximo }: { proximo: ProjetoCard }) {
+  const cover = imageProps(proximo.coverImage, 2400)
   return (
     <Scene minHeight="screen">
-      <FullBleedMedia src={proximo.coverImage} alt={proximo.nome} overlay="strong" parallax>
+      <FullBleedMedia
+        src={cover.src}
+        alt={cover.alt || proximo.nome}
+        blurDataURL={cover.blurDataURL}
+        overlay="strong"
+        parallax
+      >
         {/* Cena inteira clicável */}
         <Link
           href={`/projetos/${proximo.slug}`}

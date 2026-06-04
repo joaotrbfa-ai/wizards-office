@@ -1,34 +1,50 @@
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
-import { CONTACT } from '@/lib/nav'
+import type { PaginaContato, Config } from '@/sanity/types'
 
 type Canal = { label: string; valor: string; href?: string; external?: boolean }
 
-const CANAIS: Canal[] = [
-  { label: 'E-mail', valor: CONTACT.email, href: `mailto:${CONTACT.email}` },
-  {
-    label: 'Instagram',
-    valor: CONTACT.instagramHandle,
-    href: CONTACT.instagram,
-    external: true,
-  },
-  { label: 'Estúdio', valor: 'Balneário Camboriú · SC' },
-]
+export function ContatoDireto({
+  direto,
+  contact,
+}: {
+  direto?: PaginaContato['direto']
+  contact?: Config['contact']
+}) {
+  const eyebrow = direto?.eyebrow ?? 'Canais diretos'
+  const titulo = direto?.titulo ?? 'Ou fale direto.'
+  const emailLabel = direto?.emailLabel ?? 'E-mail'
+  const instagramLabel = direto?.instagramLabel ?? 'Instagram'
 
-export function ContatoDireto() {
+  const email = contact?.email ?? 'contato@wizardsoffice.com'
+  const instagramUrl = contact?.instagramUrl ?? 'https://www.instagram.com/wizards.office/'
+  const instagramHandle = contact?.instagramHandle ?? '@wizards.office'
+  const address = contact?.address ?? 'Balneário Camboriú · SC'
+
+  const canais: Canal[] = [
+    { label: emailLabel, valor: email, href: `mailto:${email}` },
+    {
+      label: instagramLabel,
+      valor: instagramHandle,
+      href: instagramUrl,
+      external: true,
+    },
+    { label: 'Estúdio', valor: address },
+  ]
+
   return (
     <Scene tone="ink" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">Canais diretos</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-sand">{eyebrow}</p>
           <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
-            Ou fale direto.
+            {titulo}
           </h2>
         </Reveal>
 
         <RevealGroup className="mt-12 grid grid-cols-1 gap-px border-t border-sand/20 sm:grid-cols-3">
-          {CANAIS.map((canal) => (
+          {canais.map((canal) => (
             <Reveal key={canal.label} className="border-b border-sand/20 py-8">
               <p className="text-xs uppercase tracking-[0.25em] text-sand">{canal.label}</p>
               {canal.href ? (

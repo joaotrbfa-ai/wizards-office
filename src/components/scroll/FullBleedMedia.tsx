@@ -18,6 +18,8 @@ export interface FullBleedMediaProps {
   alt?: string
   /** Poster do vídeo. */
   poster?: string
+  /** Placeholder LQIP (base64) para imagens do Sanity. */
+  blurDataURL?: string
   /** Intensidade do overlay de leitura. */
   overlay?: MediaOverlay
   /** Parallax sutil no scroll (desligado em prefers-reduced-motion). */
@@ -48,6 +50,7 @@ export function FullBleedMedia({
   type,
   alt = '',
   poster,
+  blurDataURL,
   overlay = 'soft',
   parallax = false,
   priority = false,
@@ -101,6 +104,7 @@ export function FullBleedMedia({
             sizes="100vw"
             priority={priority}
             className="object-cover"
+            {...(blurDataURL ? { placeholder: 'blur' as const, blurDataURL } : {})}
           />
         ) : (
           <video

@@ -1,3 +1,8 @@
+/**
+ * @deprecated Source-of-truth migrado para o Sanity em 2026-06-04 (Fase D).
+ * O site lê via src/sanity/queries.ts. Mantido como referência histórica /
+ * rollback e para o script scripts/migrate-to-sanity.ts.
+ */
 import type { MediaOverlay } from '@/components/scroll/FullBleedMedia'
 
 export type ServicoPosition = 'bottom-left' | 'center' | 'bottom-right'

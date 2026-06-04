@@ -1,10 +1,10 @@
 import { GaleriaRow } from './GaleriaRow'
-import { GALERIA_ROWS } from '@/data/galeria'
+import type { GaleriaRow as GaleriaRowType } from '@/sanity/types'
 
-export function GaleriaGrid() {
+export function GaleriaGrid({ rows }: { rows: GaleriaRowType[] }) {
   return (
     <>
-      {GALERIA_ROWS.map((row, i) => (
+      {rows.map((row, i) => (
         <GaleriaRow key={i} row={row} />
       ))}
     </>

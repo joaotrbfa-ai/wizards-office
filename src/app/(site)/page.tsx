@@ -9,7 +9,16 @@ import { ServicosLista } from '@/components/home/ServicosLista'
 import { ParceirosCena } from '@/components/home/ParceirosCena'
 import { PausaScript } from '@/components/home/PausaScript'
 import { CtaFinal } from '@/components/shared/CtaFinal'
-import { PILARES_DATA } from '@/data/pilares'
+import { sanityFetch, TAGS } from '@/sanity/fetch'
+import {
+  paginaHomeQuery,
+  projetosDestaqueQuery,
+  pilaresQuery,
+  parceirosQuery,
+  servicosQuery,
+} from '@/sanity/queries'
+import { imageProps } from '@/sanity/image'
+import type { PaginaHome, ProjetoCard, Pilar, Parceiro, Servico } from '@/sanity/types'
 
 export const metadata: Metadata = {
   title: {
@@ -19,42 +28,67 @@ export const metadata: Metadata = {
     'Estúdio criativo de visualização arquitetônica de alto padrão em Balneário Camboriú. Imagens, filmes e narrativas visuais que transformam arquitetura em desejo.',
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [home, projetos, pilares, parceiros, servicos] = await Promise.all([
+    sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
+    sanityFetch<ProjetoCard[]>({ query: projetosDestaqueQuery, tags: [TAGS.projeto] }),
+    sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
+    sanityFetch<Parceiro[]>({ query: parceirosQuery, tags: [TAGS.parceiro] }),
+    sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
+  ])
+
+  const cta = home?.ctaFinal
+  const ctaImg = cta?.image ? imageProps(cta.image, 2400) : null
+
   return (
     <>
       <ScrollProgress />
 
-      <Hero />
+      <Hero
+        videoUrl={home?.hero?.videoUrl ?? ''}
+        fraseHead={home?.hero?.fraseHead ?? 'Crafting spaces that feel like'}
+        fraseScript={home?.hero?.fraseScript ?? 'magic.'}
+        poster={home?.hero?.poster ? imageProps(home.hero.poster, 1920).src : undefined}
+      />
 
       <ManifestoPinned />
-      <ManifestoText />
+      <ManifestoText paragrafos={home?.manifestoTextoParagrafos ?? []} />
 
-      {PILARES_DATA.map((pilar) => (
-        <PilarScene
-          key={pilar.numero}
-          numero={pilar.numero}
-          titulo={pilar.titulo}
-          descricao={pilar.descricao}
-          image={pilar.image}
-          alt={pilar.alt}
-          position={pilar.position}
-          overlay={pilar.overlay}
+      {pilares.map((pilar) => {
+        const img = imageProps(pilar.image, 2400)
+        return (
+          <PilarScene
+            key={pilar._id}
+            numero={pilar.numero}
+            titulo={pilar.titulo}
+            descricao={pilar.descricao}
+            image={img.src}
+            alt={img.alt}
+            blurDataURL={img.blurDataURL}
+            position={pilar.position}
+            overlay={pilar.overlay}
+          />
+        )
+      })}
+
+      <PausaScript texto={home?.pausaScript?.texto} caption={home?.pausaScript?.caption} />
+
+      <ProjetosHorizontal projetos={projetos} />
+      <ServicosLista servicos={servicos.map((s) => s.titulo)} />
+      <ParceirosCena parceiros={parceiros} />
+
+      {cta && (
+        <CtaFinal
+          image={ctaImg?.src ?? ''}
+          alt={ctaImg?.alt ?? ''}
+          blurDataURL={ctaImg?.blurDataURL}
+          titulo={cta.tituloLinhas}
+          subtitulo={cta.subtitulo}
+          ctaLabel={cta.ctaLabel}
+          href={cta.href}
+          script={cta.mostrarScriptMagic}
         />
-      ))}
-
-      <PausaScript />
-
-      <ProjetosHorizontal />
-      <ServicosLista />
-      <ParceirosCena />
-      <CtaFinal
-        image="/projects/wow-rv-001-wine-gourmet.jpg"
-        alt="Ambiente Wizards Office"
-        titulo={['Vamos criar', 'magia', 'juntos?']}
-        subtitulo="Conte sobre seu projeto. Respondemos em até 48h úteis."
-        href="/contato"
-        ctaLabel="Iniciar brief"
-      />
+      )}
     </>
   )
 }

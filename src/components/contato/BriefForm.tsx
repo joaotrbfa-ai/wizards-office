@@ -24,7 +24,19 @@ type Status = 'idle' | 'sending' | 'success' | 'error'
 const legendClass = 'text-sm uppercase tracking-[0.2em] text-sand'
 const fieldsetClass = 'min-w-0 border-0 p-0'
 
-export function BriefForm() {
+type BriefFormProps = {
+  eyebrow?: string
+  titulo?: string
+  submitLabel?: string
+  contatoEmail?: string
+}
+
+export function BriefForm({
+  eyebrow = 'Como começamos',
+  titulo = 'Comece pela ambição.',
+  submitLabel = 'Enviar brief',
+  contatoEmail = 'contato@wizardsoffice.com',
+}: BriefFormProps = {}) {
   const [status, setStatus] = useState<Status>('idle')
   const successRef = useRef<HTMLDivElement>(null)
 
@@ -70,9 +82,9 @@ export function BriefForm() {
     <Scene tone="olive" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <div className="mx-auto max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">Como começamos</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-sand">{eyebrow}</p>
           <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
-            Comece pela ambição.
+            {titulo}
           </h2>
 
           {status === 'success' ? (
@@ -212,14 +224,14 @@ export function BriefForm() {
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Button type="submit" variant="solid" size="lg" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'Enviando…' : 'Enviar brief'}
+                  {status === 'sending' ? 'Enviando…' : submitLabel}
                 </Button>
 
                 {status === 'error' && (
                   <p role="alert" className="text-sm text-terracotta">
                     Algo deu errado no envio. Tente de novo ou escreva para{' '}
-                    <a href="mailto:contato@wizardsoffice.com" className="underline">
-                      contato@wizardsoffice.com
+                    <a href={`mailto:${contatoEmail}`} className="underline">
+                      {contatoEmail}
                     </a>
                     .
                   </p>

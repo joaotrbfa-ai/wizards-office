@@ -4,7 +4,8 @@ import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
-import type { GaleriaItem, Projeto } from '@/data/projetos'
+import { imageProps } from '@/sanity/image'
+import type { GaleriaItem, Projeto } from '@/sanity/types'
 
 type RowLayout = 'full' | 'split' | 'asymmetric-left'
 type Row = { layout: RowLayout; images: GaleriaItem[] }
@@ -43,12 +44,13 @@ function Tile({
   aspect: string
   sizes: string
 }) {
+  const img = imageProps(item.image, 2000)
   return (
     <div>
       <div className={cn('group relative overflow-hidden bg-ink', aspect)}>
         <Image
-          src={item.src}
-          alt={item.alt}
+          src={img.src}
+          alt={img.alt}
           fill
           sizes={sizes}
           className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
@@ -64,16 +66,25 @@ function Tile({
 }
 
 export function CaseGaleria({ projeto }: { projeto: Projeto }) {
-  const rows = buildRows(projeto.galeria)
+  const rows = buildRows(projeto.galeria ?? [])
+
+  if (rows.length === 0) return null
 
   return (
     <>
       {rows.map((row, i) => {
         if (row.layout === 'full') {
-          const [img] = row.images
+          const [item] = row.images
+          const img = imageProps(item.image, 2400)
           return (
-            <Scene key={`${img.src}-${i}`} minHeight="screen">
-              <FullBleedMedia src={img.src} alt={img.alt} overlay="bottom" parallax />
+            <Scene key={`full-${i}`} minHeight="screen">
+              <FullBleedMedia
+                src={img.src}
+                alt={img.alt}
+                blurDataURL={img.blurDataURL}
+                overlay="bottom"
+                parallax
+              />
             </Scene>
           )
         }
@@ -83,8 +94,8 @@ export function CaseGaleria({ projeto }: { projeto: Projeto }) {
             <Scene key={`split-${i}`} tone="olive" minHeight="auto" className="py-12 md:py-20">
               <Container>
                 <RevealGroup className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-                  {row.images.map((item) => (
-                    <Reveal key={item.src}>
+                  {row.images.map((item, j) => (
+                    <Reveal key={`split-${i}-${j}`}>
                       <Tile item={item} aspect="aspect-[4/5]" sizes="(min-width: 768px) 50vw, 100vw" />
                     </Reveal>
                   ))}

@@ -3,7 +3,10 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { ProjetosAbertura } from '@/components/projetos/ProjetosAbertura'
 import { ProjetoCena } from '@/components/projetos/ProjetoCena'
 import { CtaFinal } from '@/components/shared/CtaFinal'
-import { PROJETOS } from '@/data/projetos'
+import { sanityFetch, TAGS } from '@/sanity/fetch'
+import { paginaProjetosQuery, projetosListQuery } from '@/sanity/queries'
+import { imageProps } from '@/sanity/image'
+import type { PaginaProjetos, ProjetoCard } from '@/sanity/types'
 
 export const metadata: Metadata = {
   title: {
@@ -13,21 +16,52 @@ export const metadata: Metadata = {
     'Cases selecionados de visualização arquitetônica. Cada projeto traduz uma intenção em imagem, filme e narrativa.',
 }
 
-export default function ProjetosPage() {
+export default async function ProjetosPage() {
+  const [pagina, projetos] = await Promise.all([
+    sanityFetch<PaginaProjetos | null>({
+      query: paginaProjetosQuery,
+      tags: [TAGS.paginaProjetos],
+    }),
+    sanityFetch<ProjetoCard[]>({
+      query: projetosListQuery,
+      tags: [TAGS.projeto],
+    }),
+  ])
+
+  const cta = pagina?.ctaFinal
+
   return (
     <>
       <ScrollProgress />
-      <ProjetosAbertura />
-      {PROJETOS.map((projeto, i) => (
-        <ProjetoCena key={projeto.slug} projeto={projeto} index={i} total={PROJETOS.length} />
+      <ProjetosAbertura abertura={pagina?.abertura} />
+      {projetos.map((projeto, i) => (
+        <ProjetoCena
+          key={projeto.slug}
+          projeto={projeto}
+          index={i}
+          total={projetos.length}
+        />
       ))}
-      <CtaFinal
-        image="/projects/wow-rv-001-wine-gourmet.jpg"
-        alt="Ambiente Wizards Office"
-        titulo={['Vamos criar', 'magia juntos?']}
-        href="/contato"
-        ctaLabel="Trazer minha visão"
-      />
+      {cta ? (
+        <CtaFinal
+          image={imageProps(cta.image, 2400).src}
+          alt={imageProps(cta.image, 2400).alt}
+          blurDataURL={imageProps(cta.image, 2400).blurDataURL}
+          titulo={cta.tituloLinhas}
+          subtitulo={cta.subtitulo}
+          href={cta.href}
+          ctaLabel={cta.ctaLabel}
+          script={cta.mostrarScriptMagic}
+        />
+      ) : (
+        <CtaFinal
+          image="/projects/wow-rv-001-wine-gourmet.jpg"
+          alt="Ambiente Wizards Office"
+          titulo={['Vamos criar', 'magia juntos?']}
+          href="/contato"
+          ctaLabel="Trazer minha visão"
+        />
+      )}
     </>
   )
 }

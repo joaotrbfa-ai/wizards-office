@@ -1,18 +1,9 @@
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
+import type { MetricaSobre } from '@/sanity/types'
 
-type Metrica = { tipo: 'numero' | 'frase'; valor: string; label: string }
-
-/** Mix de número real + frases editoriais (evita placeholders até definirmos os reais). */
-const METRICAS: Metrica[] = [
-  { tipo: 'numero', valor: '+10', label: 'Anos de mercado' },
-  { tipo: 'frase', valor: 'Empreendimentos', label: 'em três estados' },
-  { tipo: 'numero', valor: '∞', label: 'Cenas dirigidas' },
-  { tipo: 'frase', valor: 'Cinco wizards', label: 'uma estética' },
-]
-
-export function NumerosCena() {
+export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
   return (
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
@@ -24,7 +15,7 @@ export function NumerosCena() {
         </Reveal>
 
         <RevealGroup className="mt-16 grid grid-cols-2 gap-12 md:mt-24 md:grid-cols-4 md:gap-16">
-          {METRICAS.map((metrica) => (
+          {numeros.map((metrica) => (
             <Reveal key={metrica.label} className="flex flex-col">
               {metrica.tipo === 'numero' ? (
                 <span className="font-sans text-[clamp(4rem,9vw,8rem)] font-bold leading-[0.85] text-cream">
