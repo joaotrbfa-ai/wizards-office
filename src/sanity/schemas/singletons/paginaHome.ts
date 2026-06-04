@@ -15,7 +15,7 @@ export const paginaHome = defineType({
           name: 'fraseHead',
           title: 'Frase principal',
           type: 'string',
-          initialValue: 'Crafting spaces that feel like',
+          initialValue: 'Crafting spaces that feels like',
         }),
         defineField({
           name: 'fraseScript',
