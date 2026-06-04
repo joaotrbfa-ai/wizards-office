@@ -5,20 +5,11 @@ import Image from 'next/image'
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
+import { PARCEIROS_DATA, type ParceiroData } from '@/data/parceiros'
 
-type Partner = { src: string; nome: string }
+const PARTNERS = PARCEIROS_DATA
 
-const PARTNERS: Partner[] = [
-  { src: '/partners/rv.png', nome: 'RV' },
-  { src: '/partners/racitec.png', nome: 'racitec' },
-  { src: '/partners/brasa.png', nome: 'brasa' },
-  { src: '/partners/untitled.png', nome: 'Untitled-1' },
-  { src: '/partners/procave.png', nome: 'PROCAVE' },
-  { src: '/partners/prosperita.png', nome: 'PROSPERITA' },
-  { src: '/partners/fhobus.png', nome: 'f-hobus' },
-]
-
-function PartnerLogo({ partner }: { partner: Partner }) {
+function PartnerLogo({ partner }: { partner: ParceiroData }) {
   const [erro, setErro] = useState(false)
 
   if (erro) {

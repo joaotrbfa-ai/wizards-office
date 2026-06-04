@@ -197,7 +197,8 @@ O conteúdo editável do site é gerido pelo **Sanity Studio**, embutido na pró
 - **Login:** SSO da Sanity (Google ou e-mail convidado).
 - **Rodar localmente:** `npm run dev` → abra [http://localhost:3000/admin](http://localhost:3000/admin).
 
-> **Status:** fundação (Fase B). O Studio carrega vazio — schemas reais e migração de conteúdo entram na Fase C/D.
+> **Status:** schemas definidos (Fase C). O conteúdo do site é editável no Studio.
+> Os componentes do site ainda leem de `src/data/*.ts` — a leitura via Sanity entra na Fase D.
 
 ### Variáveis de ambiente
 
@@ -206,8 +207,27 @@ O conteúdo editável do site é gerido pelo **Sanity Studio**, embutido na pró
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | ID do projeto Sanity (dashboard → Project settings). Obrigatória. |
 | `NEXT_PUBLIC_SANITY_DATASET` | Dataset — use `production`. |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | Versão da API (data, `YYYY-MM-DD`). |
+| `SANITY_API_WRITE_TOKEN` | Token de escrita (Editor). **Só local**, para a migração — nunca na Vercel. |
 
-Configure as três em `.env.local` (local) e nas **Environment Variables** do Vercel (produção). Veja `.env.example`.
+Configure as três primeiras em `.env.local` (local) e nas **Environment Variables** do Vercel (produção). O token de escrita fica **só** em `.env.local`. Veja `.env.example`.
+
+### Migração inicial (popular o Sanity)
+
+Sobe todo o conteúdo de `src/data/*.ts` + imagens de `/public` para o Sanity.
+
+**Pré-requisitos:**
+1. Crie um token de escrita: dashboard Sanity → **API** → **Tokens** → **Add API token** → Name `Migration script`, Permissions **Editor**.
+2. Adicione em `.env.local`: `SANITY_API_WRITE_TOKEN=sk_...`
+
+**Rodar:**
+
+```bash
+npx tsx scripts/migrate-to-sanity.ts
+```
+
+- **Idempotente** — usa `_id` determinístico + `createOrReplace`; pode rodar quantas vezes precisar sem duplicar.
+- Imagens são deduplicadas (a mesma imagem reusada sobe uma vez só).
+- Após sucesso, abra `/admin` e confira os documentos criados.
 
 ### Adicionar um novo editor
 
