@@ -13,9 +13,6 @@ export function EquipeHorizontal({ membros }: { membros: Membro[] }) {
         <h2 className="mt-6 font-sans text-[clamp(3rem,6vw,7rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
           The wizards.
         </h2>
-        <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-sand md:block">
-          Role para arrastar →
-        </p>
       </Container>
 
       <HorizontalScroll pinHeight="100vh">

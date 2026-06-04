@@ -30,7 +30,7 @@ export function CtaFinal({
   titulo,
   href,
   ctaLabel,
-  script = true,
+  script = false,
   subtitulo,
 }: CtaFinalProps) {
   return (

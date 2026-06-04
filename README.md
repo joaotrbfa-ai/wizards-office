@@ -280,6 +280,15 @@ marcados `@deprecated` — mantidos apenas como **referência histórica / rollb
 e porque o script `scripts/migrate-to-sanity.ts` ainda os usa como seed.
 Nenhum componente do site os importa.
 
+### Conteúdo a ajustar no Studio (pós-revisão do cliente)
+
+Algumas mudanças da revisão são de conteúdo (vivem no Sanity, não no código):
+
+- **`paginaHome → hero.fraseHead`**: `Crafting spaces that feel like` → `Crafting spaces that feels like` (volta o "s").
+- **`config → tagline`**: `Crafting spaces that feel like magic.` → `Crafting spaces that feels like magic.`
+- **`etapaProcesso → position`** (alternar L/R/L/R, sem "Centro"): 01 Briefing = Inferior esquerda · 02 Direção = **Inferior direita** · 03 Produção = **Inferior esquerda** · 04 Entrega = **Inferior direita**.
+- **`membro → Lucas Berth → foto`**: subir a foto real (hoje sem foto, mostra o avatar com a inicial).
+
 ---
 
 ## Próximas etapas

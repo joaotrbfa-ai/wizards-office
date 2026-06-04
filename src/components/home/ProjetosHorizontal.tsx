@@ -16,13 +16,13 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
 
   return (
     <>
-      <Scene tone="ink" minHeight="auto" clip={false}>
+      <Scene tone="transparent" minHeight="auto" clip={false} className="bg-sand">
         <Container className="py-24">
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">Projetos selecionados</p>
-          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(2.5rem,5vw,5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+          <p className="text-sm uppercase tracking-[0.2em] text-ink/60">Projetos selecionados</p>
+          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(2.5rem,5vw,5rem)] font-bold uppercase leading-[0.95] tracking-wide text-ink">
             Trabalhos que falam por si.
           </h2>
-          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-sand md:block">
+          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-ink/50 md:block">
             Role para arrastar →
           </p>
         </Container>
@@ -56,7 +56,7 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                       className="group hidden shrink-0 items-center gap-2 self-end pb-2 text-sm uppercase tracking-[0.2em] text-cream sm:inline-flex"
                     >
                       <span className="border-b border-cream/40 pb-1 transition-colors group-hover:border-cream">
-                        Ver case
+                        Ver projeto
                       </span>
                       <span
                         aria-hidden

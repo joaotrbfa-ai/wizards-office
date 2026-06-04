@@ -69,7 +69,6 @@ export default async function ServicosPage() {
           subtitulo={cta.subtitulo}
           ctaLabel={cta.ctaLabel}
           href={cta.href}
-          script={cta.mostrarScriptMagic}
         />
       )}
     </>

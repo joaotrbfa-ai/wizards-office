@@ -27,7 +27,7 @@ function PartnerLogo({ partner }: { partner: Parceiro }) {
       width={140}
       height={48}
       onError={() => setErro(true)}
-      className="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-12"
+      className="h-14 w-auto object-contain opacity-60 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-20"
     />
   )
 }
@@ -43,7 +43,7 @@ export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-16 flex flex-wrap items-center justify-center gap-12">
+        <RevealGroup className="mt-16 flex flex-wrap items-center justify-center gap-16 md:gap-20">
           {parceiros.map((partner) => (
             <Reveal key={partner._id} className="flex items-center justify-center">
               <PartnerLogo partner={partner} />

@@ -3,14 +3,13 @@
 import Image from 'next/image'
 import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
-import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
 import { imageProps } from '@/sanity/image'
 import type { GaleriaItem, GaleriaRow as GaleriaRowType } from '@/sanity/types'
 
 /**
- * Tile clicável para os grids editoriais (não full-bleed).
+ * Tile clicável para os grids edge-to-edge (não full-bleed).
  * O aspect-ratio é fixado por slot/layout (não vem do dado).
  */
 function Tile({
@@ -51,6 +50,9 @@ function Tile({
   )
 }
 
+// Grid edge-to-edge: sem Container, sem padding lateral, gaps curtos.
+const GRID_GAP = 'gap-3 md:gap-4'
+
 export function GaleriaRow({
   row,
   startIndex,
@@ -79,68 +81,86 @@ export function GaleriaRow({
     )
   }
 
-  // SPLIT — 50/50.
+  // SPLIT — 50/50, edge-to-edge.
   if (row.layout === 'split') {
     const [a, b] = row.images
     return (
-      <Scene tone="olive" minHeight="auto" className="py-12 md:py-20">
-        <Container>
-          <RevealGroup className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-            {a && (
-              <Reveal>
-                <Tile
-                  item={a}
-                  index={startIndex}
-                  onOpen={onOpen}
-                  aspectClassName="aspect-[4/5]"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  width={1200}
-                />
-              </Reveal>
-            )}
-            {b && (
-              <Reveal>
-                <Tile
-                  item={b}
-                  index={startIndex + 1}
-                  onOpen={onOpen}
-                  aspectClassName="aspect-[4/5]"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  width={1200}
-                />
-              </Reveal>
-            )}
-          </RevealGroup>
-        </Container>
+      <Scene tone="olive" minHeight="auto" className="py-3 md:py-4">
+        <RevealGroup className={cn('grid grid-cols-1 md:grid-cols-2', GRID_GAP)}>
+          {a && (
+            <Reveal>
+              <Tile
+                item={a}
+                index={startIndex}
+                onOpen={onOpen}
+                aspectClassName="aspect-[4/5]"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                width={1400}
+              />
+            </Reveal>
+          )}
+          {b && (
+            <Reveal>
+              <Tile
+                item={b}
+                index={startIndex + 1}
+                onOpen={onOpen}
+                aspectClassName="aspect-[4/5]"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                width={1400}
+              />
+            </Reveal>
+          )}
+        </RevealGroup>
       </Scene>
     )
   }
 
-  // TRIO — 3 iguais.
+  // QUARTET — 4 imagens numa linha (2 col no mobile, 4 no desktop), edge-to-edge.
+  if (row.layout === 'quartet') {
+    return (
+      <Scene tone="olive" minHeight="auto" className="py-3 md:py-4">
+        <RevealGroup className={cn('grid grid-cols-2 md:grid-cols-4', GRID_GAP)}>
+          {row.images.map((item, i) => (
+            <Reveal key={i}>
+              <Tile
+                item={item}
+                index={startIndex + i}
+                onOpen={onOpen}
+                aspectClassName="aspect-[4/5]"
+                sizes="(min-width: 768px) 25vw, 50vw"
+                width={800}
+              />
+            </Reveal>
+          ))}
+        </RevealGroup>
+      </Scene>
+    )
+  }
+
+  // TRIO — 3 iguais, edge-to-edge.
   if (row.layout === 'trio') {
     return (
-      <Scene tone="olive" minHeight="auto" className="py-12 md:py-20">
-        <Container>
-          <RevealGroup className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-            {row.images.map((item, i) => (
-              <Reveal key={i}>
-                <Tile
-                  item={item}
-                  index={startIndex + i}
-                  onOpen={onOpen}
-                  aspectClassName="aspect-[3/4]"
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  width={900}
-                />
-              </Reveal>
-            ))}
-          </RevealGroup>
-        </Container>
+      <Scene tone="olive" minHeight="auto" className="py-3 md:py-4">
+        <RevealGroup className={cn('grid grid-cols-1 md:grid-cols-3', GRID_GAP)}>
+          {row.images.map((item, i) => (
+            <Reveal key={i}>
+              <Tile
+                item={item}
+                index={startIndex + i}
+                onOpen={onOpen}
+                aspectClassName="aspect-[3/4]"
+                sizes="(min-width: 768px) 33vw, 100vw"
+                width={1000}
+              />
+            </Reveal>
+          ))}
+        </RevealGroup>
       </Scene>
     )
   }
 
-  // ASYMMETRIC — 1 grande + 2 stacked (lado depende do layout).
+  // ASYMMETRIC — 1 grande + 2 stacked (lado depende do layout), edge-to-edge.
   const [grande, stack1, stack2] = row.images
   const grandeNaEsquerda = row.layout === 'asymmetric-left'
 
@@ -152,13 +172,13 @@ export function GaleriaRow({
         onOpen={onOpen}
         aspectClassName="aspect-[4/5]"
         sizes="(min-width: 768px) 58vw, 100vw"
-        width={1400}
+        width={1600}
       />
     </Reveal>
   ) : null
 
   const stackBloco = (
-    <div className="flex flex-col gap-4 md:col-span-5 md:gap-6">
+    <div className={cn('flex flex-col md:col-span-5', GRID_GAP)}>
       {stack1 && (
         <Reveal>
           <Tile
@@ -167,7 +187,7 @@ export function GaleriaRow({
             onOpen={onOpen}
             aspectClassName="aspect-[4/3]"
             sizes="(min-width: 768px) 42vw, 100vw"
-            width={1000}
+            width={1100}
           />
         </Reveal>
       )}
@@ -179,7 +199,7 @@ export function GaleriaRow({
             onOpen={onOpen}
             aspectClassName="aspect-[4/3]"
             sizes="(min-width: 768px) 42vw, 100vw"
-            width={1000}
+            width={1100}
           />
         </Reveal>
       )}
@@ -187,22 +207,20 @@ export function GaleriaRow({
   )
 
   return (
-    <Scene tone="olive" minHeight="auto" className="py-12 md:py-20">
-      <Container>
-        <RevealGroup className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
-          {grandeNaEsquerda ? (
-            <>
-              {grandeBloco}
-              {stackBloco}
-            </>
-          ) : (
-            <>
-              {stackBloco}
-              {grandeBloco}
-            </>
-          )}
-        </RevealGroup>
-      </Container>
+    <Scene tone="olive" minHeight="auto" className="py-3 md:py-4">
+      <RevealGroup className={cn('grid grid-cols-1 md:grid-cols-12', GRID_GAP)}>
+        {grandeNaEsquerda ? (
+          <>
+            {grandeBloco}
+            {stackBloco}
+          </>
+        ) : (
+          <>
+            {stackBloco}
+            {grandeBloco}
+          </>
+        )}
+      </RevealGroup>
     </Scene>
   )
 }

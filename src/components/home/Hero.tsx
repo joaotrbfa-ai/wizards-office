@@ -22,7 +22,7 @@ export function Hero({ videoUrl, fraseHead, fraseScript, poster = '/hero-poster.
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE_SOFT, delay: 0.4 }}
-            className="max-w-5xl font-sans text-[clamp(2.5rem,6vw,6rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream"
+            className="max-w-5xl font-sans text-[clamp(1.75rem,4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream"
           >
             {fraseHead}{' '}
             <span className="font-script normal-case text-cream">{fraseScript}</span>

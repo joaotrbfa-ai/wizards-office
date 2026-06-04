@@ -9,18 +9,13 @@ export interface ManifestoTextProps {
 
 export function ManifestoText({ paragrafos }: ManifestoTextProps) {
   return (
-    <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">
+    <Scene tone="olive" minHeight="auto" className="py-12 md:py-20">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
           <aside className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-32">
-              <p className="text-sm uppercase tracking-[0.25em] text-sand">Manifesto</p>
-              <p className="mt-8 font-script text-[clamp(5rem,8vw,9rem)] leading-none text-terracotta">
-                magic.
-              </p>
-              <p className="mt-8 text-sm uppercase tracking-[0.15em] text-sand">
-                2019 — Balneário Camboriú · SC
-              </p>
+              <p className="text-base uppercase tracking-[0.25em] text-sand md:text-lg">Manifesto</p>
+              <p className="mt-6 text-sm uppercase tracking-[0.15em] text-sand">SINCE 2019</p>
             </div>
           </aside>
 

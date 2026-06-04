@@ -18,16 +18,16 @@ export function CaseNext({ proximo }: { proximo: ProjetoCard }) {
         {/* Cena inteira clicável */}
         <Link
           href={`/projetos/${proximo.slug}`}
-          aria-label={`Próximo case: ${proximo.nome}`}
+          aria-label={`Próximo projeto: ${proximo.nome}`}
           className="absolute inset-0 z-10 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream"
         />
 
         <div className="pointer-events-none flex h-full w-full flex-col items-center justify-center px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.25em] text-sand">Próximo case</p>
+          <p className="text-sm uppercase tracking-[0.25em] text-sand">Próximo projeto</p>
           <h2 className="mt-5 font-sans text-[clamp(3rem,7vw,8rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {proximo.nome}
           </h2>
-          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-sand">Ver case →</p>
+          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-sand">Ver projeto →</p>
         </div>
       </FullBleedMedia>
     </Scene>

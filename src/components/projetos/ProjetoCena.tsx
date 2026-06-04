@@ -28,7 +28,7 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
           {/* Cena inteira clicável */}
           <Link
             href={`/projetos/${projeto.slug}`}
-            aria-label={`Ver case: ${projeto.nome}`}
+            aria-label={`Ver projeto: ${projeto.nome}`}
             className="absolute inset-0 z-10 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream"
           />
 
@@ -54,7 +54,7 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
             className="relative z-0 inline-flex shrink-0 items-center gap-2 self-end pb-2 text-xs uppercase tracking-[0.2em] text-cream sm:text-sm"
           >
             <span className="border-b border-cream/40 pb-1 transition-colors group-hover:border-cream">
-              Ver case
+              Ver projeto
             </span>
             <span className="transition-transform duration-500 ease-soft group-hover:translate-x-1">
               →

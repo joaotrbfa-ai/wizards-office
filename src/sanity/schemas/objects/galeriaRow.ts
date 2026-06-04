@@ -6,6 +6,7 @@ const LAYOUTS = [
   { title: 'Assimétrico (esquerda) — 3 imagens', value: 'asymmetric-left' },
   { title: 'Assimétrico (direita) — 3 imagens', value: 'asymmetric-right' },
   { title: 'Trio — 3 imagens', value: 'trio' },
+  { title: 'Quarteto — 4 imagens', value: 'quartet' },
 ] as const
 
 /** Quantidade esperada de imagens por layout (usado em validação de aviso). */
@@ -15,6 +16,7 @@ const EXPECTED: Record<string, number> = {
   'asymmetric-left': 3,
   'asymmetric-right': 3,
   trio: 3,
+  quartet: 4,
 }
 
 /**

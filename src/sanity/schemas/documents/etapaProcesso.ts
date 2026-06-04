@@ -44,6 +44,8 @@ export const etapaProcesso = defineType({
       name: 'position',
       title: 'Posição do texto',
       type: 'string',
+      description:
+        'Use apenas "Inferior esquerda" / "Inferior direita", alternando L → R → L → R entre as etapas (01 esquerda, 02 direita, 03 esquerda, 04 direita). Evite "Centro".',
       options: { list: [...POSITION_OPTIONS] },
       initialValue: 'bottom-left',
     }),

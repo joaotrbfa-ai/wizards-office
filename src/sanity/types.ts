@@ -116,7 +116,13 @@ export type GaleriaItem = {
   caption?: string
 }
 
-export type GaleriaRowLayout = 'full' | 'split' | 'asymmetric-left' | 'asymmetric-right' | 'trio'
+export type GaleriaRowLayout =
+  | 'full'
+  | 'split'
+  | 'asymmetric-left'
+  | 'asymmetric-right'
+  | 'trio'
+  | 'quartet'
 
 export type GaleriaRow = {
   layout: GaleriaRowLayout
