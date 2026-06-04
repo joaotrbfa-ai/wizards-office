@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
@@ -8,24 +10,35 @@ import { imageProps } from '@/sanity/image'
 import type { GaleriaItem, GaleriaRow as GaleriaRowType } from '@/sanity/types'
 
 /**
- * Tile de imagem para os grids editoriais (não full-bleed).
- * O aspect-ratio é fixado por slot/layout (não vem do dado) — preserva o
- * comportamento anterior, em que cada posição tinha um aspect default.
+ * Tile clicável para os grids editoriais (não full-bleed).
+ * O aspect-ratio é fixado por slot/layout (não vem do dado).
  */
 function Tile({
   item,
+  index,
+  onOpen,
   aspectClassName,
   sizes,
   width,
 }: {
   item: GaleriaItem
+  index: number
+  onOpen: (index: number) => void
   aspectClassName: string
   sizes: string
   width: number
 }) {
   const img = imageProps(item.image, width)
   return (
-    <div className={cn('group relative overflow-hidden bg-ink', aspectClassName)}>
+    <button
+      type="button"
+      onClick={() => onOpen(index)}
+      aria-label="Abrir imagem em tela cheia"
+      className={cn(
+        'group relative block w-full cursor-zoom-in overflow-hidden bg-ink p-0',
+        aspectClassName,
+      )}
+    >
       <Image
         src={img.src}
         alt={img.alt}
@@ -34,19 +47,34 @@ function Tile({
         className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
         {...(img.blurDataURL ? { placeholder: 'blur' as const, blurDataURL: img.blurDataURL } : {})}
       />
-    </div>
+    </button>
   )
 }
 
-export function GaleriaRow({ row }: { row: GaleriaRowType }) {
-  // FULL — imagem 100vh com parallax leve.
+export function GaleriaRow({
+  row,
+  startIndex,
+  onOpen,
+}: {
+  row: GaleriaRowType
+  startIndex: number
+  onOpen: (index: number) => void
+}) {
+  // FULL — imagem 100vh com parallax leve; clique abre o lightbox.
   if (row.layout === 'full') {
     const [img] = row.images
     if (!img) return null
     const { src, alt, blurDataURL } = imageProps(img.image, 2400)
     return (
       <Scene minHeight="screen">
-        <FullBleedMedia src={src} alt={alt} blurDataURL={blurDataURL} overlay="none" parallax />
+        <FullBleedMedia src={src} alt={alt} blurDataURL={blurDataURL} overlay="none" parallax>
+          <button
+            type="button"
+            onClick={() => onOpen(startIndex)}
+            aria-label="Abrir imagem em tela cheia"
+            className="absolute inset-0 h-full w-full cursor-zoom-in"
+          />
+        </FullBleedMedia>
       </Scene>
     )
   }
@@ -62,6 +90,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
               <Reveal>
                 <Tile
                   item={a}
+                  index={startIndex}
+                  onOpen={onOpen}
                   aspectClassName="aspect-[4/5]"
                   sizes="(min-width: 768px) 50vw, 100vw"
                   width={1200}
@@ -72,6 +102,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
               <Reveal>
                 <Tile
                   item={b}
+                  index={startIndex + 1}
+                  onOpen={onOpen}
                   aspectClassName="aspect-[4/5]"
                   sizes="(min-width: 768px) 50vw, 100vw"
                   width={1200}
@@ -94,6 +126,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
               <Reveal key={i}>
                 <Tile
                   item={item}
+                  index={startIndex + i}
+                  onOpen={onOpen}
                   aspectClassName="aspect-[3/4]"
                   sizes="(min-width: 768px) 33vw, 100vw"
                   width={900}
@@ -114,6 +148,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
     <Reveal className="md:col-span-7">
       <Tile
         item={grande}
+        index={startIndex}
+        onOpen={onOpen}
         aspectClassName="aspect-[4/5]"
         sizes="(min-width: 768px) 58vw, 100vw"
         width={1400}
@@ -127,6 +163,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
         <Reveal>
           <Tile
             item={stack1}
+            index={startIndex + 1}
+            onOpen={onOpen}
             aspectClassName="aspect-[4/3]"
             sizes="(min-width: 768px) 42vw, 100vw"
             width={1000}
@@ -137,6 +175,8 @@ export function GaleriaRow({ row }: { row: GaleriaRowType }) {
         <Reveal>
           <Tile
             item={stack2}
+            index={startIndex + 2}
+            onOpen={onOpen}
             aspectClassName="aspect-[4/3]"
             sizes="(min-width: 768px) 42vw, 100vw"
             width={1000}
