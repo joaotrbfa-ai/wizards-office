@@ -18,11 +18,11 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
     <>
       <Scene tone="sand" minHeight="auto" clip={false}>
         <Container className="py-24">
-          <p className="text-sm uppercase tracking-[0.2em] text-ink/60">Projetos selecionados</p>
-          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(2.5rem,5vw,5rem)] font-bold uppercase leading-[0.95] tracking-wide text-ink">
+          <p className="text-sm uppercase tracking-[0.2em] text-ink/50">Projetos selecionados</p>
+          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(2.5rem,5vw,5rem)] font-bold uppercase leading-[0.95] tracking-wide text-ink/75">
             Trabalhos que falam por si.
           </h2>
-          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-ink/50 md:block">
+          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-ink/40 md:block">
             Role para arrastar →
           </p>
         </Container>

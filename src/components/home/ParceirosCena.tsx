@@ -43,7 +43,7 @@ export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-16 flex flex-wrap items-center justify-center gap-16 md:gap-20">
+        <RevealGroup className="mt-16 grid grid-cols-3 items-center justify-items-center gap-8 sm:grid-cols-4 md:gap-12 lg:grid-cols-7 lg:gap-8">
           {parceiros.map((partner) => (
             <Reveal key={partner._id} className="flex items-center justify-center">
               <PartnerLogo partner={partner} />
