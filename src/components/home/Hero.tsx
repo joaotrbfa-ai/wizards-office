@@ -25,7 +25,9 @@ export function Hero({ videoUrl, fraseHead, fraseScript, poster = '/hero-poster.
             className="max-w-5xl font-sans text-[clamp(1.75rem,4vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream"
           >
             {fraseHead}{' '}
-            <span className="font-script normal-case text-cream">{fraseScript}</span>
+            <span className="font-script normal-case text-cream text-[1.7em] leading-[0.7] align-baseline">
+              {fraseScript}
+            </span>
           </motion.h1>
 
           <ScrollCue className="absolute bottom-8 right-8" />
