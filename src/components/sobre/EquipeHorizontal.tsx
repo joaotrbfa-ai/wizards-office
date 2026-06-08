@@ -6,6 +6,9 @@ import { imageProps } from '@/sanity/image'
 import type { Membro } from '@/sanity/types'
 
 export function EquipeHorizontal({ membros }: { membros: Membro[] }) {
+  // Empty state: não renderiza a seção (evita HorizontalScroll vazio com 1 tela em branco).
+  if (!membros?.length) return null
+
   return (
     <Scene tone="ink" minHeight="auto" clip={false}>
       <Container className="py-24">
@@ -23,7 +26,7 @@ export function EquipeHorizontal({ membros }: { membros: Membro[] }) {
               <div className="grid h-full grid-cols-1 md:grid-cols-2">
                 <MemberPortrait
                   name={membro.nome}
-                  initial={membro.nome.charAt(0)}
+                  initial={membro.nome?.charAt(0) ?? '?'}
                   src={src || undefined}
                 />
 

@@ -31,14 +31,14 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
           {projetos.map((projeto, i) => {
             const cover = imageProps(projeto.coverImage, 2000)
             return (
-              <div key={projeto._id} className="relative h-full w-screen shrink-0">
+              <div key={projeto._id} className="group relative h-full w-screen shrink-0">
                 <FullBleedMedia
                   src={cover.src}
                   alt={cover.alt}
                   blurDataURL={cover.blurDataURL}
                   overlay="bottom"
                 >
-                  <div className="flex h-full w-full items-end justify-between gap-8 p-8 pb-16 md:p-16 md:pb-24">
+                  <div className="pointer-events-none flex h-full w-full items-end justify-between gap-8 p-8 pb-16 md:p-16 md:pb-24">
                     <div className="flex flex-col gap-3">
                       <span className="text-sm tracking-[0.2em] text-muted">
                         {String(i + 1).padStart(2, '0')} / {total}
@@ -51,22 +51,27 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                       </span>
                     </div>
 
-                    <Link
-                      href={`/projetos/${projeto.slug}`}
-                      className="group hidden shrink-0 items-center gap-2 self-end pb-2 text-sm uppercase tracking-[0.2em] text-cream sm:inline-flex"
+                    {/* Afordância visual (o card inteiro é o link via overlay abaixo). */}
+                    <span
+                      aria-hidden
+                      className="hidden shrink-0 items-center gap-2 self-end pb-2 text-sm uppercase tracking-[0.2em] text-cream sm:inline-flex"
                     >
                       <span className="border-b border-cream/40 pb-1 transition-colors group-hover:border-cream">
                         Ver projeto
                       </span>
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-500 ease-soft group-hover:translate-x-1"
-                      >
+                      <span className="transition-transform duration-500 ease-soft group-hover:translate-x-1">
                         →
                       </span>
-                    </Link>
+                    </span>
                   </div>
                 </FullBleedMedia>
+
+                {/* Card inteiro clicável — funciona também no mobile. */}
+                <Link
+                  href={`/projetos/${projeto.slug}`}
+                  aria-label={`Ver projeto: ${projeto.nome}`}
+                  className="absolute inset-0 z-20 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-cream"
+                />
               </div>
             )
           })}

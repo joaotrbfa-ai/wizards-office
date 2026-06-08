@@ -4,6 +4,9 @@ import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import type { MetricaSobre } from '@/sanity/types'
 
 export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
+  // Empty state: não renderiza uma tela inteira quase vazia.
+  if (!numeros?.length) return null
+
   return (
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
@@ -15,8 +18,8 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
         </Reveal>
 
         <RevealGroup className="mt-16 grid grid-cols-2 gap-12 md:mt-24 md:grid-cols-4 md:gap-16">
-          {numeros.map((metrica) => (
-            <Reveal key={metrica.label} className="flex flex-col">
+          {numeros.map((metrica, i) => (
+            <Reveal key={`${metrica.label}-${i}`} className="flex flex-col">
               {metrica.tipo === 'numero' ? (
                 <span className="font-sans text-[clamp(2.75rem,6vw,5.5rem)] font-bold leading-[0.85] text-cream">
                   {metrica.valor}

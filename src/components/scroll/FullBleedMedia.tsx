@@ -96,7 +96,11 @@ export function FullBleedMedia({
         className={cn('absolute inset-0', parallaxOn && 'scale-[1.2] will-change-transform')}
         style={parallaxOn ? { y } : undefined}
       >
-        {mediaType === 'image' ? (
+        {!src ? (
+          // Sem mídia configurada no Sanity: fundo neutro em vez de passar
+          // src='' ao next/image (que dispara erro de runtime).
+          <div aria-hidden className="absolute inset-0 bg-ink" />
+        ) : mediaType === 'image' ? (
           <Image
             src={src}
             alt={alt}

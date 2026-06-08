@@ -41,7 +41,7 @@ export default async function ServicosPage() {
         blurDataURL={aberturaImg.blurDataURL}
       />
 
-      {servicos.map((servico) => {
+      {(servicos ?? []).map((servico) => {
         const img = imageProps(servico.image, 2400)
         return (
           <ServicoCena
