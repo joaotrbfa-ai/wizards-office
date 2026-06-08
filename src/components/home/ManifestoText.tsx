@@ -14,7 +14,7 @@ export function ManifestoText({ paragrafos }: ManifestoTextProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
           <aside className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-32">
-              <p className="text-base uppercase tracking-[0.25em] text-muted md:text-lg">Manifesto</p>
+              <h2 className="text-base uppercase tracking-[0.25em] text-muted md:text-lg">Manifesto</h2>
               <p className="mt-6 text-sm uppercase tracking-[0.15em] text-muted">SINCE 2019</p>
             </div>
           </aside>

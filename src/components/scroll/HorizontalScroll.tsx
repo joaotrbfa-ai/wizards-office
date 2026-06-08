@@ -31,7 +31,6 @@ export function HorizontalScroll({
   const containerRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [distance, setDistance] = useState(0)
-  const [viewportH, setViewportH] = useState(0)
 
   // Em mobile o scroll horizontal vira stack vertical (evita scroll-jacking).
   useEffect(() => {
@@ -56,9 +55,7 @@ export function HorizontalScroll({
     if (!track) return
 
     const measure = () => {
-      const d = Math.max(0, track.scrollWidth - window.innerWidth)
-      setDistance(d)
-      setViewportH(window.innerHeight)
+      setDistance(Math.max(0, track.scrollWidth - window.innerWidth))
     }
     measure()
 
@@ -80,14 +77,13 @@ export function HorizontalScroll({
     )
   }
 
-  // Altura total = distância horizontal + 1 viewport → scroll 1:1.
-  const totalHeight = viewportH ? viewportH + distance : undefined
-
+  // Altura = 1 viewport (via CSS, correto desde o 1º paint) + distância medida.
+  // Evita o colapso/salto que acontecia quando a medição ainda não tinha rodado.
   return (
     <div
       ref={containerRef}
       className={cn('relative w-full', className)}
-      style={{ height: totalHeight ?? pinHeight }}
+      style={{ height: `calc(${pinHeight} + ${distance}px)` }}
     >
       <div className="sticky top-0 overflow-hidden" style={{ height: pinHeight }}>
         <motion.div

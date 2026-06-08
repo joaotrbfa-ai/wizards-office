@@ -8,9 +8,6 @@ const baseConfig = {
   perspective: 'published' as const, // SSG sempre lê publicados, ignora drafts
 }
 
-/** Client público — usa CDN, sem token. Server components leem daqui. */
-export const sanityClient = createClient({ ...baseConfig, useCdn: true })
-
 /** Client server-side com token de leitura — usado por sanityFetch internamente. */
 export const sanityServerClient = createClient({
   ...baseConfig,

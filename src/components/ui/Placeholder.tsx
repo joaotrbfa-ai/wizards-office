@@ -1,3 +1,6 @@
+'use client'
+
+import { useId } from 'react'
 import { cn } from '@/lib/utils'
 
 type PlaceholderProps = {
@@ -30,6 +33,8 @@ export function Placeholder({
   aspect = 'aspect-[4/5]',
   interactive = false,
 }: PlaceholderProps) {
+  // id único do filtro — evita IDs duplicados quando há vários Placeholders.
+  const noiseId = `noise-${useId().replace(/:/g, '')}`
   return (
     <div
       className={cn(
@@ -61,11 +66,11 @@ export function Placeholder({
         className="absolute inset-0 h-full w-full opacity-[0.18] mix-blend-overlay"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <filter id="noise">
+        <filter id={noiseId}>
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
           <feColorMatrix type="saturate" values="0" />
         </filter>
-        <rect width="100%" height="100%" filter="url(#noise)" />
+        <rect width="100%" height="100%" filter={`url(#${noiseId})`} />
       </svg>
 
       {/* vinheta */}
