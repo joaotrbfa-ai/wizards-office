@@ -224,7 +224,31 @@ export function BriefForm({
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Button type="submit" variant="solid" size="lg" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'Enviando…' : submitLabel}
+                  {status === 'sending' ? (
+                    <>
+                      <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 animate-spin">
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="9"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeOpacity="0.3"
+                        />
+                        <path
+                          d="M21 12a9 9 0 0 0-9-9"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      Enviando…
+                    </>
+                  ) : (
+                    submitLabel
+                  )}
                 </Button>
 
                 {status === 'error' && (
