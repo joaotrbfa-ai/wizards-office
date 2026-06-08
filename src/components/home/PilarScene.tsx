@@ -54,7 +54,7 @@ export function PilarScene({
             <p className="text-sm uppercase tracking-[0.25em] text-muted transition-colors duration-500 group-hover:text-terracotta">
               {numero} — Pilar
             </p>
-            <h2 className="font-sans text-[clamp(2.5rem,5.6vw,6.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+            <h2 className="font-sans text-[clamp(2.25rem,5vw,5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
               {titulo}
             </h2>
             <p className="max-w-2xl text-base leading-relaxed text-cream md:text-lg">

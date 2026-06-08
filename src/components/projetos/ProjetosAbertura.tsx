@@ -31,7 +31,7 @@ export function ProjetosAbertura({ abertura }: { abertura?: Abertura }) {
       >
         <div className="flex h-full w-full flex-col items-start justify-end p-8 pb-20 md:p-16 md:pb-32">
           <p className="text-sm uppercase tracking-[0.25em] text-muted">{label}</p>
-          <h1 className="mt-5 font-sans text-[clamp(2.5rem,5.6vw,5.6rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h1 className="mt-5 font-sans text-[clamp(2.25rem,5vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {tituloLinhas.map((linha, i) => (
               <span key={i}>
                 {linha}

@@ -43,8 +43,8 @@ export const briefSchema = z.object({
     .trim()
     .min(20, 'Conta um pouco mais — pelo menos 20 caracteres.')
     .max(4000),
-  /** Honeypot anti-spam: deve permanecer vazio. */
-  website: z.string().optional(),
+  /** Honeypot anti-spam: deve permanecer vazio (max evita payload abusivo). */
+  website: z.string().max(100).optional(),
 })
 
 export type BriefData = z.infer<typeof briefSchema>

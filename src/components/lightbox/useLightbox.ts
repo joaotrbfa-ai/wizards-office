@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
+import { useLenis } from '@/components/providers/MotionProvider'
 
 const QUERY_KEY = 'img'
 
@@ -34,8 +35,12 @@ export function useLightboxState(total: number) {
   const searchParams = useSearchParams()
 
   const raw = searchParams.get(QUERY_KEY)
+  const parsed = raw === null ? null : parseInt(raw, 10)
+  // ?img=abc (NaN) NÃO abre o lightbox — antes caía em 0 e abria imagem fantasma.
   const index =
-    raw === null ? null : Math.max(0, Math.min(total - 1, parseInt(raw, 10) || 0))
+    parsed === null || Number.isNaN(parsed)
+      ? null
+      : Math.max(0, Math.min(total - 1, parsed))
   const isOpen = index !== null
 
   // replace não polui o history → navegar entre imagens não acumula entradas.
@@ -59,15 +64,19 @@ export function useLightboxState(total: number) {
     if (index !== null) replaceIndex((index - 1 + total) % total)
   }, [index, replaceIndex, total])
 
-  // Bloqueia o scroll do body enquanto aberto.
+  // Bloqueia o scroll enquanto aberto: para o Lenis (smooth scroll) e trava o
+  // body. Restaura SEMPRE para o estado base ('') no cleanup — evita ficar preso
+  // em 'hidden' se o effect reexecutar por navegação/Suspense.
+  const lenis = useLenis()
   useEffect(() => {
     if (!isOpen) return
-    const previous = document.body.style.overflow
+    lenis?.stop()
     document.body.style.overflow = 'hidden'
     return () => {
-      document.body.style.overflow = previous
+      lenis?.start()
+      document.body.style.overflow = ''
     }
-  }, [isOpen])
+  }, [isOpen, lenis])
 
   // Teclado: ESC fecha, ← → navegam.
   useEffect(() => {

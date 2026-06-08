@@ -36,7 +36,7 @@ export function Hero({ videoUrl, fraseHead, fraseScript, poster = '/hero-poster.
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE_SOFT, delay: 0.4 }}
-            className="flex flex-col font-sans text-[clamp(1.5rem,3.7vw,4.25rem)] font-bold uppercase leading-[1.15] tracking-tight text-cream"
+            className="flex flex-col font-sans text-[clamp(1.4rem,3.4vw,3.75rem)] font-bold uppercase leading-[1.15] tracking-tight text-cream"
           >
             <span className="whitespace-nowrap">{linha1}</span>
             <span className="whitespace-nowrap">
