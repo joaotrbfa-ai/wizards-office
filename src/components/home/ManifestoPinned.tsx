@@ -16,7 +16,7 @@ function ManifestoInner({ progress, reducedMotion }: PinnedRenderArgs) {
   const visibleColor = useTransform(progress, [0.8, 1], [CREAM, TERRACOTTA])
 
   const frase =
-    'absolute px-6 text-center font-sans font-bold uppercase leading-[0.9] tracking-wide text-cream [font-size:clamp(4rem,12vw,14rem)]'
+    'absolute px-6 text-center font-sans font-bold uppercase leading-[0.9] tracking-wide text-cream [font-size:clamp(3.25rem,9.5vw,11rem)]'
 
   if (reducedMotion) {
     return (
@@ -24,7 +24,7 @@ function ManifestoInner({ progress, reducedMotion }: PinnedRenderArgs) {
         {FRASES.map((f) => (
           <h2
             key={f}
-            className="font-sans text-[clamp(3rem,10vw,9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream"
+            className="font-sans text-[clamp(2.5rem,8vw,7.25rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream"
           >
             {f}
           </h2>

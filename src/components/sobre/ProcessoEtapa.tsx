@@ -60,7 +60,7 @@ export function ProcessoEtapa({
             <p className="text-sm uppercase tracking-[0.25em] text-sand">
               {numero} — Etapa
             </p>
-            <h2 className="font-sans text-[clamp(3rem,7vw,8rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+            <h2 className="font-sans text-[clamp(2.5rem,5.6vw,6.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
               {titulo}
             </h2>
             <p className="max-w-2xl text-base leading-relaxed text-cream md:text-lg">

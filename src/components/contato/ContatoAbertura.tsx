@@ -22,7 +22,7 @@ export function ContatoAbertura({ abertura }: { abertura?: PaginaContato['abertu
           <p className="text-sm uppercase tracking-[0.25em] text-sand">
             {abertura?.label ?? 'Contato'}
           </p>
-          <h1 className="mt-5 font-sans text-[clamp(3rem,7vw,7rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h1 className="mt-5 font-sans text-[clamp(2.5rem,5.6vw,5.6rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {tituloLinhas.map((linha, i) => (
               <Fragment key={i}>
                 {i > 0 && <br />}

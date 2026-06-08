@@ -43,7 +43,7 @@ export function MemberPortrait({ name, initial, src, className }: MemberPortrait
         <div className="flex h-full w-full items-center justify-center">
           <span
             aria-hidden
-            className="font-sans text-[clamp(8rem,20vw,20rem)] font-light leading-none tracking-wide text-sand"
+            className="font-sans text-[clamp(6rem,16vw,16rem)] font-light leading-none tracking-wide text-sand"
           >
             {initial}
           </span>

@@ -73,8 +73,8 @@ export function ServicoCena({
               className={cn(
                 'mt-4 font-sans font-bold uppercase leading-[0.9] tracking-wide text-cream',
                 featured
-                  ? 'text-[clamp(3.5rem,8vw,9rem)]'
-                  : 'text-[clamp(2.5rem,6vw,7rem)]',
+                  ? 'text-[clamp(2.75rem,6.4vw,7.25rem)]'
+                  : 'text-[clamp(2rem,4.8vw,5.6rem)]',
               )}
             >
               {titulo}

@@ -47,8 +47,8 @@ const config: Config = {
         'section-sm': 'clamp(3rem, 6vw, 5rem)',
       },
       fontSize: {
-        display: ['clamp(3rem, 9vw, 8rem)', { lineHeight: '0.95', letterSpacing: '-0.01em' }],
-        hero: ['clamp(2.25rem, 6vw, 5rem)', { lineHeight: '1.05', letterSpacing: '0' }],
+        display: ['clamp(2.5rem, 7vw, 6.5rem)', { lineHeight: '0.95', letterSpacing: '-0.01em' }],
+        hero: ['clamp(1.85rem, 4.8vw, 4rem)', { lineHeight: '1.05', letterSpacing: '0' }],
         eyebrow: ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.18em' }],
       },
       transitionTimingFunction: {

@@ -38,7 +38,7 @@ export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
       <Container>
         <Reveal className="text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-sand">Quem confia</p>
-          <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase tracking-wide text-cream">
+          <h2 className="mt-6 font-sans text-[clamp(1.75rem,3.4vw,2.8rem)] font-bold uppercase tracking-wide text-cream">
             Parceiros
           </h2>
         </Reveal>

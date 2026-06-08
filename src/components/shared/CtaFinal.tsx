@@ -47,7 +47,7 @@ export function CtaFinal({
             <Reveal>
               <h2
                 className={cn(
-                  'font-sans text-[clamp(3rem,7vw,8rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream',
+                  'font-sans text-[clamp(2.5rem,5.6vw,6.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream',
                   script && 'mt-4',
                 )}
               >
