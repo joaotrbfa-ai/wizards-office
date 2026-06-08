@@ -89,7 +89,13 @@ export function Lightbox({ items, isOpen, index, close, next, prev }: LightboxPr
   }
 
   return createPortal(
-    <AnimatePresence>
+    // Failsafe: ao concluir a saída, garante que o scroll do body foi liberado
+    // (mesmo que o cleanup do effect tenha sido interrompido por navegação).
+    <AnimatePresence
+      onExitComplete={() => {
+        document.body.style.overflow = ''
+      }}
+    >
       {isOpen && item && (
         <motion.div
           role="dialog"
@@ -98,8 +104,10 @@ export function Lightbox({ items, isOpen, index, close, next, prev }: LightboxPr
           onKeyDown={onKeyDownTrap}
           onClick={close}
           initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          // pointerEvents no exit evita que o overlay (mesmo transparente ou
+          // órfão durante a saída) capture cliques e "trave" a página.
+          animate={{ opacity: 1, pointerEvents: 'auto' }}
+          exit={{ opacity: 0, pointerEvents: 'none' }}
           transition={{ duration: reduced ? 0 : 0.3, ease: EASE_SOFT }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-sm"
         >
