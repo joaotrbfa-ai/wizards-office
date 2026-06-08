@@ -14,11 +14,13 @@ export function urlFor(source: SanityImageSource) {
 export function imageProps(
   image: SanityImage | undefined,
   width = 2000,
-): { src: string; alt: string; blurDataURL?: string } {
+): { src: string; alt: string; blurDataURL?: string; aspectRatio?: number } {
   if (!image?.asset) return { src: '', alt: '' }
+  const dims = image.asset.metadata?.dimensions
   return {
     src: urlFor(image).width(width).url(),
     alt: image.alt ?? '',
     blurDataURL: image.asset.metadata?.lqip,
+    aspectRatio: dims ? dims.width / dims.height : undefined,
   }
 }
