@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react'
 import { NAV_ITEMS } from '@/lib/nav'
 import { EASE_SOFT, menuOverlay } from '@/lib/motion'
 import { cn } from '@/lib/utils'
+import { useLenis } from '@/components/providers/MotionProvider'
 
 export function Header() {
   const pathname = usePathname()
+  const lenis = useLenis()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -25,15 +27,22 @@ export function Header() {
     setOpen(false)
   }, [pathname])
 
+  // Menu mobile aberto: para o Lenis (o overflow:hidden sozinho não trava o
+  // smooth scroll), trava o body e fecha no Escape.
   useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-      return () => {
-        document.body.style.overflow = prev
-      }
+    if (!open) return
+    lenis?.stop()
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
     }
-  }, [open])
+    window.addEventListener('keydown', onKey)
+    return () => {
+      lenis?.start()
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open, lenis])
 
   return (
     <>

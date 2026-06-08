@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
-import { fadeUp, viewportOnce } from '@/lib/motion'
+import { fadeUp, viewportOnce, EASE_SOFT, DURATION } from '@/lib/motion'
 
 type RevealProps = {
   children: ReactNode
@@ -28,7 +28,9 @@ export function Reveal({
       whileInView="visible"
       viewport={viewportOnce}
       variants={variants}
-      transition={delay ? { delay } : undefined}
+      // Preserva o timing da casa (ease/duration) ao aplicar delay — antes o
+      // {delay} podia descartar a transition da variant.
+      transition={delay ? { duration: DURATION.base, ease: EASE_SOFT, delay } : undefined}
     >
       {children}
     </motion.div>

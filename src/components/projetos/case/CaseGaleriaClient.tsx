@@ -90,7 +90,13 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
   const flatItems: LightboxItem[] = galeria.map((g) => ({ image: g.image, caption: g.caption }))
   const open = useLightboxOpen()
 
-  let globalIndex = 0
+  // Índice global inicial de cada row — pré-computado de forma pura (sem mutar
+  // uma variável durante o render, que poderia dessincronizar com flatItems).
+  const rowStart: number[] = []
+  rows.reduce((acc, row) => {
+    rowStart.push(acc)
+    return acc + row.images.length
+  }, 0)
 
   return (
     <>
@@ -98,8 +104,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
         if (row.layout === 'full') {
           const [item] = row.images
           const img = imageProps(item.image, 2400)
-          const idx = globalIndex
-          globalIndex += 1
+          const idx = rowStart[i]
           return (
             <Scene key={`full-${i}`} minHeight="screen">
               <FullBleedMedia
@@ -121,8 +126,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
         }
 
         if (row.layout === 'split') {
-          const startIndex = globalIndex
-          globalIndex += row.images.length
+          const startIndex = rowStart[i]
           return (
             <Scene key={`split-${i}`} tone="olive" minHeight="auto" className="py-12 md:py-20">
               <Container>
@@ -146,8 +150,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
 
         // asymmetric-left
         const [grande, s1, s2] = row.images
-        const startIndex = globalIndex
-        globalIndex += row.images.length
+        const startIndex = rowStart[i]
         return (
           <Scene key={`asym-${i}`} tone="olive" minHeight="auto" className="py-12 md:py-20">
             <Container>
