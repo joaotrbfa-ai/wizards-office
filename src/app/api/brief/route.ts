@@ -4,6 +4,25 @@ import { briefSchema } from '@/lib/brief-schema'
 
 export const runtime = 'nodejs'
 
+// Rate-limit simples em memória (por IP). Suficiente para um site de marketing
+// single-instance; em serverless multi-instância, migrar para Upstash/Redis.
+const WINDOW_MS = 10 * 60 * 1000
+const MAX_REQUESTS = 5
+const MAX_BODY_BYTES = 50_000
+const hits = new Map<string, number[]>()
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now()
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS)
+  if (recent.length >= MAX_REQUESTS) {
+    hits.set(ip, recent)
+    return true
+  }
+  recent.push(now)
+  hits.set(ip, recent)
+  return false
+}
+
 /** Escapa texto do usuário antes de interpolar no HTML do e-mail. */
 function esc(value: string): string {
   return value
@@ -19,9 +38,21 @@ function linha(label: string, valor?: string): string {
 }
 
 export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { error: 'Muitas tentativas. Aguarde alguns minutos e tente de novo.' },
+      { status: 429 },
+    )
+  }
+
   let body: unknown
   try {
-    body = await req.json()
+    const raw = await req.text()
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: 'Payload muito grande.' }, { status: 413 })
+    }
+    body = JSON.parse(raw)
   } catch {
     return NextResponse.json({ error: 'JSON inválido.' }, { status: 400 })
   }
