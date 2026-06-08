@@ -2,8 +2,7 @@ import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia, type MediaOverlay } from '@/components/scroll/FullBleedMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
-
-export type ServicoPosition = 'bottom-left' | 'center' | 'bottom-right'
+import type { Position } from '@/sanity/types'
 
 export interface ServicoCenaProps {
   numero: string
@@ -14,7 +13,7 @@ export interface ServicoCenaProps {
   alt: string
   /** Placeholder LQIP (base64) da imagem do Sanity. */
   blurDataURL?: string
-  position?: ServicoPosition
+  position?: Position
   featured?: boolean
   overlay?: MediaOverlay
 }
@@ -23,13 +22,13 @@ export interface ServicoCenaProps {
  * Posições assimétricas só a partir de `md`. No mobile tudo vira bottom-left
  * para leitura confortável.
  */
-const vJustify: Record<ServicoPosition, string> = {
+const vJustify: Record<Position, string> = {
   'bottom-left': 'justify-end',
   center: 'justify-end md:justify-center',
   'bottom-right': 'justify-end',
 }
 
-const hAlign: Record<ServicoPosition, string> = {
+const hAlign: Record<Position, string> = {
   'bottom-left': 'items-start text-left',
   center: 'items-start text-left md:items-center md:text-center',
   'bottom-right': 'items-start text-left md:items-end md:text-right',

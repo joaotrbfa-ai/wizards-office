@@ -9,8 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { FormField } from '@/components/form/FormField'
 import { TextInput } from '@/components/form/TextInput'
 import { TextArea } from '@/components/form/TextArea'
-import { RadioGroup } from '@/components/form/RadioGroup'
-import { CheckboxGroup } from '@/components/form/CheckboxGroup'
+import { ChoiceGroup } from '@/components/form/ChoiceGroup'
 import {
   briefSchema,
   type BriefData,
@@ -175,7 +174,8 @@ export function BriefForm({
               {/* Grupo 2 — Sobre o projeto */}
               <fieldset className={`${fieldsetClass} flex flex-col gap-10`}>
                 <legend className={legendClass}>Sobre o projeto</legend>
-                <RadioGroup
+                <ChoiceGroup
+                  type="radio"
                   legend="Tipo de projeto"
                   name="tipoProjeto"
                   required
@@ -183,7 +183,8 @@ export function BriefForm({
                   registration={register('tipoProjeto')}
                   error={errors.tipoProjeto?.message}
                 />
-                <CheckboxGroup
+                <ChoiceGroup
+                  type="checkbox"
                   legend="Serviços de interesse"
                   name="servicos"
                   required
@@ -191,7 +192,8 @@ export function BriefForm({
                   registration={register('servicos')}
                   error={errors.servicos?.message}
                 />
-                <RadioGroup
+                <ChoiceGroup
+                  type="radio"
                   legend="Prazo"
                   name="prazo"
                   options={PRAZOS}
