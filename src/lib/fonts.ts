@@ -40,6 +40,7 @@ export const serif = DM_Serif_Display({
 })
 
 // ---------- Fonte de detalhe (script) ----------
+// Pinyon Script — script do template da marca ("magic.").
 export const script = Pinyon_Script({
   subsets: ['latin'],
   weight: '400',
