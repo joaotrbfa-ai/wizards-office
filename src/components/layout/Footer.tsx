@@ -50,7 +50,7 @@ export async function Footer() {
                 alt="wzds."
                 width={1250}
                 height={404}
-                className="h-6 w-auto"
+                className="h-6 w-auto self-start"
               />
               <span>{address}</span>
             </div>
