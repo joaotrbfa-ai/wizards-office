@@ -14,6 +14,7 @@
     --color-olive: 47 11% 31%; /* #575549 */
     --color-terracotta: 16 51% 47%; /* #B65A3A */
     --color-ink: 0 0% 18%; /* #2D2D2D */
+    --color-muted: 38 22% 79%; /* #D4CCBE — texto secundário com contraste AA (4.7:1 sobre olive) */
 
     /* Variável de fonte sans — apontamos para General Sans (fallback).
        Ao trocar para Neue Montreal self-host, esta variável é sobrescrita
@@ -58,7 +59,7 @@
 
 @layer components {
   .eyebrow {
-    @apply text-eyebrow uppercase tracking-widest text-sand;
+    @apply text-eyebrow uppercase tracking-widest text-muted;
   }
 
   .display {

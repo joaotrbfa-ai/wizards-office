@@ -25,7 +25,7 @@ export function GaleriaAbertura({ abertura }: { abertura?: Abertura }) {
         priority
       >
         <div className="flex h-full w-full flex-col items-start justify-end p-8 pb-20 md:p-16 md:pb-32">
-          <p className="text-sm uppercase tracking-[0.25em] text-sand">{label}</p>
+          <p className="text-sm uppercase tracking-[0.25em] text-muted">{label}</p>
           <h1 className="mt-5 font-sans text-[clamp(2.5rem,5.6vw,5.6rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {tituloLinhas.map((linha, i) => (
               <Fragment key={i}>
@@ -35,7 +35,7 @@ export function GaleriaAbertura({ abertura }: { abertura?: Abertura }) {
             ))}
           </h1>
           {subtitulo && (
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-sand md:text-lg">
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
               {subtitulo}
             </p>
           )}

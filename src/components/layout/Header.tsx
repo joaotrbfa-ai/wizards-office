@@ -71,7 +71,7 @@ export function Header() {
                       href={item.href}
                       className={cn(
                         'relative inline-block py-1 transition-colors duration-300',
-                        active ? 'text-cream' : 'text-cream/70 hover:text-cream',
+                        active ? 'text-cream' : 'text-cream/85 hover:text-cream',
                       )}
                     >
                       {item.label}

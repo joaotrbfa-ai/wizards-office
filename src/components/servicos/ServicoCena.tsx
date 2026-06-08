@@ -67,7 +67,7 @@ export function ServicoCena({
               hAlign[position],
             )}
           >
-            <p className="text-sm uppercase tracking-[0.25em] text-sand">{label}</p>
+            <p className="text-sm uppercase tracking-[0.25em] text-muted">{label}</p>
 
             <h2
               className={cn(
@@ -81,7 +81,7 @@ export function ServicoCena({
             </h2>
 
             {!featured && subitems.length > 0 && (
-              <p className="mt-4 text-sm uppercase tracking-[0.2em] text-sand">
+              <p className="mt-4 text-sm uppercase tracking-[0.2em] text-muted">
                 {subitems.join(' · ')}
               </p>
             )}

@@ -31,7 +31,7 @@ function SwipeHint() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           exit={{ opacity: 0 }}
-          className="pointer-events-none absolute inset-x-0 bottom-24 mx-auto text-center text-xs uppercase tracking-[0.2em] text-sand md:hidden"
+          className="pointer-events-none absolute inset-x-0 bottom-24 mx-auto text-center text-xs uppercase tracking-[0.2em] text-muted md:hidden"
         >
           Arraste para navegar
         </motion.p>
@@ -106,7 +106,7 @@ export function Lightbox({ items, isOpen, index, close, next, prev }: LightboxPr
           {/* Contador */}
           <div
             aria-live="polite"
-            className="pointer-events-none absolute left-6 top-6 z-10 text-xs uppercase tracking-[0.25em] text-sand"
+            className="pointer-events-none absolute left-6 top-6 z-10 text-xs uppercase tracking-[0.25em] text-muted"
           >
             {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </div>
@@ -183,7 +183,7 @@ export function Lightbox({ items, isOpen, index, close, next, prev }: LightboxPr
               initial={reduced ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: reduced ? 0 : 0.2 }}
-              className="pointer-events-none absolute inset-x-8 bottom-8 mx-auto max-w-2xl text-balance text-center text-xs uppercase tracking-[0.2em] text-sand"
+              className="pointer-events-none absolute inset-x-8 bottom-8 mx-auto max-w-2xl text-balance text-center text-xs uppercase tracking-[0.2em] text-muted"
             >
               {item.caption}
             </motion.p>

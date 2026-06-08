@@ -37,7 +37,7 @@ export function ContatoDireto({
     <Scene tone="ink" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">{eyebrow}</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-muted">{eyebrow}</p>
           <h2 className="mt-6 font-sans text-[clamp(1.75rem,3.4vw,2.8rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
             {titulo}
           </h2>
@@ -46,7 +46,7 @@ export function ContatoDireto({
         <RevealGroup className="mt-12 grid grid-cols-1 gap-px border-t border-sand/20 sm:grid-cols-3">
           {canais.map((canal) => (
             <Reveal key={canal.label} className="border-b border-sand/20 py-8">
-              <p className="text-xs uppercase tracking-[0.25em] text-sand">{canal.label}</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-muted">{canal.label}</p>
               {canal.href ? (
                 <a
                   href={canal.href}

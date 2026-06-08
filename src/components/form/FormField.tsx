@@ -28,7 +28,7 @@ export function FormField({
   const hintId = hint ? `${htmlFor}-hint` : undefined
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <label htmlFor={htmlFor} className="text-sm uppercase tracking-[0.15em] text-sand">
+      <label htmlFor={htmlFor} className="text-sm uppercase tracking-[0.15em] text-muted">
         {label}
         {required && (
           <span aria-hidden className="text-terracotta">
@@ -38,7 +38,7 @@ export function FormField({
         )}
       </label>
       {hint && (
-        <p id={hintId} className="text-xs text-sand/70">
+        <p id={hintId} className="text-xs text-muted/70">
           {hint}
         </p>
       )}

@@ -57,7 +57,7 @@ export function ProcessoEtapa({
           )}
         >
           <Reveal className={cn('flex flex-col gap-5', hAlign[position])}>
-            <p className="text-sm uppercase tracking-[0.25em] text-sand">
+            <p className="text-sm uppercase tracking-[0.25em] text-muted">
               {numero} — Etapa
             </p>
             <h2 className="font-sans text-[clamp(2.5rem,5.6vw,6.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">

@@ -24,8 +24,8 @@ export async function Footer() {
         <div className="flex flex-col gap-12">
           <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
             <div className="max-w-xl">
-              <p className="text-eyebrow text-sand">{siteName}</p>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
+              <p className="text-eyebrow text-muted">{siteName}</p>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/85">
                 {brandDescription}
               </p>
             </div>
@@ -43,7 +43,7 @@ export async function Footer() {
             </Link>
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-6 border-t border-cream/10 pt-8 text-[0.72rem] uppercase tracking-widest text-sand sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start justify-between gap-6 border-t border-cream/10 pt-8 text-[0.72rem] uppercase tracking-widest text-muted sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">
               <Image
                 src="/brand/logo-light.png"

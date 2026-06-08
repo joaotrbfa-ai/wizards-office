@@ -22,6 +22,7 @@ const config: Config = {
         olive: 'hsl(var(--color-olive) / <alpha-value>)',
         terracotta: 'hsl(var(--color-terracotta) / <alpha-value>)',
         ink: 'hsl(var(--color-ink) / <alpha-value>)',
+        muted: 'hsl(var(--color-muted) / <alpha-value>)',
 
         background: 'hsl(var(--color-olive) / <alpha-value>)',
         'background-alt': 'hsl(var(--color-ink) / <alpha-value>)',

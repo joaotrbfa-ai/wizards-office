@@ -8,7 +8,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">Presença</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-muted">Presença</p>
           <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             Números que nos definem
           </h2>
@@ -27,7 +27,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
                 </span>
               )}
               <div className="mt-6 border-t border-sand/30 pt-4">
-                <span className="text-sm uppercase tracking-[0.2em] text-sand">
+                <span className="text-sm uppercase tracking-[0.2em] text-muted">
                   {metrica.label}
                 </span>
               </div>

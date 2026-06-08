@@ -14,7 +14,7 @@ export function ScrollCue({ label = 'Scroll', className }: ScrollCueProps) {
   const reduced = useReducedMotion()
   return (
     <div aria-hidden className={cn('flex flex-col items-center gap-3', className)}>
-      <span className="text-xs uppercase tracking-[0.2em] text-sand">{label}</span>
+      <span className="text-xs uppercase tracking-[0.2em] text-muted">{label}</span>
       <span className="relative block h-8 w-px overflow-hidden bg-sand/30">
         <motion.span
           className="absolute left-0 top-0 block h-3 w-px bg-sand"

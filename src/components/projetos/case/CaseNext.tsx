@@ -23,11 +23,11 @@ export function CaseNext({ proximo }: { proximo: ProjetoCard }) {
         />
 
         <div className="pointer-events-none flex h-full w-full flex-col items-center justify-center px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.25em] text-sand">Próximo projeto</p>
+          <p className="text-sm uppercase tracking-[0.25em] text-muted">Próximo projeto</p>
           <h2 className="mt-5 font-sans text-[clamp(2.5rem,5.6vw,6.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {proximo.nome}
           </h2>
-          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-sand">Ver projeto →</p>
+          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-muted">Ver projeto →</p>
         </div>
       </FullBleedMedia>
     </Scene>

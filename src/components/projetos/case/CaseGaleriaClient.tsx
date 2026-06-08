@@ -79,7 +79,7 @@ function Tile({
         />
       </button>
       {item.caption && (
-        <p className="mt-4 max-w-md text-xs uppercase tracking-[0.2em] text-sand">{item.caption}</p>
+        <p className="mt-4 max-w-md text-xs uppercase tracking-[0.2em] text-muted">{item.caption}</p>
       )}
     </div>
   )

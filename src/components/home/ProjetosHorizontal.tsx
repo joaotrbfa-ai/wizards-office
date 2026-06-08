@@ -40,13 +40,13 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                 >
                   <div className="flex h-full w-full items-end justify-between gap-8 p-8 pb-16 md:p-16 md:pb-24">
                     <div className="flex flex-col gap-3">
-                      <span className="text-sm tracking-[0.2em] text-sand">
+                      <span className="text-sm tracking-[0.2em] text-muted">
                         {String(i + 1).padStart(2, '0')} / {total}
                       </span>
                       <h3 className="font-sans text-[clamp(1.75rem,4vw,4rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
                         {projeto.nome}
                       </h3>
-                      <span className="text-sm uppercase tracking-[0.2em] text-sand">
+                      <span className="text-sm uppercase tracking-[0.2em] text-muted">
                         {projeto.ano}
                       </span>
                     </div>

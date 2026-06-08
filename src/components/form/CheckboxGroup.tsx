@@ -24,7 +24,7 @@ export function CheckboxGroup({
       aria-invalid={error ? true : undefined}
       aria-describedby={error ? errorId : undefined}
     >
-      <legend className="text-sm uppercase tracking-[0.15em] text-sand">
+      <legend className="text-sm uppercase tracking-[0.15em] text-muted">
         {legend}
         {required && (
           <span aria-hidden className="text-terracotta">

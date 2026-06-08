@@ -34,16 +34,16 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
 
           {/* Esquerda — metadados */}
           <div className="relative z-0 flex flex-col gap-3">
-            <span className="text-sm tracking-[0.2em] text-sand transition-colors duration-500 group-hover:text-terracotta">
+            <span className="text-sm tracking-[0.2em] text-muted transition-colors duration-500 group-hover:text-terracotta">
               {contador}
             </span>
-            <span className="text-xs uppercase tracking-[0.25em] text-sand">
+            <span className="text-xs uppercase tracking-[0.25em] text-muted">
               {projeto.categoria}
             </span>
             <h2 className="font-sans text-[clamp(2rem,4.8vw,4.8rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream transition-transform duration-500 ease-soft group-hover:translate-x-2">
               {projeto.nome}
             </h2>
-            <span className="text-sm uppercase tracking-[0.2em] text-sand">
+            <span className="text-sm uppercase tracking-[0.2em] text-muted">
               {projeto.local} · {projeto.ano}
             </span>
           </div>

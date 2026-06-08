@@ -14,8 +14,8 @@ export function ManifestoText({ paragrafos }: ManifestoTextProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
           <aside className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-32">
-              <p className="text-base uppercase tracking-[0.25em] text-sand md:text-lg">Manifesto</p>
-              <p className="mt-6 text-sm uppercase tracking-[0.15em] text-sand">SINCE 2019</p>
+              <p className="text-base uppercase tracking-[0.25em] text-muted md:text-lg">Manifesto</p>
+              <p className="mt-6 text-sm uppercase tracking-[0.15em] text-muted">SINCE 2019</p>
             </div>
           </aside>
 
@@ -23,7 +23,7 @@ export function ManifestoText({ paragrafos }: ManifestoTextProps) {
             <RevealGroup className="flex flex-col gap-6">
               {paragrafos.map((p, i) => (
                 <Reveal key={i}>
-                  <p className="max-w-prose text-base leading-relaxed text-sand md:text-lg">
+                  <p className="max-w-prose text-base leading-relaxed text-muted md:text-lg">
                     {p}
                   </p>
                 </Reveal>

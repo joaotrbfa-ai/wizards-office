@@ -21,7 +21,7 @@ import {
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
-const legendClass = 'text-sm uppercase tracking-[0.2em] text-sand'
+const legendClass = 'text-sm uppercase tracking-[0.2em] text-muted'
 const fieldsetClass = 'min-w-0 border-0 p-0'
 
 type BriefFormProps = {
@@ -82,7 +82,7 @@ export function BriefForm({
     <Scene tone="olive" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <div className="mx-auto max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-sand">{eyebrow}</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-muted">{eyebrow}</p>
           <h2 className="mt-6 font-sans text-[clamp(1.75rem,3.4vw,2.8rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
             {titulo}
           </h2>
@@ -101,7 +101,7 @@ export function BriefForm({
               <button
                 type="button"
                 onClick={() => setStatus('idle')}
-                className="mt-8 text-sm uppercase tracking-[0.2em] text-sand underline-offset-4 transition-colors hover:text-cream hover:underline"
+                className="mt-8 text-sm uppercase tracking-[0.2em] text-muted underline-offset-4 transition-colors hover:text-cream hover:underline"
               >
                 Enviar outro brief
               </button>

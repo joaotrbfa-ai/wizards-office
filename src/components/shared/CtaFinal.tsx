@@ -61,7 +61,7 @@ export function CtaFinal({
 
             {subtitulo && (
               <Reveal>
-                <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-sand md:text-lg">
+                <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
                   {subtitulo}
                 </p>
               </Reveal>
