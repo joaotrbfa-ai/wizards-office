@@ -63,7 +63,7 @@ function Tile({
       <button
         type="button"
         onClick={() => onOpen(index)}
-        aria-label="Abrir imagem em tela cheia"
+        aria-label={`Abrir imagem ${index + 1} em tela cheia`}
         className={cn(
           'group relative block w-full cursor-zoom-in overflow-hidden bg-ink p-0',
           aspect,
@@ -71,7 +71,7 @@ function Tile({
       >
         <Image
           src={img.src}
-          alt={img.alt}
+          alt={img.alt || item.caption || 'Imagem do projeto'}
           fill
           sizes={sizes}
           className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
@@ -104,7 +104,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
             <Scene key={`full-${i}`} minHeight="screen">
               <FullBleedMedia
                 src={img.src}
-                alt={img.alt}
+                alt={img.alt || 'Imagem do projeto'}
                 blurDataURL={img.blurDataURL}
                 overlay="bottom"
                 parallax
@@ -112,7 +112,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
                 <button
                   type="button"
                   onClick={() => open(idx)}
-                  aria-label="Abrir imagem em tela cheia"
+                  aria-label={`Abrir imagem ${idx + 1} em tela cheia`}
                   className="absolute inset-0 h-full w-full cursor-zoom-in"
                 />
               </FullBleedMedia>

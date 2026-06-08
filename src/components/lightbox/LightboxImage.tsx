@@ -11,7 +11,7 @@ export function LightboxImage({ item }: { item: LightboxItem }) {
   return (
     <Image
       src={src}
-      alt={item.image.alt ?? ''}
+      alt={item.image.alt || item.caption || 'Imagem da galeria em tela cheia'}
       width={dims?.width ?? 2400}
       height={dims?.height ?? 1600}
       sizes="100vw"
