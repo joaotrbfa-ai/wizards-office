@@ -14,7 +14,7 @@ export function ServicosLista({ servicos }: ServicosListaProps) {
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-muted">O que fazemos</p>
-          <h2 className="mt-6 font-sans text-[clamp(2.5rem,5.6vw,5.6rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h2 className="mt-6 font-sans text-[clamp(2.25rem,5vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             Expertise
           </h2>
         </Reveal>

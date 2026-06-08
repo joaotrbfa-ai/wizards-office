@@ -9,7 +9,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-muted">Presença</p>
-          <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h2 className="mt-6 font-sans text-[clamp(1.85rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             Números que nos definem
           </h2>
         </Reveal>
@@ -18,7 +18,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
           {numeros.map((metrica) => (
             <Reveal key={metrica.label} className="flex flex-col">
               {metrica.tipo === 'numero' ? (
-                <span className="font-sans text-[clamp(3.25rem,7vw,6.5rem)] font-bold leading-[0.85] text-cream">
+                <span className="font-sans text-[clamp(2.75rem,6vw,5.5rem)] font-bold leading-[0.85] text-cream">
                   {metrica.valor}
                 </span>
               ) : (

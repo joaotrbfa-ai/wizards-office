@@ -40,7 +40,7 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
             <span className="text-xs uppercase tracking-[0.25em] text-muted">
               {projeto.categoria}
             </span>
-            <h2 className="font-sans text-[clamp(2rem,4.8vw,4.8rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream transition-transform duration-500 ease-soft group-hover:translate-x-2">
+            <h2 className="font-sans text-[clamp(1.85rem,4vw,4.25rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream transition-transform duration-500 ease-soft group-hover:translate-x-2">
               {projeto.nome}
             </h2>
             <span className="text-sm uppercase tracking-[0.2em] text-muted">
