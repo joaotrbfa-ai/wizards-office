@@ -19,7 +19,6 @@ const hAlign: Record<Position, string> = {
 }
 
 export interface ProcessoEtapaProps {
-  numero: string
   titulo: string
   descricao: string
   /** URL da imagem já resolvida (via imageProps). */
@@ -32,7 +31,6 @@ export interface ProcessoEtapaProps {
 }
 
 export function ProcessoEtapa({
-  numero,
   titulo,
   descricao,
   image,
@@ -57,9 +55,6 @@ export function ProcessoEtapa({
           )}
         >
           <Reveal className={cn('flex flex-col gap-5', hAlign[position])}>
-            <p className="text-sm uppercase tracking-[0.25em] text-muted">
-              {numero} — Etapa
-            </p>
             <h2 className="font-sans text-[clamp(1.95rem,4.4vw,4.1rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
               {titulo}
             </h2>

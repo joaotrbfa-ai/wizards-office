@@ -44,7 +44,6 @@ export default async function SobrePage() {
         return (
           <ProcessoEtapa
             key={etapa._id}
-            numero={etapa.numero}
             titulo={etapa.titulo}
             descricao={etapa.descricao}
             image={src}
