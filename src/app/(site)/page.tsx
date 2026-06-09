@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     'Estúdio criativo de visualização arquitetônica de alto padrão em Balneário Camboriú. Imagens, filmes e narrativas visuais que transformam arquitetura em desejo.',
 }
 
+// Orientação dos pilares na Home: direita (Direção), esquerda (Narrativa), direita (Confiança).
+const PILAR_POSITIONS = ['bottom-right', 'bottom-left', 'bottom-right'] as const
+
 export default async function HomePage() {
   const [home, projetos, pilares, parceiros, servicos] = await Promise.all([
     sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
@@ -53,18 +56,17 @@ export default async function HomePage() {
       <ManifestoPinned />
       <ManifestoText paragrafos={home?.manifestoTextoParagrafos ?? []} />
 
-      {pilares.map((pilar) => {
+      {pilares.map((pilar, i) => {
         const img = imageProps(pilar.image, 2400)
         return (
           <PilarScene
             key={pilar._id}
-            numero={pilar.numero}
             titulo={pilar.titulo}
             descricao={pilar.descricao}
             image={img.src}
             alt={img.alt}
             blurDataURL={img.blurDataURL}
-            position={pilar.position}
+            position={PILAR_POSITIONS[i] ?? pilar.position}
             overlay={pilar.overlay}
           />
         )
