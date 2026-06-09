@@ -1,11 +1,12 @@
+import Link from 'next/link'
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/Button'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 
 export interface ServicosListaProps {
-  /** Títulos dos serviços, na ordem de exibição. */
-  servicos: string[]
+  /** Serviços (número + título), na ordem de exibição. */
+  servicos: { numero: string; titulo: string }[]
 }
 
 export function ServicosLista({ servicos }: ServicosListaProps) {
@@ -13,23 +14,25 @@ export function ServicosLista({ servicos }: ServicosListaProps) {
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-muted">O que fazemos</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.95rem,4.4vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
-            Expertise
+          <h2 className="font-sans text-[clamp(1.95rem,4.4vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+            O que fazemos
           </h2>
         </Reveal>
 
         <RevealGroup className="mt-12 border-t border-sand/20">
-          {servicos.map((servico, i) => (
-            <Reveal key={servico}>
-              <div className="group flex cursor-default items-baseline gap-6 border-b border-sand/20 py-6 md:py-8">
+          {servicos.map((servico) => (
+            <Reveal key={servico.numero}>
+              <Link
+                href={`/servicos#servico-${servico.numero}`}
+                className="group flex items-baseline gap-6 border-b border-sand/20 py-6 md:py-8"
+              >
                 <span className="text-sm uppercase tracking-widest text-muted transition-colors duration-300 group-hover:text-terracotta">
-                  {String(i + 1).padStart(2, '0')}.
+                  {servico.numero}.
                 </span>
                 <span className="font-sans text-[clamp(1.35rem,2.6vw,2.2rem)] font-medium uppercase tracking-wide text-cream transition-[transform,color] duration-[400ms] ease-out group-hover:translate-x-2 group-hover:text-terracotta">
-                  {servico}
+                  {servico.titulo}
                 </span>
-              </div>
+              </Link>
             </Reveal>
           ))}
         </RevealGroup>

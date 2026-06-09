@@ -1,6 +1,7 @@
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { MotionProvider } from '@/components/providers/MotionProvider'
+import { HashScroll } from '@/components/scroll/HashScroll'
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       </a>
 
       <MotionProvider>
+        <HashScroll />
         <Header />
         <main id="conteudo">{children}</main>
         <Footer />

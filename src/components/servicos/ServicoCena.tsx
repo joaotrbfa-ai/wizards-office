@@ -51,7 +51,7 @@ export function ServicoCena({
     : `${numero} — Serviço`
 
   return (
-    <Scene minHeight="screen">
+    <Scene minHeight="screen" id={`servico-${numero}`} className="scroll-mt-24">
       <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay={overlay} parallax>
         <div
           className={cn(

@@ -37,8 +37,7 @@ export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
     <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">
       <Container>
         <Reveal className="text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted">Quem confia</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase tracking-wide text-cream">
+          <h2 className="font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase tracking-wide text-cream">
             Parceiros
           </h2>
         </Reveal>

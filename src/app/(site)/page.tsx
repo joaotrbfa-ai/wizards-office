@@ -73,7 +73,7 @@ export default async function HomePage() {
       })}
 
       <ProjetosHorizontal projetos={projetos} />
-      <ServicosLista servicos={servicos.map((s) => s.titulo)} />
+      <ServicosLista servicos={servicos.map((s) => ({ numero: s.numero, titulo: s.titulo }))} />
       <ParceirosCena parceiros={parceiros} />
 
       {cta && (

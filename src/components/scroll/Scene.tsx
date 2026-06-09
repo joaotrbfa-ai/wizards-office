@@ -19,6 +19,8 @@ export interface SceneProps {
    * primitivos.
    */
   clip?: boolean
+  /** id no elemento raiz — usado como âncora de scroll (#id). */
+  id?: string
   className?: string
 }
 
@@ -45,10 +47,12 @@ export function Scene({
   snap = false,
   minHeight = 'screen',
   clip = true,
+  id,
   className,
 }: SceneProps) {
   return (
     <section
+      id={id}
       className={cn(
         'relative flex w-full flex-col',
         clip && 'overflow-hidden',
