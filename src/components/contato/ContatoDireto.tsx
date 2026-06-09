@@ -38,7 +38,7 @@ export function ContatoDireto({
       <Container>
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-muted">{eyebrow}</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.75rem,3.4vw,2.8rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
             {titulo}
           </h2>
         </Reveal>

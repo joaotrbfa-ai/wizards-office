@@ -24,7 +24,7 @@ function ManifestoInner({ progress, reducedMotion }: PinnedRenderArgs) {
         {FRASES.map((f) => (
           <h2
             key={f}
-            className="font-sans text-[clamp(2.25rem,6.5vw,6rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream"
+            className="font-sans text-[clamp(1.95rem,5.7vw,4.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream"
           >
             {f}
           </h2>

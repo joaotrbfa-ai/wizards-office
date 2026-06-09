@@ -27,7 +27,7 @@ export function ContatoFecho({
               <span className="font-script text-3xl text-cream md:text-4xl">{script}</span>
             </Reveal>
             <Reveal>
-              <h2 className="mt-4 font-sans text-[clamp(1.85rem,4vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+              <h2 className="mt-4 font-sans text-[clamp(1.6rem,3.5vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
                 {linhas.map((linha, i) => (
                   <Fragment key={i}>
                     {i > 0 && <br />}

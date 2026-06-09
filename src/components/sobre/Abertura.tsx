@@ -22,7 +22,7 @@ export function Abertura({ abertura }: { abertura?: PaginaSobre['abertura'] }) {
           <p className="text-sm uppercase tracking-[0.25em] text-muted">
             {abertura?.label ?? ''}
           </p>
-          <h1 className="mt-5 font-sans text-[clamp(2.25rem,5vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h1 className="mt-5 font-sans text-[clamp(1.75rem,3.9vw,3.4rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
             {tituloLinhas.map((linha, i) => (
               <Fragment key={i}>
                 {i > 0 && <br />}
