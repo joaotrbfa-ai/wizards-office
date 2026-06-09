@@ -21,7 +21,7 @@ import type { PaginaHome, ProjetoCard, Pilar, Parceiro, Servico } from '@/sanity
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Wizards Office — Crafting spaces that feels like magic.',
+    absolute: 'Wizards Office — Crafting spaces that feel like magic.',
   },
   description:
     'Estúdio criativo de visualização arquitetônica de alto padrão em Balneário Camboriú. Imagens, filmes e narrativas visuais que transformam arquitetura em desejo.',
@@ -48,7 +48,7 @@ export default async function HomePage() {
 
       <Hero
         videoUrl={home?.hero?.videoUrl ?? ''}
-        fraseHead={home?.hero?.fraseHead ?? 'Crafting spaces that feels like'}
+        fraseHead={home?.hero?.fraseHead ?? 'Crafting spaces that feel like'}
         fraseScript={home?.hero?.fraseScript ?? 'magic.'}
         poster={home?.hero?.poster ? imageProps(home.hero.poster, 1920).src : undefined}
       />

@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: 'Wizards Office — Crafting spaces that feels like magic.',
+          alt: 'Wizards Office — Crafting spaces that feel like magic.',
         },
       ],
     },
