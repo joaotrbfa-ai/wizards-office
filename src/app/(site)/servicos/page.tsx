@@ -41,7 +41,7 @@ export default async function ServicosPage() {
         blurDataURL={aberturaImg.blurDataURL}
       />
 
-      {(servicos ?? []).map((servico) => {
+      {(servicos ?? []).map((servico, i) => {
         const img = imageProps(servico.image, 2400)
         return (
           <ServicoCena
@@ -53,9 +53,9 @@ export default async function ServicosPage() {
             image={img.src}
             alt={img.alt}
             blurDataURL={img.blurDataURL}
-            position={servico.position}
+            // Alterna a disposição do texto: esquerda, direita, esquerda...
+            position={i % 2 === 0 ? 'bottom-left' : 'bottom-right'}
             overlay={servico.overlay}
-            featured={servico.featured}
           />
         )
       })}
