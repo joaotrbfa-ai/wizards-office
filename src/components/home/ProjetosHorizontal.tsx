@@ -46,9 +46,6 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                       <h3 className="font-sans text-[clamp(1.4rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
                         {projeto.nome}
                       </h3>
-                      <span className="text-sm uppercase tracking-[0.2em] text-muted">
-                        {projeto.ano}
-                      </span>
                     </div>
 
                     {/* Afordância visual (o card inteiro é o link via overlay abaixo). */}

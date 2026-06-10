@@ -21,7 +21,7 @@ export function CaseHero({ projeto }: { projeto: Projeto }) {
             {projeto.nome}
           </h1>
           <p className="mt-8 text-sm uppercase tracking-[0.2em] text-muted">
-            {projeto.local} · {projeto.ano}
+            {projeto.local}
           </p>
         </div>
       </FullBleedMedia>

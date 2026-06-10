@@ -44,7 +44,7 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
               {projeto.nome}
             </h2>
             <span className="text-sm uppercase tracking-[0.2em] text-muted">
-              {projeto.local} · {projeto.ano}
+              {projeto.local}
             </span>
           </div>
 
