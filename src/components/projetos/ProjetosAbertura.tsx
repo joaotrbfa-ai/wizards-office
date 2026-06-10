@@ -17,7 +17,6 @@ export function ProjetosAbertura({ abertura }: { abertura?: Abertura }) {
     abertura?.tituloLinhas && abertura.tituloLinhas.length > 0
       ? abertura.tituloLinhas
       : FALLBACK_TITULO
-  const subtitulo = abertura?.subtitulo || 'Seis cases. Cada um, uma direção.'
 
   return (
     <Scene minHeight="screen">
@@ -39,9 +38,6 @@ export function ProjetosAbertura({ abertura }: { abertura?: Abertura }) {
               </span>
             ))}
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            {subtitulo}
-          </p>
         </div>
       </FullBleedMedia>
     </Scene>
