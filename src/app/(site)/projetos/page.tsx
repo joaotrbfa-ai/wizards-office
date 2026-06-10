@@ -34,13 +34,8 @@ export default async function ProjetosPage() {
     <>
       <ScrollProgress />
       <ProjetosAbertura abertura={pagina?.abertura} />
-      {projetos.map((projeto, i) => (
-        <ProjetoCena
-          key={projeto.slug}
-          projeto={projeto}
-          index={i}
-          total={projetos.length}
-        />
+      {projetos.map((projeto) => (
+        <ProjetoCena key={projeto.slug} projeto={projeto} />
       ))}
       {cta ? (
         <CtaFinal

@@ -6,13 +6,10 @@ import type { ProjetoCard } from '@/sanity/types'
 
 export interface ProjetoCenaProps {
   projeto: ProjetoCard
-  index: number
-  total: number
   overlay?: MediaOverlay
 }
 
-export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: ProjetoCenaProps) {
-  const contador = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`
+export function ProjetoCena({ projeto, overlay = 'bottom' }: ProjetoCenaProps) {
   const cover = imageProps(projeto.coverImage, 2400)
 
   return (
@@ -34,12 +31,6 @@ export function ProjetoCena({ projeto, index, total, overlay = 'bottom' }: Proje
 
           {/* Esquerda — metadados */}
           <div className="relative z-0 flex flex-col gap-3">
-            <span className="text-sm tracking-[0.2em] text-muted transition-colors duration-500 group-hover:text-terracotta">
-              {contador}
-            </span>
-            <span className="text-xs uppercase tracking-[0.25em] text-muted">
-              {projeto.categoria}
-            </span>
             <h2 className="font-sans text-[clamp(1.6rem,3.5vw,3.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream transition-transform duration-500 ease-soft group-hover:translate-x-2">
               {projeto.nome}
             </h2>

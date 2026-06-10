@@ -1,7 +1,6 @@
 'use client'
 
 import { Scene } from '@/components/scroll/Scene'
-import { Container } from '@/components/layout/Container'
 import { HorizontalScroll } from '@/components/scroll/HorizontalScroll'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
 import { imageProps } from '@/sanity/image'
@@ -20,12 +19,6 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
 
   return (
     <Scene tone="ink" minHeight="auto" clip={false}>
-      <Container className="py-4">
-        <h2 className="text-sm font-bold uppercase tracking-[0.25em] text-muted">
-          Galeria.
-        </h2>
-      </Container>
-
       <HorizontalScroll pinHeight="100vh">
         {galeria.map((item, i) => {
           const img = imageProps(item.image, 2000)

@@ -3,7 +3,6 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { ContatoAbertura } from '@/components/contato/ContatoAbertura'
 import { BriefForm } from '@/components/contato/BriefForm'
 import { ContatoDireto } from '@/components/contato/ContatoDireto'
-import { ContatoFecho } from '@/components/contato/ContatoFecho'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaContatoQuery, configQuery } from '@/sanity/queries'
 import type { PaginaContato, Config } from '@/sanity/types'
@@ -39,10 +38,6 @@ export default async function ContatoPage() {
         contatoEmail={config?.contact?.email}
       />
       <ContatoDireto direto={pagina?.direto} contact={config?.contact} />
-      <ContatoFecho
-        textoScript={pagina?.fecho?.textoScript}
-        captionLinhas={pagina?.fecho?.captionLinhas}
-      />
     </>
   )
 }
