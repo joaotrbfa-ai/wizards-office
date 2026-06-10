@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { Scene } from '@/components/scroll/Scene'
-import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { LightboxMount } from '@/components/lightbox/LightboxMount'
 import { useLightboxOpen } from '@/components/lightbox/useLightbox'
@@ -23,14 +22,14 @@ export function GaleriaGridClient({ rows }: { rows: GaleriaRowType[] }) {
   const open = useLightboxOpen()
 
   return (
-    <Scene tone="olive" minHeight="auto" className="py-section-sm">
-      <Container>
-        <RevealGroup className="columns-2 [column-gap:1.25rem] md:columns-3 md:[column-gap:1.5rem] 2xl:columns-4">
+    <Scene tone="olive" minHeight="auto" className="py-6 md:py-10">
+      <div className="px-2 md:px-3">
+        <RevealGroup className="columns-2 [column-gap:0.5rem] md:columns-3 2xl:columns-4">
           {items.map((item, index) => {
             const img = imageProps(item.image, 1200)
             const aspectRatio = img.aspectRatio ?? 0.8
             return (
-              <Reveal key={index} className="mb-5 block break-inside-avoid md:mb-6">
+              <Reveal key={index} className="mb-2 block break-inside-avoid">
                 <button
                   type="button"
                   onClick={() => open(index)}
@@ -53,7 +52,7 @@ export function GaleriaGridClient({ rows }: { rows: GaleriaRowType[] }) {
             )
           })}
         </RevealGroup>
-      </Container>
+      </div>
 
       <LightboxMount items={flatItems} />
     </Scene>
