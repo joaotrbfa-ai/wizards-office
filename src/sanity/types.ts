@@ -3,6 +3,8 @@
  * Mantidos à mão por enquanto; migrar para codegen (sanity typegen) se crescer.
  */
 
+import type { ThemeConfig } from '@/lib/themes'
+
 export type SanityImage = {
   _type?: 'image'
   alt?: string
@@ -154,6 +156,7 @@ export type Config = {
     defaultDescription?: string
     ogImage?: SanityImage
   }
+  theme?: ThemeConfig
 }
 
 export type PaginaHome = {

@@ -147,7 +147,18 @@ export const configQuery = groq`
     tagline,
     brandDescription,
     contact,
-    seo { ..., ogImage { ${imageFields} } }
+    seo { ..., ogImage { ${imageFields} } },
+    theme {
+      preset,
+      custom {
+        "cream": cream.hex,
+        "sand": sand.hex,
+        "olive": olive.hex,
+        "terracotta": terracotta.hex,
+        "ink": ink.hex,
+        "muted": muted.hex
+      }
+    }
   }
 `
 

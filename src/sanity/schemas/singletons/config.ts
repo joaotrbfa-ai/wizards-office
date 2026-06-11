@@ -1,4 +1,15 @@
 import { defineField, defineType } from 'sanity'
+import { CUSTOM_THEME_ID, DEFAULT_PRESET_ID, THEME_PRESETS, THEME_SLOTS } from '@/lib/themes'
+
+/** Rótulos amigáveis por slot para os color pickers do tema personalizado. */
+const SLOT_LABELS: Record<(typeof THEME_SLOTS)[number], string> = {
+  olive: 'Fundo principal',
+  ink: 'Fundo alternativo (escuro)',
+  cream: 'Texto principal',
+  muted: 'Texto secundário',
+  sand: 'Texto secundário (alt)',
+  terracotta: 'Destaque / acento',
+}
 
 export const config = defineType({
   name: 'config',
@@ -34,6 +45,46 @@ export const config = defineType({
           title: 'Imagem OG',
           type: 'image',
           options: { hotspot: true },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'theme',
+      title: 'Aparência (cores do site)',
+      type: 'object',
+      description:
+        'Escolha um esquema pronto ou selecione "Personalizado" para definir cada cor manualmente.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'preset',
+          title: 'Esquema de cores',
+          type: 'string',
+          initialValue: DEFAULT_PRESET_ID,
+          options: {
+            layout: 'radio',
+            list: [
+              ...THEME_PRESETS.map((p) => ({ title: p.label, value: p.id })),
+              { title: 'Personalizado', value: CUSTOM_THEME_ID },
+            ],
+          },
+        }),
+        defineField({
+          name: 'custom',
+          title: 'Cores personalizadas',
+          type: 'object',
+          description:
+            'Usado apenas quando o esquema é "Personalizado". Garanta contraste entre o fundo e o texto.',
+          hidden: ({ parent }) => parent?.preset !== CUSTOM_THEME_ID,
+          options: { columns: 2 },
+          fields: THEME_SLOTS.map((slot) =>
+            defineField({
+              name: slot,
+              title: SLOT_LABELS[slot],
+              type: 'color',
+              options: { disableAlpha: true },
+            }),
+          ),
         }),
       ],
     }),

@@ -4,6 +4,7 @@ import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { configQuery } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
 import type { Config } from '@/sanity/types'
+import { resolveThemeColors, themeToCssVars } from '@/lib/themes'
 import './globals.css'
 
 const FALLBACK = {
@@ -60,9 +61,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const config = await sanityFetch<Config>({ query: configQuery, tags: [TAGS.config] })
+  const themeCss = themeToCssVars(resolveThemeColors(config?.theme))
+
   return (
     <html lang="pt-BR" className={`${serif.variable} ${script.variable}`}>
+      <head>
+        {/* Sobrescreve os tokens de cor (globals.css) com o tema do Sanity.
+            Vazio/ausente → cai no preset padrão, idêntico ao globals.css. */}
+        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   )
