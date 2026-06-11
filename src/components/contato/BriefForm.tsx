@@ -20,7 +20,7 @@ import {
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
-const legendClass = 'text-sm uppercase tracking-[0.2em] text-muted'
+const legendClass = 'text-sm uppercase tracking-[0.2em] text-label'
 const fieldsetClass = 'min-w-0 border-0 p-0'
 
 type BriefFormProps = {
@@ -81,8 +81,8 @@ export function BriefForm({
     <Scene tone="olive" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <div className="mx-auto max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted">{eyebrow}</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+          <p className="text-sm uppercase tracking-[0.2em] text-label">{eyebrow}</p>
+          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
             {titulo}
           </h2>
 
@@ -91,16 +91,16 @@ export function BriefForm({
               ref={successRef}
               tabIndex={-1}
               role="status"
-              className="mt-12 border border-sand/30 p-8 focus:outline-none md:p-12"
+              className="mt-12 border border-label/30 p-8 focus:outline-none md:p-12"
             >
-              <p className="font-script text-3xl text-cream md:text-4xl">obrigado.</p>
-              <p className="mt-4 text-lg leading-relaxed text-cream">
+              <p className="font-script text-3xl text-body md:text-4xl">obrigado.</p>
+              <p className="mt-4 text-lg leading-relaxed text-body">
                 Brief recebido. Respondemos em até 48h úteis.
               </p>
               <button
                 type="button"
                 onClick={() => setStatus('idle')}
-                className="mt-8 text-sm uppercase tracking-[0.2em] text-muted underline-offset-4 transition-colors hover:text-cream hover:underline"
+                className="mt-8 text-sm uppercase tracking-[0.2em] text-label underline-offset-4 transition-colors hover:text-body hover:underline"
               >
                 Enviar outro brief
               </button>
@@ -254,7 +254,7 @@ export function BriefForm({
                 </Button>
 
                 {status === 'error' && (
-                  <p role="alert" className="text-sm text-terracotta">
+                  <p role="alert" className="text-sm text-accent">
                     Algo deu errado no envio. Tente de novo ou escreva para{' '}
                     <a href={`mailto:${contatoEmail}`} className="underline">
                       {contatoEmail}

@@ -40,14 +40,14 @@ export function CtaFinal({
           <RevealGroup className="flex max-w-4xl flex-col items-center">
             {script && (
               <Reveal>
-                <span className="font-script text-3xl text-cream md:text-4xl">magic.</span>
+                <span className="font-script text-3xl text-body md:text-4xl">magic.</span>
               </Reveal>
             )}
 
             <Reveal>
               <h2
                 className={cn(
-                  'font-sans text-[clamp(1.95rem,4.4vw,4.1rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream',
+                  'font-sans text-[clamp(1.95rem,4.4vw,4.1rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading',
                   script && 'mt-4',
                 )}
               >
@@ -61,7 +61,7 @@ export function CtaFinal({
 
             {subtitulo && (
               <Reveal>
-                <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+                <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-label md:text-lg">
                   {subtitulo}
                 </p>
               </Reveal>

@@ -19,10 +19,10 @@ export function ContatoAbertura({ abertura }: { abertura?: PaginaContato['abertu
         priority
       >
         <div className="flex h-full w-full flex-col items-start justify-end p-8 pb-20 md:p-16 md:pb-32">
-          <p className="text-sm uppercase tracking-[0.25em] text-muted">
+          <p className="text-sm uppercase tracking-[0.25em] text-label">
             {abertura?.label ?? 'Contato'}
           </p>
-          <h1 className="mt-5 font-sans text-[clamp(1.95rem,4.4vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <h1 className="mt-5 font-sans text-[clamp(1.95rem,4.4vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
             {tituloLinhas.map((linha, i) => (
               <Fragment key={i}>
                 {i > 0 && <br />}
@@ -30,7 +30,7 @@ export function ContatoAbertura({ abertura }: { abertura?: PaginaContato['abertu
               </Fragment>
             ))}
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+          <p className="mt-8 max-w-2xl text-base leading-relaxed text-label md:text-lg">
             {abertura?.subtitulo ??
               'Toda grande imagem começa por uma conversa. Conte sobre o empreendimento — respondemos em até 48h úteis.'}
           </p>

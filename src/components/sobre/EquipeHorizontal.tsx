@@ -12,7 +12,7 @@ export function EquipeHorizontal({ membros }: { membros: Membro[] }) {
   return (
     <Scene tone="ink" minHeight="auto" clip={false}>
       <Container className="py-24">
-        <h2 className="font-sans text-[clamp(1.95rem,3.7vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+        <h2 className="font-sans text-[clamp(1.95rem,3.7vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
           The wizards.
         </h2>
       </Container>
@@ -28,19 +28,20 @@ export function EquipeHorizontal({ membros }: { membros: Membro[] }) {
                 alt={alt || membro.nome || ''}
                 blurDataURL={blurDataURL}
                 overlay="bottom"
+                focus="top"
               >
                 {/* Nome e cargo sobrepostos à foto, no canto inferior. */}
                 <div className="flex h-full w-full flex-col justify-end p-8 md:p-16">
-                  <span className="text-sm tracking-[0.2em] text-muted">
+                  <span className="text-sm tracking-[0.2em] text-label">
                     {membro.numero} / {String(membros.length).padStart(2, '0')}
                   </span>
-                  <h3 className="mt-3 font-sans text-[clamp(1.4rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+                  <h3 className="mt-3 font-sans text-[clamp(1.4rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
                     {membro.nome}
                   </h3>
-                  <p className="mt-3 text-sm uppercase tracking-[0.25em] text-muted">
+                  <p className="mt-3 text-sm uppercase tracking-[0.25em] text-label">
                     {membro.cargo}
                   </p>
-                  {membro.extra && <p className="mt-4 text-sm text-muted">{membro.extra}</p>}
+                  {membro.extra && <p className="mt-4 text-sm text-label">{membro.extra}</p>}
                 </div>
               </FullBleedMedia>
             </div>

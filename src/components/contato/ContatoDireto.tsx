@@ -37,24 +37,24 @@ export function ContatoDireto({
     <Scene tone="ink" minHeight="auto" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-muted">{eyebrow}</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+          <p className="text-sm uppercase tracking-[0.2em] text-label">{eyebrow}</p>
+          <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
             {titulo}
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-12 grid grid-cols-1 gap-px border-t border-sand/20 sm:grid-cols-3">
+        <RevealGroup className="mt-12 grid grid-cols-1 gap-px border-t border-label/20 sm:grid-cols-3">
           {canais.map((canal) => (
-            <Reveal key={canal.label} className="border-b border-sand/20 py-8">
-              <p className="text-xs uppercase tracking-[0.25em] text-muted">{canal.label}</p>
+            <Reveal key={canal.label} className="border-b border-label/20 py-8">
+              <p className="text-xs uppercase tracking-[0.25em] text-label">{canal.label}</p>
               {canal.href ? (
                 <a
                   href={canal.href}
                   target={canal.external ? '_blank' : undefined}
                   rel={canal.external ? 'noopener noreferrer' : undefined}
-                  className="group mt-3 inline-flex items-center gap-2 font-sans text-lg uppercase tracking-wide text-cream transition-colors hover:text-terracotta"
+                  className="group mt-3 inline-flex items-center gap-2 font-sans text-lg uppercase tracking-wide text-body transition-colors hover:text-accent"
                 >
-                  <span className="border-b border-cream/30 pb-1 group-hover:border-terracotta">
+                  <span className="border-b border-body/30 pb-1 group-hover:border-accent">
                     {canal.valor}
                   </span>
                   <span
@@ -65,7 +65,7 @@ export function ContatoDireto({
                   </span>
                 </a>
               ) : (
-                <p className="mt-3 font-sans text-lg uppercase tracking-wide text-cream">
+                <p className="mt-3 font-sans text-lg uppercase tracking-wide text-body">
                   {canal.valor}
                 </p>
               )}

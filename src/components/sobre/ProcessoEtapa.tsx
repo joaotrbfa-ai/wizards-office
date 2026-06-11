@@ -55,10 +55,10 @@ export function ProcessoEtapa({
           )}
         >
           <Reveal className={cn('flex flex-col gap-5', hAlign[position])}>
-            <h2 className="font-sans text-[clamp(1.95rem,4.4vw,4.1rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+            <h2 className="font-sans text-[clamp(1.95rem,4.4vw,4.1rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
               {titulo}
             </h2>
-            <p className="max-w-2xl text-base leading-relaxed text-cream md:text-lg">
+            <p className="max-w-2xl text-base leading-relaxed text-body md:text-lg">
               {descricao}
             </p>
           </Reveal>

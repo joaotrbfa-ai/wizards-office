@@ -57,17 +57,17 @@ export function ServicoCena({
           )}
         >
           <Reveal className={cn('flex max-w-3xl flex-col', hAlign[position])}>
-            <h2 className="font-sans text-[clamp(1.85rem,4vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+            <h2 className="font-sans text-[clamp(1.85rem,4vw,4.75rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
               {titulo}
             </h2>
 
             {subitems.length > 0 && (
-              <p className="mt-4 text-sm uppercase tracking-[0.2em] text-muted">
+              <p className="mt-4 text-sm uppercase tracking-[0.2em] text-label">
                 {subitems.join(' · ')}
               </p>
             )}
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-cream md:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-body md:text-lg">
               {descricao}
             </p>
           </Reveal>

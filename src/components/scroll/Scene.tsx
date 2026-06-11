@@ -24,11 +24,12 @@ export interface SceneProps {
   className?: string
 }
 
-const toneClass: Record<SceneTone, string> = {
-  olive: 'bg-background',
-  ink: 'bg-background-alt',
-  transparent: 'bg-transparent',
-  sand: 'bg-sand',
+/** Mapeia o tom ao scheme de superfície (data-scheme). O fundo vem de bg-surface. */
+const toneScheme: Record<SceneTone, 'olive' | 'ink' | 'sand' | undefined> = {
+  olive: 'olive',
+  ink: 'ink',
+  sand: 'sand',
+  transparent: undefined,
 }
 
 const minHeightClass: Record<SceneMinHeight, string> = {
@@ -53,10 +54,11 @@ export function Scene({
   return (
     <section
       id={id}
+      data-scheme={toneScheme[tone]}
       className={cn(
         'relative flex w-full flex-col',
         clip && 'overflow-hidden',
-        toneClass[tone],
+        tone === 'transparent' ? 'bg-transparent' : 'bg-surface',
         minHeightClass[minHeight],
         snap && 'snap-start',
         className,

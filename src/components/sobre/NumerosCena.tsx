@@ -12,8 +12,8 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
     <Scene tone="ink" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-muted">Presença</p>
-          <h2 className="mt-6 font-sans text-[clamp(1.6rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <p className="text-sm uppercase tracking-[0.2em] text-label">Presença</p>
+          <h2 className="mt-6 font-sans text-[clamp(1.6rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
             Números que nos definem
           </h2>
         </Reveal>
@@ -23,7 +23,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
             <Reveal key={`${metrica.label}-${i}`} className="flex h-full flex-col">
               <span
                 className={cn(
-                  'font-sans font-bold leading-[0.85] text-cream',
+                  'font-sans font-bold leading-[0.85] text-heading',
                   // "Empreendimentos" (tipo frase / texto) é mais longo: fonte menor.
                   metrica.tipo === 'numero'
                     ? 'text-[clamp(2.25rem,5vw,4.25rem)]'
@@ -32,8 +32,8 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
               >
                 {metrica.valor}
               </span>
-              <div className="mt-auto border-t border-sand/30 pt-4">
-                <span className="text-sm uppercase tracking-[0.2em] text-muted">
+              <div className="mt-auto border-t border-label/30 pt-4">
+                <span className="text-sm uppercase tracking-[0.2em] text-label">
                   {metrica.label}
                 </span>
               </div>

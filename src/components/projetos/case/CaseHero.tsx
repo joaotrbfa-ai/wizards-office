@@ -16,11 +16,11 @@ export function CaseHero({ projeto }: { projeto: Projeto }) {
         priority
       >
         <div className="flex h-full w-full flex-col items-center justify-center px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.25em] text-muted">{projeto.categoria}</p>
-          <h1 className="mt-5 font-sans text-[clamp(2.1rem,4.8vw,4.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-cream">
+          <p className="text-sm uppercase tracking-[0.25em] text-label">{projeto.categoria}</p>
+          <h1 className="mt-5 font-sans text-[clamp(2.1rem,4.8vw,4.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
             {projeto.nome}
           </h1>
-          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-muted">
+          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-label">
             {projeto.local}
           </p>
         </div>

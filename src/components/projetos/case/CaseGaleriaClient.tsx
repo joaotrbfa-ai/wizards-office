@@ -38,7 +38,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
                   className="absolute inset-0 h-full w-full cursor-zoom-in"
                 />
                 {item.caption && (
-                  <p className="pointer-events-none absolute inset-x-0 bottom-0 p-8 text-xs uppercase tracking-[0.2em] text-cream/90 md:p-12">
+                  <p className="pointer-events-none absolute inset-x-0 bottom-0 p-8 text-xs uppercase tracking-[0.2em] text-body/90 md:p-12">
                     {item.caption}
                   </p>
                 )}

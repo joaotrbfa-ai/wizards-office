@@ -18,11 +18,11 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
     <>
       <Scene tone="sand" minHeight="auto" clip={false}>
         <Container className="py-24">
-          <p className="text-sm uppercase tracking-[0.2em] text-ink/50">Projetos selecionados</p>
-          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(1.6rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-ink/75">
+          <p className="text-sm uppercase tracking-[0.2em] text-label/50">Projetos selecionados</p>
+          <h2 className="mt-6 max-w-4xl font-sans text-[clamp(1.6rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading/75">
             Trabalhos que falam por si.
           </h2>
-          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-ink/40 md:block">
+          <p className="mt-8 hidden text-xs uppercase tracking-[0.25em] text-label/40 md:block">
             Role para arrastar →
           </p>
         </Container>
@@ -40,10 +40,10 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                 >
                   <div className="pointer-events-none flex h-full w-full items-end justify-between gap-8 p-8 pb-16 md:p-16 md:pb-24">
                     <div className="flex flex-col gap-3">
-                      <span className="text-sm tracking-[0.2em] text-muted">
+                      <span className="text-sm tracking-[0.2em] text-label">
                         {String(i + 1).padStart(2, '0')} / {total}
                       </span>
-                      <h3 className="font-sans text-[clamp(1.4rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+                      <h3 className="font-sans text-[clamp(1.4rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
                         {projeto.nome}
                       </h3>
                     </div>
@@ -51,9 +51,9 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
                     {/* Afordância visual (o card inteiro é o link via overlay abaixo). */}
                     <span
                       aria-hidden
-                      className="hidden shrink-0 items-center gap-2 self-end pb-2 text-sm uppercase tracking-[0.2em] text-cream sm:inline-flex"
+                      className="hidden shrink-0 items-center gap-2 self-end pb-2 text-sm uppercase tracking-[0.2em] text-body sm:inline-flex"
                     >
-                      <span className="border-b border-cream/40 pb-1 transition-colors group-hover:border-cream">
+                      <span className="border-b border-body/40 pb-1 transition-colors group-hover:border-body">
                         Ver projeto
                       </span>
                       <span className="transition-transform duration-500 ease-soft group-hover:translate-x-1">

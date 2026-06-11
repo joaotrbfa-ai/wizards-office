@@ -31,10 +31,10 @@ export function ProjetoCena({ projeto, overlay = 'bottom' }: ProjetoCenaProps) {
 
           {/* Esquerda — metadados */}
           <div className="relative z-0 flex flex-col gap-3">
-            <h2 className="font-sans text-[clamp(1.6rem,3.5vw,3.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream transition-transform duration-500 ease-soft group-hover:translate-x-2">
+            <h2 className="font-sans text-[clamp(1.6rem,3.5vw,3.5rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading transition-transform duration-500 ease-soft group-hover:translate-x-2">
               {projeto.nome}
             </h2>
-            <span className="text-sm uppercase tracking-[0.2em] text-muted">
+            <span className="text-sm uppercase tracking-[0.2em] text-label">
               {projeto.local}
             </span>
           </div>
@@ -42,9 +42,9 @@ export function ProjetoCena({ projeto, overlay = 'bottom' }: ProjetoCenaProps) {
           {/* Direita — affordance visual de "ver case" */}
           <span
             aria-hidden
-            className="relative z-0 inline-flex shrink-0 items-center gap-2 self-end pb-2 text-xs uppercase tracking-[0.2em] text-cream sm:text-sm"
+            className="relative z-0 inline-flex shrink-0 items-center gap-2 self-end pb-2 text-xs uppercase tracking-[0.2em] text-body sm:text-sm"
           >
-            <span className="border-b border-cream/40 pb-1 transition-colors group-hover:border-cream">
+            <span className="border-b border-body/40 pb-1 transition-colors group-hover:border-body">
               Ver projeto
             </span>
             <span className="transition-transform duration-500 ease-soft group-hover:translate-x-1">

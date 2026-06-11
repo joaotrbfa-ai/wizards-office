@@ -17,7 +17,7 @@ function PartnerLogo({ partner }: { partner: Parceiro }) {
   const logo = partner.logo ? imageProps(partner.logo, 280) : null
 
   if (erro || !logo?.src) {
-    return <span className="text-sm uppercase tracking-widest text-muted">{partner.nome}</span>
+    return <span className="text-sm uppercase tracking-widest text-label">{partner.nome}</span>
   }
 
   return (
@@ -37,7 +37,7 @@ export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
     <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">
       <Container>
         <Reveal className="text-center">
-          <h2 className="font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase tracking-wide text-cream">
+          <h2 className="font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase tracking-wide text-heading">
             Parceiros
           </h2>
         </Reveal>

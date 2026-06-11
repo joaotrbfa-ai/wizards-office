@@ -28,7 +28,13 @@ const config: Config = {
         'background-alt': 'hsl(var(--color-ink) / <alpha-value>)',
         text: 'hsl(var(--color-cream) / <alpha-value>)',
         'text-muted': 'hsl(var(--color-sand) / <alpha-value>)',
-        accent: 'hsl(var(--color-terracotta) / <alpha-value>)',
+
+        // Papéis semânticos (cascata global → página → seção via CSS vars).
+        surface: 'hsl(var(--role-surface) / <alpha-value>)',
+        heading: 'hsl(var(--role-heading) / <alpha-value>)',
+        body: 'hsl(var(--role-body) / <alpha-value>)',
+        label: 'hsl(var(--role-label) / <alpha-value>)',
+        accent: 'hsl(var(--role-accent) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],

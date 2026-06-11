@@ -8,6 +8,8 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export type MediaType = 'image' | 'video'
 export type MediaOverlay = 'none' | 'soft' | 'strong' | 'bottom'
+/** Ancoragem do recorte do object-cover (onde a imagem "gruda" ao ser cortada). */
+export type MediaFocus = 'center' | 'top' | 'bottom'
 
 export interface FullBleedMediaProps {
   /** Caminho da imagem ou do vídeo. */
@@ -22,6 +24,8 @@ export interface FullBleedMediaProps {
   blurDataURL?: string
   /** Intensidade do overlay de leitura. */
   overlay?: MediaOverlay
+  /** Ancoragem do recorte (default center). 'top' preserva o topo da imagem. */
+  focus?: MediaFocus
   /** Parallax sutil no scroll (desligado em prefers-reduced-motion). */
   parallax?: boolean
   /** Prioriza o carregamento da imagem (hero acima da dobra). */
@@ -40,6 +44,12 @@ const overlayClass: Record<MediaOverlay, string> = {
   bottom: 'bg-gradient-to-b from-transparent via-transparent to-black/70',
 }
 
+const focusClass: Record<MediaFocus, string> = {
+  center: 'object-center',
+  top: 'object-top',
+  bottom: 'object-bottom',
+}
+
 function detectType(src: string, explicit?: MediaType): MediaType {
   if (explicit) return explicit
   return VIDEO_EXT.test(src) ? 'video' : 'image'
@@ -52,6 +62,7 @@ export function FullBleedMedia({
   poster,
   blurDataURL,
   overlay = 'soft',
+  focus = 'center',
   parallax = false,
   priority = false,
   children,
@@ -107,7 +118,7 @@ export function FullBleedMedia({
             fill
             sizes="100vw"
             priority={priority}
-            className="object-cover"
+            className={cn('object-cover', focusClass[focus])}
             {...(blurDataURL ? { placeholder: 'blur' as const, blurDataURL } : {})}
           />
         ) : (
