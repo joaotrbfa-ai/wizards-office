@@ -31,31 +31,9 @@
     --font-sans: 'General Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
 
-  /* Schemes de superfície — aplicados via data-scheme pelo Scene. Definem o
-     par fundo/texto de cada tom. Override de página/seção entra por cima. */
-  [data-scheme='olive'] {
-    --role-surface: var(--color-olive);
-    --role-heading: var(--color-cream);
-    --role-body: var(--color-cream);
-    --role-label: var(--color-muted);
-    --role-accent: var(--color-terracotta);
-  }
-
-  [data-scheme='ink'] {
-    --role-surface: var(--color-ink);
-    --role-heading: var(--color-cream);
-    --role-body: var(--color-cream);
-    --role-label: var(--color-muted);
-    --role-accent: var(--color-terracotta);
-  }
-
-  [data-scheme='sand'] {
-    --role-surface: var(--color-sand);
-    --role-heading: var(--color-ink);
-    --role-body: var(--color-ink);
-    --role-label: var(--color-ink);
-    --role-accent: var(--color-terracotta);
-  }
+  /* Os tons de superfície (fundo + inversão de texto no sand) são aplicados
+     inline pelo Scene — ver src/components/scroll/Scene.tsx. Os papéis acima
+     são os defaults que herdam quando o Scene não os sobrescreve. */
 
   html {
     -webkit-font-smoothing: antialiased;

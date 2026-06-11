@@ -57,6 +57,7 @@ export default async function ServicosPage() {
             // Alterna a disposição do texto: esquerda, direita, esquerda...
             position={i % 2 === 0 ? 'bottom-left' : 'bottom-right'}
             overlay={servico.overlay}
+            roles={servico.aparencia}
           />
         )
       })}
@@ -70,6 +71,7 @@ export default async function ServicosPage() {
           subtitulo={cta.subtitulo}
           ctaLabel={cta.ctaLabel}
           href={cta.href}
+          roles={cta.aparencia}
         />
       )}
     </ThemeScope>

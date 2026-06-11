@@ -2,6 +2,7 @@ import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia, type MediaOverlay } from '@/components/scroll/FullBleedMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
+import type { RoleOverrides } from '@/lib/themes'
 
 export type PilarPosition = 'bottom-left' | 'center' | 'bottom-right'
 
@@ -14,6 +15,7 @@ export interface PilarSceneProps {
   blurDataURL?: string
   position?: PilarPosition
   overlay?: MediaOverlay
+  roles?: RoleOverrides | null
 }
 
 /** Justificação vertical (eixo do flex-col) por posição. */
@@ -38,9 +40,10 @@ export function PilarScene({
   blurDataURL,
   position = 'bottom-left',
   overlay = 'strong',
+  roles,
 }: PilarSceneProps) {
   return (
-    <Scene minHeight="screen">
+    <Scene minHeight="screen" roles={roles}>
       <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay={overlay} parallax>
         <div
           className={cn(

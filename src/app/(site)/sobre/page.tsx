@@ -52,6 +52,7 @@ export default async function SobrePage() {
             blurDataURL={blurDataURL}
             position={etapa.position}
             overlay={etapa.overlay}
+            roles={etapa.aparencia}
           />
         )
       })}

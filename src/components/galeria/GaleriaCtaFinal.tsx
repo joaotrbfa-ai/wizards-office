@@ -14,6 +14,7 @@ export function GaleriaCtaFinal({ cta }: { cta?: CtaBlock }) {
         subtitulo={cta.subtitulo}
         href={cta.href}
         ctaLabel={cta.ctaLabel}
+        roles={cta.aparencia}
       />
     )
   }

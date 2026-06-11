@@ -56,6 +56,13 @@ export const etapaProcesso = defineType({
       options: { list: [...OVERLAY_OPTIONS] },
       initialValue: 'strong',
     }),
+    defineField({
+      name: 'aparencia',
+      title: 'Aparência da seção (cores)',
+      type: 'temaPapeis',
+      description: 'Sobrescreve as cores desta seção. Vazio = herda da página.',
+      options: { collapsible: true, collapsed: true },
+    }),
   ],
   orderings: [
     { title: 'Número', name: 'numeroAsc', by: [{ field: 'numero', direction: 'asc' }] },

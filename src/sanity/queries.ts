@@ -13,6 +13,15 @@ const imageFields = groq`
   }
 `
 
+/** Projeção dos overrides de papel (todos opcionais → null quando ausentes). */
+const temaPapeisFields = groq`
+  "surface": surface.hex,
+  "heading": heading.hex,
+  "body": body.hex,
+  "label": label.hex,
+  "accent": accent.hex
+`
+
 /** Abertura padrão das páginas (título em linhas). */
 const aberturaFields = groq`
   label,
@@ -27,7 +36,8 @@ const ctaBlockFields = groq`
   subtitulo,
   ctaLabel,
   href,
-  mostrarScriptMagic
+  mostrarScriptMagic,
+  aparencia { ${temaPapeisFields} }
 `
 
 // ===== Document queries =====
@@ -88,7 +98,8 @@ export const pilaresQuery = groq`
     descricao,
     image { ${imageFields} },
     position,
-    overlay
+    overlay,
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -102,7 +113,8 @@ export const servicosQuery = groq`
     image { ${imageFields} },
     position,
     overlay,
-    featured
+    featured,
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -114,7 +126,8 @@ export const etapasQuery = groq`
     descricao,
     image { ${imageFields} },
     position,
-    overlay
+    overlay,
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -140,15 +153,6 @@ export const parceirosQuery = groq`
 `
 
 // ===== Singleton queries =====
-
-/** Projeção dos overrides de papel (todos opcionais → null quando ausentes). */
-const temaPapeisFields = groq`
-  "surface": surface.hex,
-  "heading": heading.hex,
-  "body": body.hex,
-  "label": label.hex,
-  "accent": accent.hex
-`
 
 export const configQuery = groq`
   *[_id == "config"][0] {

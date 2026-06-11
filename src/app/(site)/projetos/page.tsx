@@ -47,6 +47,7 @@ export default async function ProjetosPage() {
           subtitulo={cta.subtitulo}
           href={cta.href}
           ctaLabel={cta.ctaLabel}
+          roles={cta.aparencia}
         />
       ) : (
         <CtaFinal

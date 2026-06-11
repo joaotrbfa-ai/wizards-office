@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
-import type { ReactNode } from 'react'
+import { rolesToStyle, type RoleOverrides } from '@/lib/themes'
+import type { CSSProperties, ReactNode } from 'react'
 
 export type SceneTone = 'olive' | 'ink' | 'transparent' | 'sand'
 export type SceneMinHeight = 'screen' | 'tall' | 'auto'
@@ -8,6 +9,8 @@ export interface SceneProps {
   children: ReactNode
   /** Fundo da cena. Reaproveita os tokens do DS. */
   tone?: SceneTone
+  /** Override de cores desta seção (CSS vars --role-*). Herda da página onde vazio. */
+  roles?: RoleOverrides | null
   /** Quando true, alinha a cena ao scroll-snap (exige ancestral .scene-snap). */
   snap?: boolean
   /** Altura mínima. `screen` = 100svh (fallback 100vh); `tall` = 120vh. */
@@ -24,12 +27,24 @@ export interface SceneProps {
   className?: string
 }
 
-/** Mapeia o tom ao scheme de superfície (data-scheme). O fundo vem de bg-surface. */
-const toneScheme: Record<SceneTone, 'olive' | 'ink' | 'sand' | undefined> = {
-  olive: 'olive',
-  ink: 'ink',
-  sand: 'sand',
-  transparent: undefined,
+/**
+ * Cada tom define o fundo via `--role-surface`. Aplicado INLINE (não por regra
+ * CSS global) para que:
+ *  - tons claros (olive/ink) NÃO resetem os papéis de texto → eles HERDAM de
+ *    overrides de ancestral (página/global);
+ *  - o tom `sand` inverta o texto para escuro (contraste sobre fundo claro);
+ *  - um override de seção (`roles`) sobrescreva o tom (vem depois no spread).
+ */
+const toneVars: Record<SceneTone, Record<string, string>> = {
+  olive: { '--role-surface': 'var(--color-olive)' },
+  ink: { '--role-surface': 'var(--color-ink)' },
+  sand: {
+    '--role-surface': 'var(--color-sand)',
+    '--role-heading': 'var(--color-ink)',
+    '--role-body': 'var(--color-ink)',
+    '--role-label': 'var(--color-ink)',
+  },
+  transparent: {},
 }
 
 const minHeightClass: Record<SceneMinHeight, string> = {
@@ -45,16 +60,19 @@ const minHeightClass: Record<SceneMinHeight, string> = {
 export function Scene({
   children,
   tone = 'olive',
+  roles,
   snap = false,
   minHeight = 'screen',
   clip = true,
   id,
   className,
 }: SceneProps) {
+  const style = { ...toneVars[tone], ...rolesToStyle(roles) } as CSSProperties
+
   return (
     <section
       id={id}
-      data-scheme={toneScheme[tone]}
+      style={style}
       className={cn(
         'relative flex w-full flex-col',
         clip && 'overflow-hidden',

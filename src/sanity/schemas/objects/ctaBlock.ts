@@ -53,6 +53,13 @@ export const ctaBlock = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'aparencia',
+      title: 'Aparência da seção (cores)',
+      type: 'temaPapeis',
+      description: 'Sobrescreve as cores desta seção. Vazio = herda da página.',
+      options: { collapsible: true, collapsed: true },
+    }),
   ],
   preview: {
     select: { media: 'image', linhas: 'tituloLinhas', subtitle: 'ctaLabel' },

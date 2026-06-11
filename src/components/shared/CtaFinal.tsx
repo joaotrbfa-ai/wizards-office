@@ -3,6 +3,7 @@ import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
 import { Button } from '@/components/ui/Button'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
+import type { RoleOverrides } from '@/lib/themes'
 
 export interface CtaFinalProps {
   image: string
@@ -17,6 +18,7 @@ export interface CtaFinalProps {
   script?: boolean
   /** Subtítulo opcional em sand. */
   subtitulo?: string
+  roles?: RoleOverrides | null
 }
 
 /**
@@ -32,9 +34,10 @@ export function CtaFinal({
   ctaLabel,
   script = false,
   subtitulo,
+  roles,
 }: CtaFinalProps) {
   return (
-    <Scene minHeight="screen">
+    <Scene minHeight="screen" roles={roles}>
       <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay="strong" parallax>
         <div className="flex h-full w-full items-center justify-center px-6 text-center">
           <RevealGroup className="flex max-w-4xl flex-col items-center">

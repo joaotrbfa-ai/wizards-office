@@ -2,6 +2,7 @@ import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia, type MediaOverlay } from '@/components/scroll/FullBleedMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
+import type { RoleOverrides } from '@/lib/themes'
 import type { Position } from '@/sanity/types'
 
 export interface ServicoCenaProps {
@@ -15,6 +16,7 @@ export interface ServicoCenaProps {
   blurDataURL?: string
   position?: Position
   overlay?: MediaOverlay
+  roles?: RoleOverrides | null
 }
 
 /**
@@ -43,9 +45,10 @@ export function ServicoCena({
   blurDataURL,
   position = 'bottom-left',
   overlay = 'strong',
+  roles,
 }: ServicoCenaProps) {
   return (
-    <Scene minHeight="screen" id={`servico-${numero}`} className="scroll-mt-24">
+    <Scene minHeight="screen" id={`servico-${numero}`} className="scroll-mt-24" roles={roles}>
       <FullBleedMedia src={image} alt={alt} blurDataURL={blurDataURL} overlay={overlay} parallax>
         <div
           className={cn(

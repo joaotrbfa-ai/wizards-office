@@ -2,6 +2,7 @@ import { Scene } from '@/components/scroll/Scene'
 import { FullBleedMedia } from '@/components/scroll/FullBleedMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
+import type { RoleOverrides } from '@/lib/themes'
 import type { Position, Overlay } from '@/sanity/types'
 
 /** Justificação vertical (eixo do flex-col) por posição. */
@@ -28,6 +29,7 @@ export interface ProcessoEtapaProps {
   blurDataURL?: string
   position?: Position
   overlay?: Overlay
+  roles?: RoleOverrides | null
 }
 
 export function ProcessoEtapa({
@@ -38,9 +40,10 @@ export function ProcessoEtapa({
   blurDataURL,
   position = 'bottom-left',
   overlay = 'strong',
+  roles,
 }: ProcessoEtapaProps) {
   return (
-    <Scene minHeight="screen">
+    <Scene minHeight="screen" roles={roles}>
       <FullBleedMedia
         src={image}
         alt={alt}

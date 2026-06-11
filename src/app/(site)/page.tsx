@@ -69,6 +69,7 @@ export default async function HomePage() {
             blurDataURL={img.blurDataURL}
             position={PILAR_POSITIONS[i] ?? pilar.position}
             overlay={pilar.overlay}
+            roles={pilar.aparencia}
           />
         )
       })}
@@ -86,6 +87,7 @@ export default async function HomePage() {
           subtitulo={cta.subtitulo}
           ctaLabel={cta.ctaLabel}
           href={cta.href}
+          roles={cta.aparencia}
         />
       )}
     </ThemeScope>

@@ -54,6 +54,7 @@ export type Pilar = {
   image?: SanityImage
   position?: Position
   overlay?: Overlay
+  aparencia?: RoleOverrides
 }
 
 export type Servico = {
@@ -66,6 +67,7 @@ export type Servico = {
   position?: Position
   overlay?: Overlay
   featured?: boolean
+  aparencia?: RoleOverrides
 }
 
 export type EtapaProcesso = {
@@ -76,6 +78,7 @@ export type EtapaProcesso = {
   image?: SanityImage
   position?: Position
   overlay?: Overlay
+  aparencia?: RoleOverrides
 }
 
 export type Membro = {
@@ -104,6 +107,7 @@ export type CtaBlock = {
   ctaLabel: string
   href: string
   mostrarScriptMagic?: boolean
+  aparencia?: RoleOverrides
 }
 
 export type Abertura = {
