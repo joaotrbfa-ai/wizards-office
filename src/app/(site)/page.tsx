@@ -8,6 +8,7 @@ import { ProjetosHorizontal } from '@/components/home/ProjetosHorizontal'
 import { ServicosLista } from '@/components/home/ServicosLista'
 import { ParceirosCena } from '@/components/home/ParceirosCena'
 import { CtaFinal } from '@/components/shared/CtaFinal'
+import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import {
   paginaHomeQuery,
@@ -43,7 +44,7 @@ export default async function HomePage() {
   const ctaImg = cta?.image ? imageProps(cta.image, 2400) : null
 
   return (
-    <>
+    <ThemeScope roles={home?.aparencia}>
       <ScrollProgress />
 
       <Hero
@@ -87,6 +88,6 @@ export default async function HomePage() {
           href={cta.href}
         />
       )}
-    </>
+    </ThemeScope>
   )
 }

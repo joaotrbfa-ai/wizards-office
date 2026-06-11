@@ -5,6 +5,7 @@ import { ctaBlock } from './objects/ctaBlock'
 import { galeriaItem } from './objects/galeriaItem'
 import { galeriaRow } from './objects/galeriaRow'
 import { metricaSobre } from './objects/metricaSobre'
+import { temaPapeis } from './objects/temaPapeis'
 
 // Documents (listáveis)
 import { projeto } from './documents/projeto'
@@ -40,6 +41,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   galeriaItem,
   galeriaRow,
   metricaSobre,
+  temaPapeis,
   // documents
   projeto,
   pilar,

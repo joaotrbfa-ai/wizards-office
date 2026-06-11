@@ -34,6 +34,13 @@ export const paginaGaleria = defineType({
       of: [{ type: 'galeriaRow' }],
     }),
     defineField({ name: 'ctaFinal', title: 'CTA final', type: 'ctaBlock' }),
+    defineField({
+      name: 'aparencia',
+      title: 'Aparência da página (cores)',
+      type: 'temaPapeis',
+      description: 'Sobrescreve as cores desta página inteira. Vazio = herda do tema global.',
+      options: { collapsible: true, collapsed: true },
+    }),
   ],
   preview: { prepare: () => ({ title: 'Página: Galeria' }) },
 })

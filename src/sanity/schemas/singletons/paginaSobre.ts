@@ -43,6 +43,13 @@ export const paginaSobre = defineType({
       type: 'array',
       of: [{ type: 'metricaSobre' }],
     }),
+    defineField({
+      name: 'aparencia',
+      title: 'Aparência da página (cores)',
+      type: 'temaPapeis',
+      description: 'Sobrescreve as cores desta página inteira. Vazio = herda do tema global.',
+      options: { collapsible: true, collapsed: true },
+    }),
   ],
   preview: { prepare: () => ({ title: 'Página: Sobre' }) },
 })

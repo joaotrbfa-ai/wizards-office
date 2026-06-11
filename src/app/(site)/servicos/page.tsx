@@ -3,6 +3,7 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { Abertura } from '@/components/servicos/Abertura'
 import { ServicoCena } from '@/components/servicos/ServicoCena'
 import { CtaFinal } from '@/components/shared/CtaFinal'
+import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaServicosQuery, servicosQuery } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
@@ -29,7 +30,7 @@ export default async function ServicosPage() {
   const ctaImg = cta?.image ? imageProps(cta.image, 2400) : null
 
   return (
-    <>
+    <ThemeScope roles={pagina?.aparencia}>
       <ScrollProgress />
 
       <Abertura
@@ -71,6 +72,6 @@ export default async function ServicosPage() {
           href={cta.href}
         />
       )}
-    </>
+    </ThemeScope>
   )
 }

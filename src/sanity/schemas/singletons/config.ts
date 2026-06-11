@@ -86,6 +86,14 @@ export const config = defineType({
             }),
           ),
         }),
+        defineField({
+          name: 'roles',
+          title: 'Ajuste fino por papel (opcional)',
+          type: 'temaPapeis',
+          description:
+            'Sobrescreve a cor de cada papel separadamente (ex.: títulos diferentes do corpo). Vazio = deriva da paleta.',
+          options: { collapsible: true, collapsed: true },
+        }),
       ],
     }),
   ],

@@ -141,6 +141,15 @@ export const parceirosQuery = groq`
 
 // ===== Singleton queries =====
 
+/** Projeção dos overrides de papel (todos opcionais → null quando ausentes). */
+const temaPapeisFields = groq`
+  "surface": surface.hex,
+  "heading": heading.hex,
+  "body": body.hex,
+  "label": label.hex,
+  "accent": accent.hex
+`
+
 export const configQuery = groq`
   *[_id == "config"][0] {
     siteName,
@@ -157,7 +166,8 @@ export const configQuery = groq`
         "terracotta": terracotta.hex,
         "ink": ink.hex,
         "muted": muted.hex
-      }
+      },
+      roles { ${temaPapeisFields} }
     }
   }
 `
@@ -167,7 +177,8 @@ export const paginaHomeQuery = groq`
     hero { videoUrl, fraseHead, fraseScript, poster { ${imageFields} } },
     manifestoTextoParagrafos,
     pausaScript { texto, caption },
-    ctaFinal { ${ctaBlockFields} }
+    ctaFinal { ${ctaBlockFields} },
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -175,21 +186,24 @@ export const paginaSobreQuery = groq`
   *[_id == "paginaSobre"][0] {
     abertura { ${aberturaFields} },
     manifesto { label, titulo, texto },
-    numeros[] { tipo, valor, label }
+    numeros[] { tipo, valor, label },
+    aparencia { ${temaPapeisFields} }
   }
 `
 
 export const paginaServicosQuery = groq`
   *[_id == "paginaServicos"][0] {
     abertura { ${aberturaFields} },
-    ctaFinal { ${ctaBlockFields} }
+    ctaFinal { ${ctaBlockFields} },
+    aparencia { ${temaPapeisFields} }
   }
 `
 
 export const paginaProjetosQuery = groq`
   *[_id == "paginaProjetos"][0] {
     abertura { ${aberturaFields} },
-    ctaFinal { ${ctaBlockFields} }
+    ctaFinal { ${ctaBlockFields} },
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -197,7 +211,8 @@ export const paginaGaleriaQuery = groq`
   *[_id == "paginaGaleria"][0] {
     abertura { ${aberturaFields} },
     rows[] { layout, images[] { image { ${imageFields} }, caption } },
-    ctaFinal { ${ctaBlockFields} }
+    ctaFinal { ${ctaBlockFields} },
+    aparencia { ${temaPapeisFields} }
   }
 `
 
@@ -206,6 +221,7 @@ export const paginaContatoQuery = groq`
     abertura { ${aberturaFields} },
     brief,
     direto,
-    fecho { textoScript, captionLinhas }
+    fecho { textoScript, captionLinhas },
+    aparencia { ${temaPapeisFields} }
   }
 `

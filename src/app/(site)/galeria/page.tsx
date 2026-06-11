@@ -3,6 +3,7 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { GaleriaAbertura } from '@/components/galeria/GaleriaAbertura'
 import { GaleriaGrid } from '@/components/galeria/GaleriaGrid'
 import { GaleriaCtaFinal } from '@/components/galeria/GaleriaCtaFinal'
+import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaGaleriaQuery } from '@/sanity/queries'
 import type { PaginaGaleria } from '@/sanity/types'
@@ -22,11 +23,11 @@ export default async function GaleriaPage() {
   })
 
   return (
-    <>
+    <ThemeScope roles={pagina?.aparencia}>
       <ScrollProgress />
       <GaleriaAbertura abertura={pagina?.abertura} />
       <GaleriaGrid rows={pagina?.rows ?? []} />
       <GaleriaCtaFinal cta={pagina?.ctaFinal} />
-    </>
+    </ThemeScope>
   )
 }

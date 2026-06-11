@@ -3,7 +3,7 @@
  * Mantidos à mão por enquanto; migrar para codegen (sanity typegen) se crescer.
  */
 
-import type { ThemeConfig } from '@/lib/themes'
+import type { ThemeConfig, RoleOverrides } from '@/lib/themes'
 
 export type SanityImage = {
   _type?: 'image'
@@ -169,28 +169,33 @@ export type PaginaHome = {
   manifestoTextoParagrafos?: string[]
   pausaScript?: { texto?: string; caption?: string }
   ctaFinal?: CtaBlock
+  aparencia?: RoleOverrides
 }
 
 export type PaginaSobre = {
   abertura?: Abertura
   manifesto?: { label?: string; titulo?: string; texto?: string }
   numeros?: MetricaSobre[]
+  aparencia?: RoleOverrides
 }
 
 export type PaginaServicos = {
   abertura?: Abertura
   ctaFinal?: CtaBlock
+  aparencia?: RoleOverrides
 }
 
 export type PaginaProjetos = {
   abertura?: Abertura
   ctaFinal?: CtaBlock
+  aparencia?: RoleOverrides
 }
 
 export type PaginaGaleria = {
   abertura?: Abertura
   rows?: GaleriaRow[]
   ctaFinal?: CtaBlock
+  aparencia?: RoleOverrides
 }
 
 export type PaginaContato = {
@@ -198,4 +203,5 @@ export type PaginaContato = {
   brief?: { eyebrow?: string; titulo?: string; submitLabel?: string }
   direto?: { eyebrow?: string; titulo?: string; emailLabel?: string; instagramLabel?: string }
   fecho?: { textoScript?: string; captionLinhas?: string[] }
+  aparencia?: RoleOverrides
 }

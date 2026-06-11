@@ -3,6 +3,7 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { ProjetosAbertura } from '@/components/projetos/ProjetosAbertura'
 import { ProjetoCena } from '@/components/projetos/ProjetoCena'
 import { CtaFinal } from '@/components/shared/CtaFinal'
+import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaProjetosQuery, projetosListQuery } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
@@ -31,7 +32,7 @@ export default async function ProjetosPage() {
   const cta = pagina?.ctaFinal
 
   return (
-    <>
+    <ThemeScope roles={pagina?.aparencia}>
       <ScrollProgress />
       <ProjetosAbertura abertura={pagina?.abertura} />
       {projetos.map((projeto) => (
@@ -56,6 +57,6 @@ export default async function ProjetosPage() {
           ctaLabel="Trazer minha visão"
         />
       )}
-    </>
+    </ThemeScope>
   )
 }

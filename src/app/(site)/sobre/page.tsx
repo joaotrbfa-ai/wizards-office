@@ -5,6 +5,7 @@ import { ManifestoSobre } from '@/components/sobre/ManifestoSobre'
 import { ProcessoEtapa } from '@/components/sobre/ProcessoEtapa'
 import { NumerosCena } from '@/components/sobre/NumerosCena'
 import { EquipeHorizontal } from '@/components/sobre/EquipeHorizontal'
+import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaSobreQuery, etapasQuery, membrosQuery } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
@@ -35,7 +36,7 @@ export default async function SobrePage() {
   ])
 
   return (
-    <>
+    <ThemeScope roles={pagina?.aparencia}>
       <ScrollProgress />
       <Abertura abertura={pagina?.abertura} />
       <ManifestoSobre manifesto={pagina?.manifesto} />
@@ -56,6 +57,6 @@ export default async function SobrePage() {
       })}
       <NumerosCena numeros={pagina?.numeros ?? []} />
       <EquipeHorizontal membros={membros ?? []} />
-    </>
+    </ThemeScope>
   )
 }

@@ -4,7 +4,7 @@ import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { configQuery } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
 import type { Config } from '@/sanity/types'
-import { resolveThemeColors, themeToCssVars } from '@/lib/themes'
+import { resolveThemeColors, themeToCssVars, rolesToCssDecls } from '@/lib/themes'
 import './globals.css'
 
 const FALLBACK = {
@@ -63,7 +63,9 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const config = await sanityFetch<Config>({ query: configQuery, tags: [TAGS.config] })
-  const themeCss = themeToCssVars(resolveThemeColors(config?.theme))
+  const paletteCss = themeToCssVars(resolveThemeColors(config?.theme))
+  const roleDecls = rolesToCssDecls(config?.theme?.roles)
+  const themeCss = roleDecls ? `${paletteCss}:root{${roleDecls}}` : paletteCss
 
   return (
     <html lang="pt-BR" className={`${serif.variable} ${script.variable}`}>

@@ -78,6 +78,8 @@ const DEFAULT_COLORS = PRESETS_BY_ID.get(DEFAULT_PRESET_ID)!.colors
 export type ThemeConfig = {
   preset?: string
   custom?: Partial<Record<ThemeSlot, string>>
+  /** Override fino por papel (global). Vazio → papéis derivam dos slots. */
+  roles?: RoleOverrides
 }
 
 /**
@@ -107,6 +109,33 @@ export function resolveThemeColors(theme?: ThemeConfig | null): ThemeColors {
 export function themeToCssVars(colors: ThemeColors): string {
   const decls = THEME_SLOTS.map((slot) => `--color-${slot}: ${hexToHslParts(colors[slot])};`).join('')
   return `:root{${decls}}`
+}
+
+// ===== Papéis semânticos (override por escopo: global → página → seção) =====
+
+export const ROLE_SLOTS = ['surface', 'heading', 'body', 'label', 'accent'] as const
+export type RoleSlot = (typeof ROLE_SLOTS)[number]
+export type RoleOverrides = Partial<Record<RoleSlot, string>>
+
+/**
+ * Overrides de papel → mapa de CSS vars inline (style prop). Usado no escopo de
+ * página e seção. Só inclui os papéis preenchidos; o resto herda do nível acima.
+ */
+export function rolesToStyle(roles?: RoleOverrides | null): Record<string, string> {
+  const style: Record<string, string> = {}
+  if (!roles) return style
+  for (const slot of ROLE_SLOTS) {
+    const hex = normalizeHex(roles[slot])
+    if (hex) style[`--role-${slot}`] = hexToHslParts(hex)
+  }
+  return style
+}
+
+/** Mesmas declarações como string CSS (para o :root global no <head>). */
+export function rolesToCssDecls(roles?: RoleOverrides | null): string {
+  return Object.entries(rolesToStyle(roles))
+    .map(([k, v]) => `${k}: ${v};`)
+    .join('')
 }
 
 // ===== Helpers de cor =====
