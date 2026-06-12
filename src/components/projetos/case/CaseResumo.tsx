@@ -11,9 +11,8 @@ export function CaseResumo({ projeto }: { projeto: Projeto }) {
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-4">
-            <p className="text-sm uppercase tracking-[0.2em] text-label">Resumo</p>
-            <h2 className="mt-6 font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
-              Contexto.
+            <h2 className="font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
+              Sobre o projeto
             </h2>
           </Reveal>
 
