@@ -16,7 +16,7 @@ export function ProjetosHorizontal({ projetos }: ProjetosHorizontalProps) {
 
   return (
     <>
-      <Scene tone="sand" minHeight="auto" clip={false}>
+      <Scene tone="cream" minHeight="auto" clip={false}>
         <Container className="py-24">
           <p className="text-sm uppercase tracking-[0.2em] text-label/50">Projetos selecionados</p>
           <h2 className="mt-6 max-w-4xl font-sans text-[clamp(1.6rem,3.2vw,2.85rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading/75">

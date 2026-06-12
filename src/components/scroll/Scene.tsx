@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { rolesToStyle, type RoleOverrides } from '@/lib/themes'
 import type { CSSProperties, ReactNode } from 'react'
 
-export type SceneTone = 'olive' | 'ink' | 'transparent' | 'sand'
+export type SceneTone = 'olive' | 'ink' | 'transparent' | 'sand' | 'cream'
 export type SceneMinHeight = 'screen' | 'tall' | 'auto'
 
 export interface SceneProps {
@@ -43,6 +43,14 @@ const toneVars: Record<SceneTone, Record<string, string>> = {
     '--role-heading': 'var(--color-ink)',
     '--role-body': 'var(--color-ink)',
     '--role-label': 'var(--color-ink)',
+  },
+  // Fundo bege claro (cream) com texto em cinza-oliva — inversão sobre fundo
+  // claro, conforme o brandbook ("fundo bege claro, escrita cinza").
+  cream: {
+    '--role-surface': 'var(--color-cream)',
+    '--role-heading': 'var(--color-olive)',
+    '--role-body': 'var(--color-olive)',
+    '--role-label': 'var(--color-olive)',
   },
   transparent: {},
 }

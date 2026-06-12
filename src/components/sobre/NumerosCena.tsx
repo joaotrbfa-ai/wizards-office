@@ -9,7 +9,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
   if (!numeros?.length) return null
 
   return (
-    <Scene tone="ink" minHeight="screen">
+    <Scene tone="cream" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-label">Presença</p>

@@ -11,7 +11,7 @@ export interface ServicosListaProps {
 
 export function ServicosLista({ servicos }: ServicosListaProps) {
   return (
-    <Scene tone="ink" minHeight="screen">
+    <Scene tone="olive" minHeight="screen">
       <Container className="flex flex-1 flex-col justify-center py-24">
         <Reveal>
           <h2 className="font-sans text-[clamp(1.95rem,4.4vw,3.9rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
