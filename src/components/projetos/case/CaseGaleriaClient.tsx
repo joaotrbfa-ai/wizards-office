@@ -22,7 +22,7 @@ export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
 
   return (
     <Scene tone="cream" minHeight="auto" clip={false}>
-      <HorizontalScroll pinHeight="100vh" gap="4vw">
+      <HorizontalScroll pinHeight="100vh" gap="2vw">
         {/* Respiro inicial (espaço negativo na borda esquerda). */}
         <div aria-hidden className="hidden shrink-0 md:block md:w-[8vw]" />
 
