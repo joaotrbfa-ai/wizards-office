@@ -38,3 +38,4 @@ next-env.d.ts
 # design scratch / referências (não versionar)
 /mockups
 /public/templates
+/public/prints
