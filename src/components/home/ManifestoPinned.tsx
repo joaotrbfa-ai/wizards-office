@@ -10,7 +10,7 @@ const TERRACOTTA = '#B65A3A'
 const FRASES = ['The invisible', 'Made', 'Visible.']
 
 function ManifestoInner({ progress, reducedMotion }: PinnedRenderArgs) {
-  const o1 = useTransform(progress, [0.02, 0.1, 0.28, 0.35], [0, 1, 1, 0])
+  const o1 = useTransform(progress, [0, 0.05, 0.28, 0.35], [0, 1, 1, 0])
   const o2 = useTransform(progress, [0.35, 0.5, 0.58, 0.65], [0, 1, 1, 0])
   const o3 = useTransform(progress, [0.65, 0.8, 1], [0, 1, 1])
   const visibleColor = useTransform(progress, [0.8, 1], [CREAM, TERRACOTTA])
