@@ -181,6 +181,16 @@ export const paginaHomeQuery = groq`
     hero { videoUrl, fraseHead, fraseScript, poster { ${imageFields} } },
     manifestoTextoParagrafos,
     pausaScript { texto, caption },
+    miniGaleria {
+      eyebrow,
+      titulo,
+      descricao,
+      itens[] {
+        image { ${imageFields} },
+        caption,
+        projeto->{ "slug": slug.current, nome, categoria }
+      }
+    },
     ctaFinal { ${ctaBlockFields} },
     aparencia { ${temaPapeisFields} }
   }

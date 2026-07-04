@@ -141,6 +141,20 @@ export type MetricaSobre = {
   label: string
 }
 
+/** Item da mini-galeria da Home: imagem + projeto vinculado (opcional). */
+export type MiniGaleriaItem = {
+  image: SanityImage
+  caption?: string
+  projeto?: { slug: string; nome: string; categoria?: string }
+}
+
+export type MiniGaleria = {
+  eyebrow?: string
+  titulo?: string
+  descricao?: string
+  itens?: MiniGaleriaItem[]
+}
+
 // ===== Singletons =====
 
 export type Config = {
@@ -172,6 +186,7 @@ export type PaginaHome = {
   }
   manifestoTextoParagrafos?: string[]
   pausaScript?: { texto?: string; caption?: string }
+  miniGaleria?: MiniGaleria
   ctaFinal?: CtaBlock
   aparencia?: RoleOverrides
 }

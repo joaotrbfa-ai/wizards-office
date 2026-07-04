@@ -9,14 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { FormField } from '@/components/form/FormField'
 import { TextInput } from '@/components/form/TextInput'
 import { TextArea } from '@/components/form/TextArea'
-import { ChoiceGroup } from '@/components/form/ChoiceGroup'
-import {
-  briefSchema,
-  type BriefData,
-  TIPOS_PROJETO,
-  SERVICOS_BRIEF,
-  PRAZOS,
-} from '@/lib/brief-schema'
+import { briefSchema, type BriefData } from '@/lib/brief-schema'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
@@ -51,7 +44,6 @@ export function BriefForm({
       email: '',
       empresa: '',
       telefone: '',
-      servicos: [],
       mensagem: '',
       website: '',
     },
@@ -171,38 +163,7 @@ export function BriefForm({
                 </div>
               </fieldset>
 
-              {/* Grupo 2 — Sobre o projeto */}
-              <fieldset className={`${fieldsetClass} flex flex-col gap-10`}>
-                <legend className={legendClass}>Sobre o projeto</legend>
-                <ChoiceGroup
-                  type="radio"
-                  legend="Tipo de projeto"
-                  name="tipoProjeto"
-                  required
-                  options={TIPOS_PROJETO}
-                  registration={register('tipoProjeto')}
-                  error={errors.tipoProjeto?.message}
-                />
-                <ChoiceGroup
-                  type="checkbox"
-                  legend="Serviços de interesse"
-                  name="servicos"
-                  required
-                  options={SERVICOS_BRIEF}
-                  registration={register('servicos')}
-                  error={errors.servicos?.message}
-                />
-                <ChoiceGroup
-                  type="radio"
-                  legend="Prazo"
-                  name="prazo"
-                  options={PRAZOS}
-                  registration={register('prazo')}
-                  error={errors.prazo?.message}
-                />
-              </fieldset>
-
-              {/* Grupo 3 — Mensagem */}
+              {/* Grupo 2 — Mensagem */}
               <fieldset className={fieldsetClass}>
                 <legend className={legendClass}>Mensagem</legend>
                 <div className="mt-6">

@@ -155,6 +155,7 @@ export function Header() {
                       >
                         <Link
                           href={item.href}
+                          onClick={() => setOpen(false)}
                           className={cn(
                             'block border-b border-cream/15 py-5 font-sans text-3xl uppercase tracking-wider transition-colors sm:text-4xl',
                             active ? 'text-cream' : 'text-cream/80 hover:text-cream',
