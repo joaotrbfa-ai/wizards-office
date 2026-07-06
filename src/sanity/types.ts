@@ -32,6 +32,7 @@ export type Projeto = {
   categoria: string
   ano: number
   local: string
+  cliente?: string
   coverImage: SanityImage
   galeria?: { image: SanityImage; caption?: string }[]
   resumo?: string

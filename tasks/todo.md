@@ -84,10 +84,22 @@ componentes existentes. Páginas internas (`/sobre`, `/servicos`, `/projetos`,
 - [x] Galeria: mobile vira carrossel com swipe (scroll-snap nativo, cards 78%),
       desktop mantém o scroll horizontal com pin. Card extraído em `<Slide>`.
 
+## Rodada 7 — página interna do projeto (/projetos/[slug])
+- [x] Removidas as seções Hero, "Sobre o projeto" e "Próximo projeto"
+      (componentes CaseHero/CaseResumo/CaseNext deletados).
+- [x] Nova estrutura sobre fundo PRETO (tone `black` novo no Scene = 0 0% 0%):
+      metadados (Projeto · Cliente · Localização) → faixa de imagens (galeria
+      existente, agora preta) → breve descrição (campo Resumo).
+      Componentes novos: `CaseMeta`, `CaseDescricao`.
+- [x] Seta `›` ao lado de "Projeto" → link para o próximo projeto (índice circular).
+- [x] Schema `projeto`: campo `cliente` (opcional) + query + tipo.
+- [x] Cliente de exemplo preenchido nos 6 projetos (incorporadoras fictícias;
+      substituir no Studio → Catálogos → Projetos → Cliente).
+
 ## Pendências remanescentes
 - Ver se `/contato` também deve receber o Fecho (hoje só na landing) — não decidido ainda.
-- Validar visualmente no browser: scroll horizontal da galeria (pin) no desktop e
-  o carrossel/ordem/imagens no mobile.
+- Validar visualmente no browser: landing (galeria pin desktop / carrossel mobile) e
+  a nova página de projeto (fundo preto, metadados, seta próximo, lightbox).
 
 ## Notas de infra
 - Seed helper: `node scripts/seed-mini-galeria.mjs` (repopula mini-galeria com 3 capas deduplicadas).
