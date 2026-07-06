@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ScrollProgress } from '@/components/scroll/ScrollProgress'
-import { CaseHero } from '@/components/projetos/case/CaseHero'
-import { CaseResumo } from '@/components/projetos/case/CaseResumo'
+import { CaseMeta } from '@/components/projetos/case/CaseMeta'
 import { CaseGaleria } from '@/components/projetos/case/CaseGaleria'
-import { CaseNext } from '@/components/projetos/case/CaseNext'
+import { CaseDescricao } from '@/components/projetos/case/CaseDescricao'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
-import {
-  projetoBySlugQuery,
-  projetoSlugsQuery,
-  projetosListQuery,
-} from '@/sanity/queries'
+import { projetoBySlugQuery, projetoSlugsQuery, projetosListQuery } from '@/sanity/queries'
 import type { Projeto, ProjetoCard } from '@/sanity/types'
 
 type Params = { slug: string }
@@ -47,28 +42,21 @@ export default async function CasePage({ params }: { params: Params }) {
       params: { slug: params.slug },
       tags: [TAGS.projeto],
     }),
-    sanityFetch<ProjetoCard[]>({
-      query: projetosListQuery,
-      tags: [TAGS.projeto],
-    }),
+    sanityFetch<ProjetoCard[]>({ query: projetosListQuery, tags: [TAGS.projeto] }),
   ])
 
   if (!projeto) notFound()
 
-  // Próximo projeto: índice circular dentro da lista ordenada (replica a lógica original).
+  // Próximo projeto (índice circular na lista ordenada) — alvo da seta no cabeçalho.
   const idx = lista.findIndex((p) => p.slug === projeto.slug)
-  const proximo =
-    lista.length > 0
-      ? lista[(Math.max(idx, 0) + 1) % lista.length]
-      : undefined
+  const proximo = lista.length > 1 ? lista[(Math.max(idx, 0) + 1) % lista.length] : undefined
 
   return (
     <>
       <ScrollProgress />
-      <CaseHero projeto={projeto} />
-      <CaseResumo projeto={projeto} />
+      <CaseMeta projeto={projeto} proximo={proximo && { slug: proximo.slug, nome: proximo.nome }} />
       <CaseGaleria projeto={projeto} />
-      {proximo && <CaseNext proximo={proximo} />}
+      <CaseDescricao projeto={projeto} />
     </>
   )
 }

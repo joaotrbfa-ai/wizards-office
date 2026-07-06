@@ -46,6 +46,12 @@ export const projeto = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'cliente',
+      title: 'Cliente',
+      type: 'string',
+      description: 'Opcional. Exibido nos metadados da página do projeto.',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Imagem de capa',
       type: 'image',

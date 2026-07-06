@@ -77,6 +77,7 @@ export const projetoBySlugQuery = groq`
     categoria,
     ano,
     local,
+    cliente,
     coverImage { ${imageFields} },
     galeria[] { image { ${imageFields} }, caption },
     resumo,

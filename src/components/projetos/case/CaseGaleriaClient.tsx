@@ -11,17 +11,17 @@ import type { GaleriaItem } from '@/sanity/types'
 
 /**
  * Galeria do case em faixa horizontal (scroll-driven). Cada imagem preserva o
- * aspect ratio natural (largura proporcional à altura fixa) sobre fundo bege
- * claro, com respiro entre elas e nas bordas — espaço negativo, referência
- * smtn.cc. No mobile vira coluna (fallback do HorizontalScroll). Cada imagem
- * abre no lightbox.
+ * aspect ratio natural (largura proporcional à altura fixa) sobre o fundo padrão
+ * (olive), com respiro entre elas e nas bordas — espaço negativo, referência
+ * smtn.cc. No mobile vira coluna (fallback do HorizontalScroll). Cada imagem abre
+ * no lightbox.
  */
 export function CaseGaleriaClient({ galeria }: { galeria: GaleriaItem[] }) {
   const flatItems: LightboxItem[] = galeria.map((g) => ({ image: g.image, caption: g.caption }))
   const open = useLightboxOpen()
 
   return (
-    <Scene tone="cream" minHeight="auto" clip={false}>
+    <Scene tone="olive" minHeight="auto" clip={false}>
       <HorizontalScroll pinHeight="100vh" gap="2vw">
         {/* Respiro inicial (espaço negativo na borda esquerda). */}
         <div aria-hidden className="hidden shrink-0 md:block md:w-[8vw]" />
