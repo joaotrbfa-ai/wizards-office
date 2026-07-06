@@ -42,21 +42,24 @@ export function CaseMeta({ projeto, proximo }: CaseMetaProps) {
             </h1>
           </Reveal>
 
-          {projeto.cliente && (
-            <Reveal className="md:pt-1">
-              <p className="text-xs uppercase tracking-[0.25em] text-label">Cliente</p>
+          {/* Cliente + Localização: lado a lado no mobile; itens soltos da linha no desktop. */}
+          <div className="flex gap-12 md:contents">
+            {projeto.cliente && (
+              <Reveal className="md:pt-1">
+                <p className="text-xs uppercase tracking-[0.25em] text-label">Cliente</p>
+                <p className="mt-2 font-sans text-sm uppercase tracking-[0.15em] text-heading md:text-base">
+                  {projeto.cliente}
+                </p>
+              </Reveal>
+            )}
+
+            <Reveal className="md:pt-1 md:text-right">
+              <p className="text-xs uppercase tracking-[0.25em] text-label">Localização</p>
               <p className="mt-2 font-sans text-sm uppercase tracking-[0.15em] text-heading md:text-base">
-                {projeto.cliente}
+                {projeto.local}
               </p>
             </Reveal>
-          )}
-
-          <Reveal className="md:pt-1 md:text-right">
-            <p className="text-xs uppercase tracking-[0.25em] text-label">Localização</p>
-            <p className="mt-2 font-sans text-sm uppercase tracking-[0.15em] text-heading md:text-base">
-              {projeto.local}
-            </p>
-          </Reveal>
+          </div>
         </RevealGroup>
       </Container>
     </Scene>
