@@ -1,0 +1,406 @@
+# Instincts generated from https://github.com/joaotrbfa-ai/wizards-office
+# Generated: 2026-07-06T19:54:26.386Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: wizards-office-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat
+
+## Evidence
+
+- 3 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat(home): consolida a Home em landing page única de 6 seções, feat(home): galeria horizontal + polish de layout da landing
+
+---
+id: wizards-office-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Commit Length
+
+## Action
+
+Write moderate-length commit messages (~63 characters)
+
+## Evidence
+
+- Average commit message length: 63 chars
+- Based on 3 commits
+
+---
+id: wizards-office-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: wizards-office-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: wizards-office-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: wizards-office-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: app, components, lib, sanity
+
+---
+id: wizards-office-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: wizards-office-workflow-landing-page-section-iteration
+trigger: "when doing landing page section iteration"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Workflow Landing Page Section Iteration
+
+## Action
+
+Follow the landing-page-section-iteration workflow:
+1. Edit or refactor multiple React component files under src/components/home/ to update section layout/content.
+2. Update src/app/(site)/page.tsx to assemble or reorder sections.
+3. Modify Sanity schema/types/queries (src/sanity/schemas/, src/sanity/types.ts, src/sanity/queries.ts) to support new/changed content.
+4. Adjust data population scripts or seeds if needed (e.g., scripts/seed-*.mjs).
+5. Update tasks/todo.md to reflect pending or completed work.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/app/(site)/page.tsx, src/components/home/*.tsx, src/sanity/queries.ts
+
+---
+id: wizards-office-instinct-filename-pascalcase
+trigger: "When creating or renaming a file in the codebase"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Filename Pascalcase
+
+## Action
+
+Name the file using PascalCase (e.g., MyComponent.tsx)
+
+## Evidence
+
+- Pattern in namingConventions.files
+- Observed in src/components/home/*.tsx
+
+---
+id: wizards-office-instinct-function-camelcase
+trigger: "When defining a new function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Function Camelcase
+
+## Action
+
+Name the function using camelCase (e.g., fetchData)
+
+## Evidence
+
+- Pattern in namingConventions.functions
+
+---
+id: wizards-office-instinct-class-pascalcase
+trigger: "When defining a new class"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Class Pascalcase
+
+## Action
+
+Name the class using PascalCase (e.g., HomeSection)
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: wizards-office-instinct-constant-screaming-snake
+trigger: "When defining a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Constant Screaming Snake
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE (e.g., MAX_ITEMS)
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: wizards-office-instinct-import-alias
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Import Alias
+
+## Action
+
+Use alias import style instead of relative paths
+
+## Evidence
+
+- Pattern in importStyle: alias
+- Seen in src/components/home/*.tsx
+
+---
+id: wizards-office-instinct-export-named
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Export Named
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: wizards-office-instinct-try-catch-errors
+trigger: "When handling errors in code"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Try Catch Errors
+
+## Action
+
+Use try-catch blocks for error handling
+
+## Evidence
+
+- Pattern in errorHandling.style: try-catch
+
+---
+id: wizards-office-instinct-git-conventional-commits
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Git Conventional Commits
+
+## Action
+
+Use conventional commit format with 'feat' prefix for features (e.g., feat(home): ...)
+
+## Evidence
+
+- Seen in commit: feat(home): consolida a Home em landing page única de 6 seções
+- Pattern in commits.prefixes
+
+---
+id: wizards-office-instinct-git-commit-length
+trigger: "When composing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Git Commit Length
+
+## Action
+
+Keep commit messages concise, around 60-70 characters
+
+## Evidence
+
+- Pattern in commits.averageLength: 63
+
+---
+id: wizards-office-instinct-landing-section-iteration
+trigger: "When adding, modifying, or polishing a landing page section"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Landing Section Iteration
+
+## Action
+
+Edit React components under src/components/home/, update src/app/(site)/page.tsx, modify Sanity schemas/types/queries, adjust seed scripts if needed, and update tasks/todo.md
+
+## Evidence
+
+- Workflow: landing-page-section-iteration
+- Seen in commit sequence and files: src/components/home/*.tsx, src/app/(site)/page.tsx, src/sanity/queries.ts, src/sanity/types.ts, src/sanity/schemas/*, scripts/seed-*.mjs, tasks/todo.md
+
+---
+id: wizards-office-instinct-typescript-language
+trigger: "When writing new code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Typescript Language
+
+## Action
+
+Use TypeScript for all new source files
+
+## Evidence
+
+- Pattern in codeStyle.language: TypeScript
+- Seen in src/app/(site)/page.tsx, src/components/home/*.tsx
+
+---
+id: wizards-office-instinct-tests-separate-location
+trigger: "When adding tests for a module"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: joaotrbfa-ai/wizards-office
+---
+
+# Wizards Office Instinct Tests Separate Location
+
+## Action
+
+Place test files in a separate directory from source files
+
+## Evidence
+
+- Pattern in architecture.testLocation: separate
+
