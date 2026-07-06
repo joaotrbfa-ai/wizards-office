@@ -70,6 +70,10 @@ componentes existentes. Páginas internas (`/sobre`, `/servicos`, `/projetos`,
       tipo `GaleriaHomeProjeto`, helper `montarImagens`). Altura fixa 62vh, aspect 3/4.
       Cabeçalho segue editável via `miniGaleria` (eyebrow/titulo/descricao).
 - Schema `miniGaleria.itens` mantido (decisão do cliente), embora a Home não use mais.
+- [x] Studio (`structure.ts`): grupo "🏠 Landing Page (Home)" no topo mapeando as
+      seções da landing às fontes (Home, Equipe, Sobre→números, Pilares, Serviços,
+      Projetos→galeria, Contato→brief/fecho). Páginas internas e Catálogos abaixo.
+- [x] Push da branch `feat/landing-page` para o GitHub (gera preview na Vercel).
 
 ## Pendências remanescentes
 - Ver se `/contato` também deve receber o Fecho (hoje só na landing) — não decidido ainda.
