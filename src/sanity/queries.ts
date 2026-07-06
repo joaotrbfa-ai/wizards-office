@@ -90,6 +90,17 @@ export const projetoSlugsQuery = groq`
   *[_type == "projeto" && defined(slug.current)].slug.current
 `
 
+/** Fonte da galeria horizontal da Home: capa + fotos internas de cada projeto. */
+export const galeriaHomeProjetosQuery = groq`
+  *[_type == "projeto" && defined(coverImage.asset)] | order(coalesce(ordem, 999), nome) {
+    "slug": slug.current,
+    nome,
+    categoria,
+    coverImage { ${imageFields} },
+    "galeria": galeria[]{ image { ${imageFields} } }
+  }
+`
+
 export const pilaresQuery = groq`
   *[_type == "pilar"] | order(numero) {
     _id,
@@ -181,6 +192,16 @@ export const paginaHomeQuery = groq`
     hero { videoUrl, fraseHead, fraseScript, poster { ${imageFields} } },
     manifestoTextoParagrafos,
     pausaScript { texto, caption },
+    miniGaleria {
+      eyebrow,
+      titulo,
+      descricao,
+      itens[] {
+        image { ${imageFields} },
+        caption,
+        projeto->{ "slug": slug.current, nome, categoria }
+      }
+    },
     ctaFinal { ${ctaBlockFields} },
     aparencia { ${temaPapeisFields} }
   }

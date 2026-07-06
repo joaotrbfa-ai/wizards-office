@@ -1,24 +1,36 @@
 import type { Metadata } from 'next'
 import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { Hero } from '@/components/home/Hero'
-import { ManifestoPinned } from '@/components/home/ManifestoPinned'
-import { ManifestoText } from '@/components/home/ManifestoText'
-import { PilarScene } from '@/components/home/PilarScene'
-import { ProjetosHorizontal } from '@/components/home/ProjetosHorizontal'
+import { ManifestoSection } from '@/components/home/ManifestoSection'
+import { PilaresSection } from '@/components/home/PilaresSection'
 import { ServicosLista } from '@/components/home/ServicosLista'
-import { ParceirosCena } from '@/components/home/ParceirosCena'
-import { CtaFinal } from '@/components/shared/CtaFinal'
+import { MiniGaleria } from '@/components/home/MiniGaleria'
+import { Fecho } from '@/components/home/Fecho'
+import { BriefForm } from '@/components/contato/BriefForm'
+import { ContatoDireto } from '@/components/contato/ContatoDireto'
 import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import {
   paginaHomeQuery,
-  projetosDestaqueQuery,
   pilaresQuery,
-  parceirosQuery,
   servicosQuery,
+  membrosQuery,
+  paginaSobreQuery,
+  paginaContatoQuery,
+  configQuery,
+  galeriaHomeProjetosQuery,
 } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
-import type { PaginaHome, ProjetoCard, Pilar, Parceiro, Servico } from '@/sanity/types'
+import type {
+  PaginaHome,
+  Pilar,
+  Servico,
+  Membro,
+  PaginaSobre,
+  PaginaContato,
+  Config,
+  GaleriaHomeProjeto,
+} from '@/sanity/types'
 
 export const metadata: Metadata = {
   title: {
@@ -28,25 +40,27 @@ export const metadata: Metadata = {
     'Estúdio criativo de visualização arquitetônica de alto padrão em Balneário Camboriú. Imagens, filmes e narrativas visuais que transformam arquitetura em desejo.',
 }
 
-// Orientação dos pilares na Home: direita (Direção), esquerda (Narrativa), direita (Confiança).
-const PILAR_POSITIONS = ['bottom-right', 'bottom-left', 'bottom-right'] as const
-
 export default async function HomePage() {
-  const [home, projetos, pilares, parceiros, servicos] = await Promise.all([
-    sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
-    sanityFetch<ProjetoCard[]>({ query: projetosDestaqueQuery, tags: [TAGS.projeto] }),
-    sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
-    sanityFetch<Parceiro[]>({ query: parceirosQuery, tags: [TAGS.parceiro] }),
-    sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
-  ])
+  const [home, pilares, servicos, membros, sobre, contato, config, galeriaProjetos] =
+    await Promise.all([
+      sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
+      sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
+      sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
+      sanityFetch<Membro[]>({ query: membrosQuery, tags: [TAGS.membro] }),
+      sanityFetch<PaginaSobre | null>({ query: paginaSobreQuery, tags: [TAGS.paginaSobre] }),
+      sanityFetch<PaginaContato | null>({ query: paginaContatoQuery, tags: [TAGS.paginaContato] }),
+      sanityFetch<Config | null>({ query: configQuery, tags: [TAGS.config] }),
+      sanityFetch<GaleriaHomeProjeto[]>({ query: galeriaHomeProjetosQuery, tags: [TAGS.projeto] }),
+    ])
 
-  const cta = home?.ctaFinal
-  const ctaImg = cta?.image ? imageProps(cta.image, 2400) : null
+  // Equipe na landing: apenas Berth, Matheus e Renata (os três primeiros por número).
+  const equipe = (membros ?? []).slice(0, 3)
 
   return (
     <ThemeScope roles={home?.aparencia}>
       <ScrollProgress />
 
+      {/* 1. Hero */}
       <Hero
         videoUrl={home?.hero?.videoUrl ?? ''}
         fraseHead={home?.hero?.fraseHead ?? 'Crafting spaces that feel like'}
@@ -54,42 +68,58 @@ export default async function HomePage() {
         poster={home?.hero?.poster ? imageProps(home.hero.poster, 1920).src : undefined}
       />
 
-      <ManifestoPinned />
-      <ManifestoText paragrafos={home?.manifestoTextoParagrafos ?? []} />
-
-      {pilares.map((pilar, i) => {
-        const img = imageProps(pilar.image, 2400)
-        return (
-          <PilarScene
-            key={pilar._id}
-            titulo={pilar.titulo}
-            descricao={pilar.descricao}
-            image={img.src}
-            alt={img.alt}
-            blurDataURL={img.blurDataURL}
-            position={PILAR_POSITIONS[i] ?? pilar.position}
-            overlay={pilar.overlay}
-            roles={pilar.aparencia}
-          />
-        )
-      })}
-
-      <ProjetosHorizontal projetos={projetos} />
-      <ServicosLista servicos={servicos.map((s) => ({ numero: s.numero, titulo: s.titulo }))} />
-      <ParceirosCena parceiros={parceiros} />
-
-      {cta && (
-        <CtaFinal
-          image={ctaImg?.src ?? ''}
-          alt={ctaImg?.alt ?? ''}
-          blurDataURL={ctaImg?.blurDataURL}
-          titulo={cta.tituloLinhas}
-          subtitulo={cta.subtitulo}
-          ctaLabel={cta.ctaLabel}
-          href={cta.href}
-          roles={cta.aparencia}
+      {/* 2. Manifesto / Equipe / Números — seção única */}
+      <div id="manifesto" className="scroll-mt-24">
+        <ManifestoSection
+          paragrafos={home?.manifestoTextoParagrafos ?? []}
+          membros={equipe}
+          numeros={sobre?.numeros ?? []}
         />
-      )}
+      </div>
+
+      {/* 3. Direção / Narrativa / Confiança — seção única */}
+      <div id="pilares" className="scroll-mt-24">
+        <PilaresSection pilares={pilares} />
+      </div>
+
+      {/* 4. Serviços */}
+      <div id="servicos" className="scroll-mt-24">
+        <ServicosLista
+          servicos={servicos.map((s) => ({
+            numero: s.numero,
+            titulo: s.titulo,
+            descricao: s.descricao,
+          }))}
+        />
+      </div>
+
+      {/* 5. Galeria */}
+      <div id="galeria" className="scroll-mt-24">
+        <MiniGaleria
+          projetos={galeriaProjetos ?? []}
+          eyebrow={home?.miniGaleria?.eyebrow}
+          titulo={home?.miniGaleria?.titulo}
+          descricao={home?.miniGaleria?.descricao}
+          max={7}
+        />
+      </div>
+
+      {/* 6. CTA */}
+      <div id="contato" className="scroll-mt-24">
+        <BriefForm
+          eyebrow={contato?.brief?.eyebrow}
+          titulo={contato?.brief?.titulo}
+          submitLabel={contato?.brief?.submitLabel}
+          contatoEmail={config?.contact?.email}
+        />
+        <ContatoDireto direto={contato?.direto} contact={config?.contact} />
+      </div>
+
+      {/* Fecho — sign-off poético antes do rodapé. */}
+      <Fecho
+        textoScript={contato?.fecho?.textoScript}
+        captionLinhas={contato?.fecho?.captionLinhas}
+      />
     </ThemeScope>
   )
 }

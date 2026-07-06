@@ -89,9 +89,6 @@ export async function POST(req: Request) {
       ${linha('E-mail', data.email)}
       ${linha('Empresa', data.empresa)}
       ${linha('Telefone', data.telefone)}
-      ${linha('Tipo de projeto', data.tipoProjeto)}
-      ${linha('Serviços', data.servicos.join(', '))}
-      ${linha('Prazo', data.prazo)}
       <p style="margin:16px 0 8px"><strong>Mensagem:</strong></p>
       <p style="margin:0;white-space:pre-wrap">${esc(data.mensagem)}</p>
     </div>

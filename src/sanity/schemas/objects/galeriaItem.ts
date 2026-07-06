@@ -28,6 +28,13 @@ export const galeriaItem = defineType({
       type: 'string',
       description: 'Contexto curto opcional (exibido em alguns layouts).',
     }),
+    defineField({
+      name: 'projeto',
+      title: 'Projeto vinculado',
+      type: 'reference',
+      to: [{ type: 'projeto' }],
+      description: 'Opcional. Quando definido, clicar na imagem abre este projeto.',
+    }),
   ],
   preview: {
     select: { media: 'image', title: 'image.alt', subtitle: 'caption' },

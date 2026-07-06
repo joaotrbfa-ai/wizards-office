@@ -47,6 +47,36 @@ export const paginaHome = defineType({
         defineField({ name: 'caption', title: 'Legenda', type: 'string' }),
       ],
     }),
+    defineField({
+      name: 'miniGaleria',
+      title: 'Mini-galeria (Home)',
+      type: 'object',
+      description: 'Grade de imagens na landing; cada imagem abre o projeto vinculado.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'eyebrow',
+          title: 'Eyebrow',
+          type: 'string',
+          initialValue: 'Portfólio',
+        }),
+        defineField({ name: 'titulo', title: 'Título', type: 'string', initialValue: 'Galeria' }),
+        defineField({
+          name: 'descricao',
+          title: 'Texto curto',
+          type: 'text',
+          rows: 3,
+        }),
+        defineField({
+          name: 'itens',
+          title: 'Imagens (3–6)',
+          type: 'array',
+          of: [{ type: 'galeriaItem' }],
+          validation: (rule) => rule.max(6),
+          description: 'Vincule um projeto em cada imagem para torná-la clicável.',
+        }),
+      ],
+    }),
     defineField({ name: 'ctaFinal', title: 'CTA final', type: 'ctaBlock' }),
     defineField({
       name: 'aparencia',

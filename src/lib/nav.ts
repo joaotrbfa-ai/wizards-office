@@ -3,13 +3,14 @@ export type NavItem = {
   href: string
 }
 
+// Menu da landing: âncoras para as seções da Home (o HashScroll cuida do
+// scroll suave, inclusive vindo de outra página via `/#secao`).
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Sobre', href: '/sobre' },
-  { label: 'Serviços', href: '/servicos' },
-  { label: 'Projetos', href: '/projetos' },
-  { label: 'Galeria', href: '/galeria' },
-  { label: 'Contato', href: '/contato' },
+  { label: 'Sobre', href: '/#manifesto' },
+  { label: 'Serviços', href: '/#servicos' },
+  { label: 'Galeria', href: '/#galeria' },
+  { label: 'Contato', href: '/#contato' },
 ]
 
 export const CONTACT = {
