@@ -155,6 +155,15 @@ export type MiniGaleria = {
   itens?: MiniGaleriaItem[]
 }
 
+/** Projeto como fonte de imagens da galeria horizontal da Home (capa + galeria interna). */
+export type GaleriaHomeProjeto = {
+  slug: string
+  nome: string
+  categoria?: string
+  coverImage: SanityImage
+  galeria?: { image: SanityImage }[]
+}
+
 // ===== Singletons =====
 
 export type Config = {

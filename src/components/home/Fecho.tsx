@@ -20,7 +20,7 @@ export function Fecho({ textoScript = 'magic.', captionLinhas }: FechoProps) {
       {/* Wordmark gigante ao fundo — profundidade sutil, sem competir com o texto. */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center font-sans text-[26vw] font-bold uppercase leading-none tracking-tighter text-cream/[0.035]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[23vw] font-bold uppercase leading-none tracking-tighter text-cream opacity-[0.035]"
       >
         wizards
       </span>
@@ -37,7 +37,7 @@ export function Fecho({ textoScript = 'magic.', captionLinhas }: FechoProps) {
         </RevealGroup>
 
         <Reveal>
-          <p className="mt-8 font-script text-[clamp(4.5rem,15vw,12rem)] leading-[0.8] text-cream">
+          <p className="mt-8 font-script text-[clamp(3.5rem,11vw,9rem)] leading-[0.8] text-cream">
             {textoScript}
           </p>
         </Reveal>

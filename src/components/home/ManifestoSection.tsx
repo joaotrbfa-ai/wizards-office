@@ -19,8 +19,8 @@ export interface ManifestoSectionProps {
  */
 export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSectionProps) {
   return (
-    <Scene tone="olive" minHeight="auto" className="py-24 md:py-32">
-      <Container>
+    <Scene tone="olive" minHeight="auto" className="py-16 md:py-20">
+      <Container width="wide">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Coluna esquerda: identidade + equipe + números */}
           <div className="lg:col-span-5">
@@ -69,8 +69,8 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
 
             {numeros.length > 0 && (
               <Reveal className="mt-10">
-                <div className="bg-cream p-8">
-                  <p className="text-sm uppercase tracking-[0.2em] text-olive/70">
+                <div className="border-t border-label/20 pt-8">
+                  <p className="text-sm uppercase tracking-[0.2em] text-label">
                     Números que nos definem
                   </p>
                   <div className="mt-6 grid grid-cols-3 gap-6">
@@ -78,7 +78,7 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                       <div key={`${metrica.label}-${i}`} className="flex flex-col">
                         <span
                           className={cn(
-                            'font-sans font-bold leading-[0.85] text-olive',
+                            'font-sans font-bold leading-[0.85] text-heading',
                             metrica.tipo === 'numero'
                               ? 'text-[clamp(1.6rem,3vw,2.6rem)]'
                               : 'text-[clamp(1.15rem,2vw,1.75rem)]',
@@ -86,7 +86,7 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                         >
                           {metrica.valor}
                         </span>
-                        <span className="mt-3 border-t border-olive/25 pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-olive/70">
+                        <span className="mt-3 border-t border-label/25 pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
                           {metrica.label}
                         </span>
                       </div>
@@ -98,11 +98,11 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
           </div>
 
           {/* Coluna direita: parágrafos do manifesto */}
-          <div className="lg:col-span-7">
-            <RevealGroup className="flex flex-col gap-6">
+          <div className="lg:col-span-7 lg:pt-8">
+            <RevealGroup className="flex flex-col gap-7">
               {paragrafos.map((p, i) => (
                 <Reveal key={i}>
-                  <p className="max-w-prose text-base leading-relaxed text-label md:text-lg">{p}</p>
+                  <p className="text-base leading-relaxed text-label md:text-xl">{p}</p>
                 </Reveal>
               ))}
             </RevealGroup>

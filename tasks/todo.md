@@ -45,15 +45,39 @@ componentes existentes. Páginas internas (`/sobre`, `/servicos`, `/projetos`,
 - [x] Mini-galeria: título "Galeria" linka p/ /galeria; 3 imagens; sem rótulos
 - [x] Fecho antes do rodapé (`Fecho.tsx`) — usa paginaContato.fecho (script "magic." + caption), bookend do hero
 
-## Estado atual / retomar segunda
-- Landing 100% montada e verificada (tsc + lint + build/dev todos verdes).
+## Rodada 4 — resolução das pendências
+- [x] "Elevare duplicado" era só um **draft pendente** (única diff: ordem 1→2, resto idêntico).
+      Decisão: publicar ordem=2 + descartar o draft. Dataset agora limpo/sequencial
+      (Fazenda Garden 1, Elevare 2, Serras 3, Nilo 4; Believe/Harmonia sem ordem).
+- [x] Curadoria da mini-galeria: **manter os 3 atuais** (Elevare, Fazenda Garden, Serras).
+      A mini-galeria referencia projetos por _id, então publicar Elevare=2 não a alterou.
+- [x] Ajuste fino do fecho: script "magic." reduzido `clamp(4.5rem,15vw,12rem)` →
+      `clamp(3.5rem,11vw,9rem)` (mais contido). tsc + lint OK, home 200.
+
+## Rodada 5 — polish de layout + galeria horizontal
+- [x] Fecho: script "magic." menor (`clamp(3.5rem,11vw,9rem)`); wordmark "wizards"
+      ajustado p/ 23vw + `whitespace-nowrap`; opacidade movida p/ o elemento
+      (`text-cream opacity-[0.035]`) — some o acúmulo de alpha nas letras sobrepostas.
+- [x] Números na Home (ManifestoSection): removido card `bg-cream`, integrado ao
+      fundo olive com separador (`border-t`) e texto claro. (/sobre mantém cream.)
+- [x] Container ganhou prop `width` ('wrap'|'wide'|'full'); Manifesto/Pilares/Galeria
+      usam `width="wide"` (max-w 1760px) — conteúdo menos "centralizado".
+- [x] Padding vertical das 3 seções: `py-24 md:py-32` → `py-16 md:py-20`.
+- [x] Manifesto: texto `md:text-xl` sem `max-w-prose`; coluna com `lg:pt-8`.
+- [x] Pilares: removida a numeração 01/02/03 (só imagem + título + descrição).
+- [x] Galeria → scroll horizontal com pin (reusa `HorizontalScroll`). 7 imagens
+      montadas de capa + fotos internas dos projetos (query `galeriaHomeProjetosQuery`,
+      tipo `GaleriaHomeProjeto`, helper `montarImagens`). Altura fixa 62vh, aspect 3/4.
+      Cabeçalho segue editável via `miniGaleria` (eyebrow/titulo/descricao).
+- Schema `miniGaleria.itens` mantido (decisão do cliente), embora a Home não use mais.
+
+## Pendências remanescentes
+- Ver se `/contato` também deve receber o Fecho (hoje só na landing) — não decidido ainda.
+- Validar visualmente o scroll horizontal da galeria (efeito de pin) no browser.
+
+## Notas de infra
 - Seed helper: `node scripts/seed-mini-galeria.mjs` (repopula mini-galeria com 3 capas deduplicadas).
-- **Pendências abertas para decidir:**
-  - Projeto "Elevare" duplicado no dataset (2 docs, mesmo slug) — limpar no Studio.
-  - Curadoria da mini-galeria (quais 3 projetos) — hoje pega os 3 primeiros por ordem.
-  - Ajuste fino visual do fecho (tamanho do script/wordmark) — aguardando feedback.
-  - Ver se `/contato` também deve receber o Fecho (hoje só na landing).
-- Não commitado ainda em relação a conteúdo do Sanity (mudanças de dados vivem no dataset, não no git).
+- Mudanças de conteúdo do Sanity vivem no dataset, não no git (só o código vai versionado).
 
 ## Review
 - `/` agora é a landing de 6 seções. `tsc`, `next lint` e `next build` passam (exit 0).

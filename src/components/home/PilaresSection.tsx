@@ -13,8 +13,8 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
   if (!pilares.length) return null
 
   return (
-    <Scene tone="ink" minHeight="auto" className="py-24 md:py-32">
-      <Container>
+    <Scene tone="ink" minHeight="auto" className="py-16 md:py-20">
+      <Container width="wide">
         <RevealGroup className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
           {pilares.map((pilar) => {
             const { src, alt, blurDataURL } = imageProps(pilar.image, 1200)
@@ -33,10 +33,7 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
                       />
                     )}
                   </div>
-                  <span className="mt-6 block text-sm tracking-[0.2em] text-label">
-                    {pilar.numero}
-                  </span>
-                  <h3 className="mt-2 font-sans text-[clamp(1.4rem,2.2vw,2rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
+                  <h3 className="mt-6 font-sans text-[clamp(1.4rem,2.2vw,2rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
                     {pilar.titulo}
                   </h3>
                   <p className="mt-3 max-w-prose text-sm leading-relaxed text-label md:text-base">

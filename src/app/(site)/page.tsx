@@ -18,6 +18,7 @@ import {
   paginaSobreQuery,
   paginaContatoQuery,
   configQuery,
+  galeriaHomeProjetosQuery,
 } from '@/sanity/queries'
 import { imageProps } from '@/sanity/image'
 import type {
@@ -28,6 +29,7 @@ import type {
   PaginaSobre,
   PaginaContato,
   Config,
+  GaleriaHomeProjeto,
 } from '@/sanity/types'
 
 export const metadata: Metadata = {
@@ -39,15 +41,17 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [home, pilares, servicos, membros, sobre, contato, config] = await Promise.all([
-    sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
-    sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
-    sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
-    sanityFetch<Membro[]>({ query: membrosQuery, tags: [TAGS.membro] }),
-    sanityFetch<PaginaSobre | null>({ query: paginaSobreQuery, tags: [TAGS.paginaSobre] }),
-    sanityFetch<PaginaContato | null>({ query: paginaContatoQuery, tags: [TAGS.paginaContato] }),
-    sanityFetch<Config | null>({ query: configQuery, tags: [TAGS.config] }),
-  ])
+  const [home, pilares, servicos, membros, sobre, contato, config, galeriaProjetos] =
+    await Promise.all([
+      sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
+      sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
+      sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
+      sanityFetch<Membro[]>({ query: membrosQuery, tags: [TAGS.membro] }),
+      sanityFetch<PaginaSobre | null>({ query: paginaSobreQuery, tags: [TAGS.paginaSobre] }),
+      sanityFetch<PaginaContato | null>({ query: paginaContatoQuery, tags: [TAGS.paginaContato] }),
+      sanityFetch<Config | null>({ query: configQuery, tags: [TAGS.config] }),
+      sanityFetch<GaleriaHomeProjeto[]>({ query: galeriaHomeProjetosQuery, tags: [TAGS.projeto] }),
+    ])
 
   // Equipe na landing: apenas Berth, Matheus e Renata (os três primeiros por número).
   const equipe = (membros ?? []).slice(0, 3)
@@ -91,7 +95,13 @@ export default async function HomePage() {
 
       {/* 5. Galeria */}
       <div id="galeria" className="scroll-mt-24">
-        <MiniGaleria data={home?.miniGaleria} />
+        <MiniGaleria
+          projetos={galeriaProjetos ?? []}
+          eyebrow={home?.miniGaleria?.eyebrow}
+          titulo={home?.miniGaleria?.titulo}
+          descricao={home?.miniGaleria?.descricao}
+          max={7}
+        />
       </div>
 
       {/* 6. CTA */}
