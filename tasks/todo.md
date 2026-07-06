@@ -75,9 +75,19 @@ componentes existentes. Páginas internas (`/sobre`, `/servicos`, `/projetos`,
       Projetos→galeria, Contato→brief/fecho). Páginas internas e Catálogos abaixo.
 - [x] Push da branch `feat/landing-page` para o GitHub (gera preview na Vercel).
 
+## Rodada 6 — responsividade mobile
+- [x] Manifesto: no mobile empilha na ordem de leitura (título → texto → equipe →
+      números) via `order` + grid placement (`col-start`/`row-start`); desktop
+      mantém as 2 colunas idênticas.
+- [x] Pilares: imagem `aspect-[3/2]` (paisagem, menor) no mobile, `md:aspect-[4/5]`
+      (retrato) no desktop.
+- [x] Galeria: mobile vira carrossel com swipe (scroll-snap nativo, cards 78%),
+      desktop mantém o scroll horizontal com pin. Card extraído em `<Slide>`.
+
 ## Pendências remanescentes
 - Ver se `/contato` também deve receber o Fecho (hoje só na landing) — não decidido ainda.
-- Validar visualmente o scroll horizontal da galeria (efeito de pin) no browser.
+- Validar visualmente no browser: scroll horizontal da galeria (pin) no desktop e
+  o carrossel/ordem/imagens no mobile.
 
 ## Notas de infra
 - Seed helper: `node scripts/seed-mini-galeria.mjs` (repopula mini-galeria com 3 capas deduplicadas).

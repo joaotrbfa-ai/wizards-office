@@ -13,26 +13,41 @@ export interface ManifestoSectionProps {
 }
 
 /**
- * Seção única de Manifesto: identidade + equipe + números à esquerda e os
- * parágrafos do manifesto à direita — consolidando o que antes eram três
- * seções separadas (manifesto, equipe, números).
+ * Seção única de Manifesto. No desktop: identidade + equipe + números à esquerda
+ * e os parágrafos à direita. No mobile os três blocos empilham na ordem de
+ * leitura — título → texto do manifesto → equipe → números — via `order` +
+ * grid placement (o desktop é reconstruído com col-start/row-start).
  */
 export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSectionProps) {
   return (
     <Scene tone="olive" minHeight="auto" className="py-16 md:py-20">
       <Container width="wide">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
-          {/* Coluna esquerda: identidade + equipe + números */}
-          <div className="lg:col-span-5">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-10">
+          {/* 1. Identidade — sempre primeiro */}
+          <div className="order-1 lg:col-span-5 lg:col-start-1 lg:row-start-1">
             <Reveal>
               <h2 className="text-base uppercase tracking-[0.25em] text-label md:text-lg">
                 Manifesto
               </h2>
               <p className="mt-3 text-sm uppercase tracking-[0.15em] text-label">SINCE 2019</p>
             </Reveal>
+          </div>
 
+          {/* 2. Texto do manifesto — 2º no mobile; coluna direita (2 linhas) no desktop */}
+          <div className="order-2 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:pt-8">
+            <RevealGroup className="flex flex-col gap-7">
+              {paragrafos.map((p, i) => (
+                <Reveal key={i}>
+                  <p className="text-base leading-relaxed text-label md:text-xl">{p}</p>
+                </Reveal>
+              ))}
+            </RevealGroup>
+          </div>
+
+          {/* 3. Equipe + Números — 3º no mobile; esquerda-baixo no desktop */}
+          <div className="order-3 lg:col-span-5 lg:col-start-1 lg:row-start-2">
             {membros.length > 0 && (
-              <RevealGroup className="mt-10 grid grid-cols-3 gap-3">
+              <RevealGroup className="grid grid-cols-3 gap-3">
                 {membros.map((m) => {
                   const { src, alt, blurDataURL } = imageProps(m.foto, 600)
                   return (
@@ -68,7 +83,7 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
             )}
 
             {numeros.length > 0 && (
-              <Reveal className="mt-10">
+              <Reveal className={membros.length > 0 ? 'mt-10' : ''}>
                 <div className="border-t border-label/20 pt-8">
                   <p className="text-sm uppercase tracking-[0.2em] text-label">
                     Números que nos definem
@@ -95,17 +110,6 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                 </div>
               </Reveal>
             )}
-          </div>
-
-          {/* Coluna direita: parágrafos do manifesto */}
-          <div className="lg:col-span-7 lg:pt-8">
-            <RevealGroup className="flex flex-col gap-7">
-              {paragrafos.map((p, i) => (
-                <Reveal key={i}>
-                  <p className="text-base leading-relaxed text-label md:text-xl">{p}</p>
-                </Reveal>
-              ))}
-            </RevealGroup>
           </div>
         </div>
       </Container>

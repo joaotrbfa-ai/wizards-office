@@ -21,7 +21,7 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
             return (
               <Reveal key={pilar._id}>
                 <article>
-                  <div className="relative aspect-[4/5] overflow-hidden bg-olive">
+                  <div className="relative aspect-[3/2] overflow-hidden bg-olive md:aspect-[4/5]">
                     {src && (
                       <Image
                         src={src}
