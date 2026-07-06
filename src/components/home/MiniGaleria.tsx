@@ -5,6 +5,7 @@ import { Container } from '@/components/layout/Container'
 import { Reveal } from '@/components/motion/Reveal'
 import { HorizontalScroll } from '@/components/scroll/HorizontalScroll'
 import { imageProps } from '@/sanity/image'
+import { cn } from '@/lib/utils'
 import type { GaleriaHomeProjeto, SanityImage } from '@/sanity/types'
 
 export interface MiniGaleriaProps {
@@ -50,10 +51,46 @@ function montarImagens(projetos: GaleriaHomeProjeto[], max: number): GaleriaImag
   return itens
 }
 
+/** Uma imagem clicável da galeria. `dimClass` controla a dimensão do container
+ *  (varia entre o trilho do desktop e o carrossel do mobile). */
+function Slide({ item, dimClass }: { item: GaleriaImagem; dimClass: string }) {
+  const img = imageProps(item.image, 1400)
+  return (
+    <Link
+      href={`/projetos/${item.slug}`}
+      aria-label={`Ver projeto: ${item.nome}`}
+      className="group block focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-cream"
+    >
+      <div className={cn('relative overflow-hidden bg-ink', dimClass)}>
+        {img.src && (
+          <Image
+            src={img.src}
+            alt={img.alt || item.nome || 'Imagem da galeria'}
+            fill
+            sizes="(min-width: 768px) 50vw, 80vw"
+            className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
+            {...(img.blurDataURL
+              ? { placeholder: 'blur' as const, blurDataURL: img.blurDataURL }
+              : {})}
+          />
+        )}
+        {/* Afordância de clique. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-[0.7rem] uppercase tracking-[0.15em] text-olive opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        >
+          Ver
+        </span>
+      </div>
+    </Link>
+  )
+}
+
 /**
- * Galeria da landing em scroll horizontal: o scroll vertical "trava" a seção e
- * empurra as imagens para o lado (via `HorizontalScroll`). Cada imagem abre o
- * projeto vinculado; o título "Galeria" leva à página completa.
+ * Galeria da landing. No desktop: scroll horizontal com pin — o scroll vertical
+ * "trava" a seção e empurra as imagens para o lado (via `HorizontalScroll`). No
+ * mobile: um carrossel com swipe (scroll-snap nativo), imagens menores. Cada
+ * imagem abre o projeto vinculado; o título "Galeria" leva à página completa.
  */
 export function MiniGaleria({ projetos, eyebrow, titulo, descricao, max = 7 }: MiniGaleriaProps) {
   const itens = montarImagens(projetos ?? [], max)
@@ -91,47 +128,27 @@ export function MiniGaleria({ projetos, eyebrow, titulo, descricao, max = 7 }: M
         </div>
       </Container>
 
-      {/* Trilho horizontal — imagens de altura fixa (62vh) passam para o lado. */}
-      <HorizontalScroll pinHeight="100vh" gap="clamp(1rem,2.5vw,3rem)" className="pb-8">
-        {itens.map((item, i) => {
-          const img = imageProps(item.image, 1400)
-          const card = (
-            <div className="relative aspect-[3/4] h-[62vh] overflow-hidden bg-ink">
-              {img.src && (
-                <Image
-                  src={img.src}
-                  alt={img.alt || item.nome || 'Imagem da galeria'}
-                  fill
-                  sizes="50vw"
-                  className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
-                  {...(img.blurDataURL
-                    ? { placeholder: 'blur' as const, blurDataURL: img.blurDataURL }
-                    : {})}
-                />
-              )}
-              {/* Afordância de clique. */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-[0.7rem] uppercase tracking-[0.15em] text-olive opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-              >
-                Ver
-              </span>
+      {/* Desktop: trilho horizontal com pin — imagens de altura fixa (62vh). */}
+      <div className="hidden md:block">
+        <HorizontalScroll pinHeight="100vh" gap="clamp(1rem,2.5vw,3rem)" className="pb-8">
+          {itens.map((item, i) => (
+            <div key={`d-${item.slug}-${i}`} className="flex h-full shrink-0 items-center">
+              <Slide item={item} dimClass="aspect-[3/4] h-[62vh]" />
             </div>
-          )
+          ))}
+        </HorizontalScroll>
+      </div>
 
-          return (
-            <div key={`${item.slug}-${i}`} className="flex h-full shrink-0 items-center">
-              <Link
-                href={`/projetos/${item.slug}`}
-                aria-label={`Ver projeto: ${item.nome}`}
-                className="group block focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-cream"
-              >
-                {card}
-              </Link>
+      {/* Mobile: carrossel com swipe (scroll-snap), uma imagem por vez com prévia. */}
+      <div className="md:hidden">
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {itens.map((item, i) => (
+            <div key={`m-${item.slug}-${i}`} className="w-[78%] shrink-0 snap-center">
+              <Slide item={item} dimClass="aspect-[3/4] w-full" />
             </div>
-          )
-        })}
-      </HorizontalScroll>
+          ))}
+        </div>
+      </div>
     </Scene>
   )
 }
