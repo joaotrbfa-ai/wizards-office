@@ -12,6 +12,11 @@ export interface HorizontalScrollProps {
   pinHeight?: string
   /** Gap entre as cenas (qualquer valor CSS). */
   gap?: string
+  /**
+   * Centraliza verticalmente o bloco fixo na viewport quando `pinHeight < 100vh`
+   * (offset `top = (100svh - pinHeight)/2`). Default: encosta no topo (`top: 0`).
+   */
+  center?: boolean
   className?: string
 }
 
@@ -24,6 +29,7 @@ export function HorizontalScroll({
   children,
   pinHeight = '100vh',
   gap = '0px',
+  center = false,
   className,
 }: HorizontalScrollProps) {
   const reduced = useReducedMotion()
@@ -85,7 +91,13 @@ export function HorizontalScroll({
       className={cn('relative w-full', className)}
       style={{ height: `calc(${pinHeight} + ${distance}px)` }}
     >
-      <div className="sticky top-0 overflow-hidden" style={{ height: pinHeight }}>
+      <div
+        className="sticky overflow-hidden"
+        style={{
+          height: pinHeight,
+          top: center ? `calc((100svh - ${pinHeight}) / 2)` : 0,
+        }}
+      >
         <motion.div
           ref={trackRef}
           style={{ x, gap }}

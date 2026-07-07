@@ -1,6 +1,5 @@
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
-import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/motion/Reveal'
 import { ServicosAccordion } from './ServicosAccordion'
 
@@ -20,12 +19,6 @@ export function ServicosLista({ servicos }: ServicosListaProps) {
         </Reveal>
 
         <ServicosAccordion servicos={servicos} />
-
-        <Reveal className="mt-12">
-          <Button variant="outline" href="/servicos" size="md">
-            Conheça todos os serviços
-          </Button>
-        </Reveal>
       </Container>
     </Scene>
   )

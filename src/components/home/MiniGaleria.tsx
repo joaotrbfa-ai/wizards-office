@@ -92,22 +92,20 @@ function Slide({ item, dimClass }: { item: GaleriaImagem; dimClass: string }) {
  * mobile: um carrossel com swipe (scroll-snap nativo), imagens menores. Cada
  * imagem abre o projeto vinculado; o título "Galeria" leva à página completa.
  */
-export function MiniGaleria({ projetos, eyebrow, titulo, descricao, max = 7 }: MiniGaleriaProps) {
+export function MiniGaleria({ projetos, titulo, descricao, max = 7 }: MiniGaleriaProps) {
   const itens = montarImagens(projetos ?? [], max)
   if (!itens.length) return null
 
-  const eyebrowText = eyebrow ?? 'Portfólio'
   const tituloText = titulo ?? 'Galeria'
 
   return (
     // clip={false}: o `sticky` interno do HorizontalScroll quebra se um ancestral
     // tiver overflow-hidden.
     <Scene tone="olive" minHeight="auto" clip={false}>
-      <Container width="wide" className="py-16 md:py-20">
+      <Container width="wide" className="pt-16 pb-1 md:pt-20 md:pb-2">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <Reveal>
-            <p className="text-sm uppercase tracking-[0.2em] text-label">{eyebrowText}</p>
-            <h2 className="mt-4 font-sans text-[clamp(2rem,5vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
+            <h2 className="font-sans text-[clamp(2rem,5vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
               <Link
                 href="/galeria"
                 className="underline-offset-8 transition-colors hover:text-accent hover:underline"
@@ -130,7 +128,7 @@ export function MiniGaleria({ projetos, eyebrow, titulo, descricao, max = 7 }: M
 
       {/* Desktop: trilho horizontal com pin — imagens de altura fixa (62vh). */}
       <div className="hidden md:block">
-        <HorizontalScroll pinHeight="100vh" gap="clamp(1rem,2.5vw,3rem)" className="pb-8">
+        <HorizontalScroll pinHeight="72vh" gap="0.5rem" center className="pb-8">
           {itens.map((item, i) => (
             <div key={`d-${item.slug}-${i}`} className="flex h-full shrink-0 items-center">
               <Slide item={item} dimClass="aspect-[3/4] h-[62vh]" />
@@ -141,7 +139,7 @@ export function MiniGaleria({ projetos, eyebrow, titulo, descricao, max = 7 }: M
 
       {/* Mobile: carrossel com swipe (scroll-snap), uma imagem por vez com prévia. */}
       <div className="md:hidden">
-        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {itens.map((item, i) => (
             <div key={`m-${item.slug}-${i}`} className="w-[78%] shrink-0 snap-center">
               <Slide item={item} dimClass="aspect-[3/4] w-full" />
