@@ -21,23 +21,27 @@ export function CaseMeta({ projeto, proximo }: CaseMetaProps) {
     <Scene tone="olive" minHeight="auto" clip={false} className="pt-28 md:pt-36">
       <Container width="wide">
         <RevealGroup className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
-          {/* Projeto — nome em destaque; seta → próximo projeto */}
+          {/* Projeto — nome em destaque; link rotulado → próximo projeto */}
           <Reveal className="md:max-w-[45%]">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs uppercase tracking-[0.25em] text-label">Projeto</p>
               {proximo && (
                 <Link
                   href={`/projetos/${proximo.slug}`}
                   aria-label={`Próximo projeto: ${proximo.nome}`}
-                  className="text-label transition-colors hover:text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+                  className="group inline-flex items-center gap-2 rounded-full border border-label/40 px-4 py-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-label transition-colors hover:border-heading hover:text-heading focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
                 >
-                  <span aria-hidden className="text-base leading-none">
+                  Próximo projeto
+                  <span
+                    aria-hidden
+                    className="text-lg leading-none transition-transform duration-300 group-hover:translate-x-1"
+                  >
                     &rsaquo;
                   </span>
                 </Link>
               )}
             </div>
-            <h1 className="mt-2 font-sans text-[clamp(1.8rem,4vw,3.4rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
+            <h1 className="mt-4 font-sans text-[clamp(1.8rem,4vw,3.4rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
               {projeto.nome}
             </h1>
           </Reveal>

@@ -5,9 +5,7 @@ import { ManifestoSection } from '@/components/home/ManifestoSection'
 import { PilaresSection } from '@/components/home/PilaresSection'
 import { ServicosLista } from '@/components/home/ServicosLista'
 import { MiniGaleria } from '@/components/home/MiniGaleria'
-import { Fecho } from '@/components/home/Fecho'
 import { BriefForm } from '@/components/contato/BriefForm'
-import { ContatoDireto } from '@/components/contato/ContatoDireto'
 import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import {
@@ -104,7 +102,7 @@ export default async function HomePage() {
         />
       </div>
 
-      {/* 6. CTA */}
+      {/* 6. CTA — do formulário direto para o rodapé */}
       <div id="contato" className="scroll-mt-24">
         <BriefForm
           eyebrow={contato?.brief?.eyebrow}
@@ -112,14 +110,7 @@ export default async function HomePage() {
           submitLabel={contato?.brief?.submitLabel}
           contatoEmail={config?.contact?.email}
         />
-        <ContatoDireto direto={contato?.direto} contact={config?.contact} />
       </div>
-
-      {/* Fecho — sign-off poético antes do rodapé. */}
-      <Fecho
-        textoScript={contato?.fecho?.textoScript}
-        captionLinhas={contato?.fecho?.captionLinhas}
-      />
     </ThemeScope>
   )
 }

@@ -9,7 +9,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Sobre', href: '/#manifesto' },
   { label: 'Serviços', href: '/#servicos' },
-  { label: 'Galeria', href: '/#galeria' },
+  { label: 'Galeria', href: '/galeria' },
   { label: 'Contato', href: '/#contato' },
 ]
 

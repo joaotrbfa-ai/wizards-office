@@ -3,7 +3,8 @@ import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { imageProps } from '@/sanity/image'
-import { cn } from '@/lib/utils'
+import { NumeroContador } from '@/components/home/NumeroContador'
+import { LineReveal } from '@/components/motion/LineReveal'
 import type { Membro, MetricaSobre } from '@/sanity/types'
 
 export interface ManifestoSectionProps {
@@ -34,11 +35,11 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
           </div>
 
           {/* 2. Texto do manifesto — 2º no mobile; coluna direita (2 linhas) no desktop */}
-          <div className="order-2 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:pt-8">
+          <div className="order-2 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
             <RevealGroup className="flex flex-col gap-7">
               {paragrafos.map((p, i) => (
                 <Reveal key={i}>
-                  <p className="text-base leading-relaxed text-label md:text-xl">{p}</p>
+                  <p className="text-base leading-relaxed text-label md:text-lg">{p}</p>
                 </Reveal>
               ))}
             </RevealGroup>
@@ -52,26 +53,25 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                   const { src, alt, blurDataURL } = imageProps(m.foto, 600)
                   return (
                     <Reveal key={m._id}>
-                      <figure>
-                        <div className="relative aspect-[3/4] overflow-hidden bg-ink">
-                          {src && (
-                            <Image
-                              src={src}
-                              alt={alt || m.nome}
-                              fill
-                              sizes="(min-width: 1024px) 12vw, 30vw"
-                              className="object-cover object-top"
-                              {...(blurDataURL
-                                ? { placeholder: 'blur' as const, blurDataURL }
-                                : {})}
-                            />
-                          )}
-                        </div>
-                        <figcaption className="mt-2">
-                          <span className="block font-sans text-xs uppercase tracking-wide text-heading">
+                      <figure className="group relative aspect-[3/4] overflow-hidden bg-ink">
+                        {src && (
+                          <Image
+                            src={src}
+                            alt={alt || m.nome}
+                            fill
+                            sizes="(min-width: 1024px) 12vw, 30vw"
+                            className="object-cover object-top"
+                            {...(blurDataURL
+                              ? { placeholder: 'blur' as const, blurDataURL }
+                              : {})}
+                          />
+                        )}
+                        {/* Nome/função sobre degradê preto — só no hover. */}
+                        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-3 pt-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <span className="block font-sans text-xs uppercase tracking-wide text-cream">
                             {m.nome}
                           </span>
-                          <span className="block text-[0.65rem] uppercase tracking-wide text-label">
+                          <span className="block text-[0.65rem] uppercase tracking-wide text-cream/70">
                             {m.cargo}
                           </span>
                         </figcaption>
@@ -91,17 +91,18 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                   <div className="mt-6 grid grid-cols-3 gap-6">
                     {numeros.map((metrica, i) => (
                       <div key={`${metrica.label}-${i}`} className="flex flex-col">
-                        <span
-                          className={cn(
-                            'font-sans font-bold leading-[0.85] text-heading',
-                            metrica.tipo === 'numero'
-                              ? 'text-[clamp(1.6rem,3vw,2.6rem)]'
-                              : 'text-[clamp(1.15rem,2vw,1.75rem)]',
-                          )}
-                        >
-                          {metrica.valor}
-                        </span>
-                        <span className="mt-3 border-t border-label/25 pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
+                        {metrica.tipo === 'numero' ? (
+                          <NumeroContador
+                            valor={metrica.valor}
+                            className="font-sans font-bold leading-[0.85] text-heading text-[clamp(1.6rem,3vw,2.6rem)]"
+                          />
+                        ) : (
+                          <span className="font-sans font-bold leading-[0.85] text-heading text-[clamp(1.15rem,2vw,1.75rem)]">
+                            {metrica.valor}
+                          </span>
+                        )}
+                        <LineReveal className="mt-3" />
+                        <span className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
                           {metrica.label}
                         </span>
                       </div>

@@ -20,25 +20,26 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
             const { src, alt, blurDataURL } = imageProps(pilar.image, 1200)
             return (
               <Reveal key={pilar._id}>
-                <article>
-                  <div className="relative aspect-[3/2] overflow-hidden bg-olive md:aspect-[4/5]">
-                    {src && (
-                      <Image
-                        src={src}
-                        alt={alt || pilar.titulo}
-                        fill
-                        sizes="(min-width: 768px) 33vw, 100vw"
-                        className="object-cover"
-                        {...(blurDataURL ? { placeholder: 'blur' as const, blurDataURL } : {})}
-                      />
-                    )}
+                <article className="group relative aspect-[3/2] overflow-hidden bg-olive md:aspect-[4/5]">
+                  {src && (
+                    <Image
+                      src={src}
+                      alt={alt || pilar.titulo}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
+                      {...(blurDataURL ? { placeholder: 'blur' as const, blurDataURL } : {})}
+                    />
+                  )}
+                  {/* Título + descrição sobre degradê preto, sempre visíveis. */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent p-6 pt-20 md:p-7 md:pt-24">
+                    <h3 className="font-sans text-[clamp(1.4rem,2.2vw,2rem)] font-bold uppercase leading-[0.95] tracking-wide text-cream">
+                      {pilar.titulo}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-cream/80 md:text-base">
+                      {pilar.descricao}
+                    </p>
                   </div>
-                  <h3 className="mt-6 font-sans text-[clamp(1.4rem,2.2vw,2rem)] font-bold uppercase leading-[0.95] tracking-wide text-heading">
-                    {pilar.titulo}
-                  </h3>
-                  <p className="mt-3 max-w-prose text-sm leading-relaxed text-label md:text-base">
-                    {pilar.descricao}
-                  </p>
                 </article>
               </Reveal>
             )
