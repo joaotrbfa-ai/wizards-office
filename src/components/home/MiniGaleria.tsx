@@ -4,6 +4,7 @@ import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/motion/Reveal'
+import { MaskReveal } from '@/components/motion/MaskReveal'
 import { HorizontalScroll } from '@/components/scroll/HorizontalScroll'
 import { imageProps } from '@/sanity/image'
 import { cn } from '@/lib/utils'
@@ -105,16 +106,13 @@ export function MiniGaleria({ projetos, titulo, descricao, max = 7 }: MiniGaleri
     <Scene tone="olive" minHeight="auto" clip={false}>
       <Container width="wide" className="pt-16 pb-1 md:pt-20 md:pb-2">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <Reveal>
-            <h2 className="font-sans text-[clamp(2rem,5vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
-              <Link
-                href="/galeria"
-                className="underline-offset-8 transition-colors hover:text-accent hover:underline"
-              >
+          <h2 className="font-sans text-[clamp(2rem,5vw,4rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
+            <MaskReveal>
+              <Link href="/galeria" className="transition-colors hover:text-accent">
                 {tituloText}
               </Link>
-            </h2>
-          </Reveal>
+            </MaskReveal>
+          </h2>
           <Reveal>
             {descricao ? (
               <p className="max-w-sm text-sm leading-relaxed text-body md:text-base">{descricao}</p>

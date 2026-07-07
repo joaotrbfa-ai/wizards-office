@@ -4,6 +4,7 @@ import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { imageProps } from '@/sanity/image'
 import { NumeroContador } from '@/components/home/NumeroContador'
+import { LineReveal } from '@/components/motion/LineReveal'
 import type { Membro, MetricaSobre } from '@/sanity/types'
 
 export interface ManifestoSectionProps {
@@ -100,7 +101,8 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
                             {metrica.valor}
                           </span>
                         )}
-                        <span className="mt-3 border-t border-label/25 pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
+                        <LineReveal className="mt-3" />
+                        <span className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
                           {metrica.label}
                         </span>
                       </div>

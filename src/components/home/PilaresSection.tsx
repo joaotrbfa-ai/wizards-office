@@ -20,14 +20,14 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
             const { src, alt, blurDataURL } = imageProps(pilar.image, 1200)
             return (
               <Reveal key={pilar._id}>
-                <article className="relative aspect-[3/2] overflow-hidden bg-olive md:aspect-[4/5]">
+                <article className="group relative aspect-[3/2] overflow-hidden bg-olive md:aspect-[4/5]">
                   {src && (
                     <Image
                       src={src}
                       alt={alt || pilar.titulo}
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105"
                       {...(blurDataURL ? { placeholder: 'blur' as const, blurDataURL } : {})}
                     />
                   )}
