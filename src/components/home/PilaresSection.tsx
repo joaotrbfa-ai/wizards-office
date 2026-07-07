@@ -14,7 +14,7 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
   if (!pilares.length) return null
 
   return (
-    <Scene tone="ink" minHeight="auto" className="py-16 md:py-36">
+    <Scene tone="ink" minHeight="auto" className="pt-12 pb-16 md:pt-28 md:pb-36">
       <Container width="wide">
         <Reveal className="flex flex-col items-center">
           <Image
