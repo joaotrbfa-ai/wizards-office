@@ -76,13 +76,12 @@ function Slide({ item, dimClass }: { item: GaleriaImagem; dimClass: string }) {
               : {})}
           />
         )}
-        {/* Afordância de clique. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-[0.7rem] uppercase tracking-[0.15em] text-olive opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        >
-          Ver
-        </span>
+        {/* Nome do projeto sobre degradê preto — só no hover (padrão da equipe). */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-5 pt-14 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="block font-sans text-sm uppercase tracking-wide text-cream">
+            {item.nome}
+          </span>
+        </div>
       </div>
     </Link>
   )

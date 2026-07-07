@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, MotionConfig } from 'framer-motion'
+import { motion, MotionConfig, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { EASE_SOFT } from '@/lib/motion'
 
@@ -9,9 +10,9 @@ import { EASE_SOFT } from '@/lib/motion'
  * viewport. `duration` casa com a contagem dos números (2s) para o traço e o
  * número avançarem juntos.
  *
- * `MotionConfig reducedMotion="never"` local: o `scaleX` é transform, que o
- * `reducedMotion="user"` global suprimiria — deixando a linha em scaleX:0
- * (invisível). Revelamos sempre, coerente com o contador dos números.
+ * O `useInView` observa um wrapper ESTÁVEL — a linha em si tem `scaleX:0`
+ * (largura zero), que o IntersectionObserver não detectaria como visível.
+ * `MotionConfig reducedMotion="never"` garante o transform sob reduced-motion.
  */
 export function LineReveal({
   className,
@@ -22,16 +23,20 @@ export function LineReveal({
   duration?: number
   delay?: number
 }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.5 })
+
   return (
     <MotionConfig reducedMotion="never">
-      <motion.span
-        aria-hidden
-        className={cn('block h-px origin-left bg-label/25', className)}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration, ease: EASE_SOFT, delay }}
-      />
+      <span ref={ref} className={cn('block', className)}>
+        <motion.span
+          aria-hidden
+          className="block h-px origin-left bg-label/25"
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ duration, ease: EASE_SOFT, delay }}
+        />
+      </span>
     </MotionConfig>
   )
 }
