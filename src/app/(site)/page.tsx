@@ -66,18 +66,18 @@ export default async function HomePage() {
         poster={home?.hero?.poster ? imageProps(home.hero.poster, 1920).src : undefined}
       />
 
-      {/* 2. Manifesto / Equipe / Números — seção única */}
+      {/* 2. Direção / Narrativa / Confiança — seção única */}
+      <div id="pilares" className="scroll-mt-24">
+        <PilaresSection pilares={pilares} />
+      </div>
+
+      {/* 3. Manifesto / Equipe / Números — seção única */}
       <div id="manifesto" className="scroll-mt-24">
         <ManifestoSection
           paragrafos={home?.manifestoTextoParagrafos ?? []}
           membros={equipe}
           numeros={sobre?.numeros ?? []}
         />
-      </div>
-
-      {/* 3. Direção / Narrativa / Confiança — seção única */}
-      <div id="pilares" className="scroll-mt-24">
-        <PilaresSection pilares={pilares} />
       </div>
 
       {/* 4. Serviços */}
