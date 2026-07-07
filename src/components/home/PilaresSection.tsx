@@ -18,11 +18,11 @@ export function PilaresSection({ pilares }: { pilares: Pilar[] }) {
       <Container width="wide">
         <Reveal className="flex flex-col items-center">
           <Image
-            src="/brand/logo-light.png"
+            src="/brand/logo-extensa-branco.png"
             alt="Wizards Office"
-            width={1250}
-            height={404}
-            className="h-8 w-auto md:h-11"
+            width={1238}
+            height={147}
+            className="h-auto w-72 md:w-96"
           />
           <span aria-hidden className="mt-6 block h-px w-12 bg-label/40 md:mt-8" />
         </Reveal>
