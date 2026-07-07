@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { ScrollProgress } from '@/components/scroll/ScrollProgress'
-import { GaleriaAbertura } from '@/components/galeria/GaleriaAbertura'
+import { Scene } from '@/components/scroll/Scene'
+import { Container } from '@/components/layout/Container'
+import { Reveal } from '@/components/motion/Reveal'
 import { GaleriaGrid } from '@/components/galeria/GaleriaGrid'
-import { GaleriaCtaFinal } from '@/components/galeria/GaleriaCtaFinal'
 import { ThemeScope } from '@/components/theme/ThemeScope'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { paginaGaleriaQuery } from '@/sanity/queries'
@@ -25,9 +26,16 @@ export default async function GaleriaPage() {
   return (
     <ThemeScope roles={pagina?.aparencia}>
       <ScrollProgress />
-      <GaleriaAbertura abertura={pagina?.abertura} />
+      <Scene tone="olive" minHeight="auto" className="pt-28 pb-2 md:pt-36 md:pb-4">
+        <Container>
+          <Reveal>
+            <h1 className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-bold uppercase leading-[0.9] tracking-wide text-heading">
+              Galeria
+            </h1>
+          </Reveal>
+        </Container>
+      </Scene>
       <GaleriaGrid rows={pagina?.rows ?? []} />
-      <GaleriaCtaFinal cta={pagina?.ctaFinal} />
     </ThemeScope>
   )
 }

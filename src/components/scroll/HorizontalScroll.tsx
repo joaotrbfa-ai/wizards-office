@@ -17,6 +17,12 @@ export interface HorizontalScrollProps {
    * (offset `top = (100svh - pinHeight)/2`). Default: encosta no topo (`top: 0`).
    */
   center?: boolean
+  /**
+   * Conteúdo fixado DENTRO da área pinada (não rola com o trilho). O elemento
+   * deve se posicionar sozinho (ex.: `absolute bottom-4 right-6`). Útil para um
+   * CTA que fica "blocado" no canto enquanto as imagens passam.
+   */
+  overlay?: ReactNode
   className?: string
 }
 
@@ -30,6 +36,7 @@ export function HorizontalScroll({
   pinHeight = '100vh',
   gap = '0px',
   center = false,
+  overlay,
   className,
 }: HorizontalScrollProps) {
   const reduced = useReducedMotion()
@@ -105,6 +112,7 @@ export function HorizontalScroll({
         >
           {children}
         </motion.div>
+        {overlay}
       </div>
     </div>
   )

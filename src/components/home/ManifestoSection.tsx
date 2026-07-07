@@ -34,9 +34,9 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
             </Reveal>
           </div>
 
-          {/* 2. Texto do manifesto — 2º no mobile; coluna direita (2 linhas) no desktop */}
-          <div className="order-2 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
-            <RevealGroup className="flex flex-col gap-7">
+          {/* 2. Texto do manifesto — 2º no mobile; no desktop começa na linha das fotos (row 2) */}
+          <div className="order-2 lg:col-span-7 lg:col-start-6 lg:row-start-2">
+            <RevealGroup className="flex flex-col gap-7 lg:h-full lg:justify-between">
               {paragrafos.map((p, i) => (
                 <Reveal key={i}>
                   <p className="text-base leading-relaxed text-label md:text-lg">{p}</p>
