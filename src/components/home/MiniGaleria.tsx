@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
+import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/motion/Reveal'
 import { HorizontalScroll } from '@/components/scroll/HorizontalScroll'
 import { imageProps } from '@/sanity/image'
@@ -128,7 +129,7 @@ export function MiniGaleria({ projetos, titulo, descricao, max = 7 }: MiniGaleri
 
       {/* Desktop: trilho horizontal com pin — imagens de altura fixa (62vh). */}
       <div className="hidden md:block">
-        <HorizontalScroll pinHeight="72vh" gap="0.5rem" center className="pb-8">
+        <HorizontalScroll pinHeight="72vh" gap="0.5rem" center className="pb-1">
           {itens.map((item, i) => (
             <div key={`d-${item.slug}-${i}`} className="flex h-full shrink-0 items-center">
               <Slide item={item} dimClass="aspect-[3/4] h-[62vh]" />
@@ -139,7 +140,7 @@ export function MiniGaleria({ projetos, titulo, descricao, max = 7 }: MiniGaleri
 
       {/* Mobile: carrossel com swipe (scroll-snap), uma imagem por vez com prévia. */}
       <div className="md:hidden">
-        <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {itens.map((item, i) => (
             <div key={`m-${item.slug}-${i}`} className="w-[78%] shrink-0 snap-center">
               <Slide item={item} dimClass="aspect-[3/4] w-full" />
@@ -147,6 +148,14 @@ export function MiniGaleria({ projetos, titulo, descricao, max = 7 }: MiniGaleri
           ))}
         </div>
       </div>
+
+      <Container width="wide" className="flex justify-end pt-1">
+        <Reveal>
+          <Button variant="outline" href="/galeria" size="md">
+            Ver galeria completa
+          </Button>
+        </Reveal>
+      </Container>
     </Scene>
   )
 }
