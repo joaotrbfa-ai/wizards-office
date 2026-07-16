@@ -27,22 +27,16 @@ function PartnerLogo({ partner }: { partner: Parceiro }) {
       width={140}
       height={48}
       onError={() => setErro(true)}
-      className="h-14 w-auto object-contain opacity-60 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-20"
+      className="h-16 w-auto object-contain opacity-60 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-24"
     />
   )
 }
 
 export function ParceirosCena({ parceiros }: ParceirosCenaProps) {
   return (
-    <Scene tone="olive" minHeight="auto" className="py-32 md:py-48">
+    <Scene tone="olive" minHeight="auto" className="py-7 md:py-9">
       <Container>
-        <Reveal className="text-center">
-          <h2 className="font-sans text-[clamp(1.55rem,3vw,2.3rem)] font-bold uppercase tracking-wide text-heading">
-            Parceiros
-          </h2>
-        </Reveal>
-
-        <RevealGroup className="mt-16 grid grid-cols-3 items-center justify-items-center gap-8 sm:grid-cols-4 md:gap-12 lg:grid-cols-7 lg:gap-8">
+        <RevealGroup className="grid grid-cols-3 items-center justify-items-center gap-8 sm:grid-cols-4 md:gap-12 lg:grid-cols-7 lg:gap-8">
           {parceiros.map((partner) => (
             <Reveal key={partner._id} className="flex items-center justify-center">
               <PartnerLogo partner={partner} />

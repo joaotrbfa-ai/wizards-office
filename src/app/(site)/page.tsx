@@ -3,6 +3,7 @@ import { ScrollProgress } from '@/components/scroll/ScrollProgress'
 import { Hero } from '@/components/home/Hero'
 import { ManifestoSection } from '@/components/home/ManifestoSection'
 import { PilaresSection } from '@/components/home/PilaresSection'
+import { ParceirosCena } from '@/components/home/ParceirosCena'
 import { ServicosLista } from '@/components/home/ServicosLista'
 import { MiniGaleria } from '@/components/home/MiniGaleria'
 import { BriefForm } from '@/components/contato/BriefForm'
@@ -11,6 +12,7 @@ import { sanityFetch, TAGS } from '@/sanity/fetch'
 import {
   paginaHomeQuery,
   pilaresQuery,
+  parceirosQuery,
   servicosQuery,
   membrosQuery,
   paginaSobreQuery,
@@ -22,6 +24,7 @@ import { imageProps } from '@/sanity/image'
 import type {
   PaginaHome,
   Pilar,
+  Parceiro,
   Servico,
   Membro,
   PaginaSobre,
@@ -39,10 +42,11 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [home, pilares, servicos, membros, sobre, contato, config, galeriaProjetos] =
+  const [home, pilares, parceiros, servicos, membros, sobre, contato, config, galeriaProjetos] =
     await Promise.all([
       sanityFetch<PaginaHome>({ query: paginaHomeQuery, tags: [TAGS.paginaHome] }),
       sanityFetch<Pilar[]>({ query: pilaresQuery, tags: [TAGS.pilar] }),
+      sanityFetch<Parceiro[]>({ query: parceirosQuery, tags: [TAGS.parceiro] }),
       sanityFetch<Servico[]>({ query: servicosQuery, tags: [TAGS.servico] }),
       sanityFetch<Membro[]>({ query: membrosQuery, tags: [TAGS.membro] }),
       sanityFetch<PaginaSobre | null>({ query: paginaSobreQuery, tags: [TAGS.paginaSobre] }),
@@ -80,7 +84,14 @@ export default async function HomePage() {
         />
       </div>
 
-      {/* 4. Serviços */}
+      {/* 4. Parceiros — logos das construtoras */}
+      {parceiros.length > 0 && (
+        <div id="parceiros" className="scroll-mt-24">
+          <ParceirosCena parceiros={parceiros} />
+        </div>
+      )}
+
+      {/* 5. Serviços */}
       <div id="servicos" className="scroll-mt-24">
         <ServicosLista
           servicos={servicos.map((s) => ({
@@ -91,7 +102,7 @@ export default async function HomePage() {
         />
       </div>
 
-      {/* 5. Galeria */}
+      {/* 6. Galeria */}
       <div id="galeria" className="scroll-mt-24">
         <MiniGaleria
           projetos={galeriaProjetos ?? []}
@@ -102,7 +113,7 @@ export default async function HomePage() {
         />
       </div>
 
-      {/* 6. CTA — do formulário direto para o rodapé */}
+      {/* 7. CTA — do formulário direto para o rodapé */}
       <div id="contato" className="scroll-mt-24">
         <BriefForm
           eyebrow={contato?.brief?.eyebrow}
