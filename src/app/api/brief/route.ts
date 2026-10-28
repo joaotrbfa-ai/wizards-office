@@ -4,8 +4,9 @@ import { briefSchema } from '@/lib/brief-schema'
 
 export const runtime = 'nodejs'
 
-// Rate-limit simples em memória (por IP). Suficiente para um site de marketing
-// single-instance; em serverless multi-instância, migrar para Upstash/Redis.
+// Rate-limit em memória, POR INSTÂNCIA: cada função serverless tem o próprio Map,
+// zerado a cada cold start. Não é um teto global de envios (nem da cota do Resend);
+// para isso seria preciso um store compartilhado (ex.: Upstash/Redis).
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_REQUESTS = 5
 const MAX_BODY_BYTES = 50_000
@@ -23,6 +24,17 @@ function rateLimited(ip: string): boolean {
   return false
 }
 
+/**
+ * IP do cliente definido pela borda da Vercel, que sobrescreve esses headers (o
+ * cliente não consegue forjá-los). `request.ip` não existe no runtime nodejs do
+ * Next 14. Não usa X-Forwarded-For: fora da Vercel (`next start`) ele vem do cliente.
+ * Sem o header (dev local / self-hosted), cai num bucket único compartilhado.
+ */
+function clientIp(req: Request): string {
+  const header = req.headers.get('x-vercel-forwarded-for') ?? req.headers.get('x-real-ip')
+  return header?.split(',')[0]?.trim() || 'unknown'
+}
+
 /** Escapa texto do usuário antes de interpolar no HTML do e-mail. */
 function esc(value: string): string {
   return value
@@ -38,8 +50,7 @@ function linha(label: string, valor?: string): string {
 }
 
 export async function POST(req: Request) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  if (rateLimited(ip)) {
+  if (rateLimited(clientIp(req))) {
     return NextResponse.json(
       { error: 'Muitas tentativas. Aguarde alguns minutos e tente de novo.' },
       { status: 429 },

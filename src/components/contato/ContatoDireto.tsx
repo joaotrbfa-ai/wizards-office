@@ -1,6 +1,7 @@
 import { Scene } from '@/components/scroll/Scene'
 import { Container } from '@/components/layout/Container'
 import { Reveal, RevealGroup } from '@/components/motion/Reveal'
+import { isSafeHref } from '@/lib/safe-href'
 import type { PaginaContato, Config } from '@/sanity/types'
 
 type Canal = { label: string; valor: string; href?: string; external?: boolean }
@@ -18,7 +19,9 @@ export function ContatoDireto({
   const instagramLabel = direto?.instagramLabel ?? 'Instagram'
 
   const email = contact?.email ?? 'contato@wizardsoffice.com'
-  const instagramUrl = contact?.instagramUrl ?? 'https://www.instagram.com/wizards.office/'
+  const instagramUrl = isSafeHref(contact?.instagramUrl)
+    ? contact.instagramUrl
+    : 'https://www.instagram.com/wizards.office/'
   const instagramHandle = contact?.instagramHandle ?? '@wizards.office'
   const address = contact?.address ?? 'Balneário Camboriú · SC'
 

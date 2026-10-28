@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from './Container'
+import { isSafeHref } from '@/lib/safe-href'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { configQuery } from '@/sanity/queries'
 import type { Config } from '@/sanity/types'
@@ -12,7 +13,9 @@ export async function Footer() {
   const config = await sanityFetch<Config>({ query: configQuery, tags: [TAGS.config] })
 
   const email = config?.contact?.email ?? 'contato@wizardsoffice.com'
-  const instagramUrl = config?.contact?.instagramUrl ?? 'https://www.instagram.com/wizards.office/'
+  const instagramUrl = isSafeHref(config?.contact?.instagramUrl)
+    ? config.contact.instagramUrl
+    : 'https://www.instagram.com/wizards.office/'
   const instagramHandle = config?.contact?.instagramHandle ?? '@wizards.office'
 
   return (
