@@ -109,7 +109,7 @@ export default async function HomePage() {
           eyebrow={home?.miniGaleria?.eyebrow}
           titulo={home?.miniGaleria?.titulo}
           descricao={home?.miniGaleria?.descricao}
-          max={7}
+          max={8}
         />
       </div>
 

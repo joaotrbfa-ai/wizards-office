@@ -22,35 +22,14 @@ export interface MiniGaleriaProps {
 type GaleriaImagem = { image: SanityImage; slug: string; nome: string }
 
 /**
- * Monta a lista de imagens da galeria: primeiro a capa de cada projeto (na ordem
- * de exibição), depois completa com as fotos internas em round-robin até atingir
- * `max`. Assim a galeria começa variada (um projeto diferente por vez) e só
- * repete projeto quando precisa de mais imagens.
+ * Monta a lista de imagens da galeria: a capa de cada projeto, uma única vez e
+ * na ordem de exibição, até `max`. Não completa com fotos internas — com poucos
+ * projetos isso repetia o primeiro (Fazenda Garden aparecia duas vezes).
  */
 function montarImagens(projetos: GaleriaHomeProjeto[], max: number): GaleriaImagem[] {
-  const itens: GaleriaImagem[] = []
-
-  for (const p of projetos) {
-    if (itens.length >= max) break
-    itens.push({ image: p.coverImage, slug: p.slug, nome: p.nome })
-  }
-
-  let g = 0
-  let progrediu = true
-  while (itens.length < max && progrediu) {
-    progrediu = false
-    for (const p of projetos) {
-      if (itens.length >= max) break
-      const foto = p.galeria?.[g]?.image
-      if (foto) {
-        itens.push({ image: foto, slug: p.slug, nome: p.nome })
-        progrediu = true
-      }
-    }
-    g++
-  }
-
-  return itens
+  return projetos
+    .slice(0, max)
+    .map((p) => ({ image: p.coverImage, slug: p.slug, nome: p.nome }))
 }
 
 /** Uma imagem clicável da galeria. `dimClass` controla a dimensão do container
