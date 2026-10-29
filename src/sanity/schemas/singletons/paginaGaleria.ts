@@ -28,10 +28,19 @@ export const paginaGaleria = defineType({
       ],
     }),
     defineField({
+      name: 'imagens',
+      title: 'Imagens do feed',
+      type: 'array',
+      of: [{ type: 'galeriaItem' }],
+      description:
+        'Feed infinito da galeria. A ordem aqui é a primeira volta; depois o feed recomeça embaralhado. Vazio = usa as linhas antigas abaixo.',
+    }),
+    defineField({
       name: 'rows',
-      title: 'Linhas da galeria',
+      title: 'Linhas da galeria (legado)',
       type: 'array',
       of: [{ type: 'galeriaRow' }],
+      description: 'Layout antigo em linhas. Só é usado enquanto "Imagens do feed" estiver vazio.',
     }),
     defineField({ name: 'ctaFinal', title: 'CTA final', type: 'ctaBlock' }),
     defineField({
