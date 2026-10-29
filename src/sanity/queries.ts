@@ -236,6 +236,7 @@ export const paginaProjetosQuery = groq`
 export const paginaGaleriaQuery = groq`
   *[_id == "paginaGaleria"][0] {
     abertura { ${aberturaFields} },
+    imagens[] { image { ${imageFields} }, caption, "projeto": projeto->nome },
     rows[] { layout, images[] { image { ${imageFields} }, caption } },
     ctaFinal { ${ctaBlockFields} },
     aparencia { ${temaPapeisFields} }

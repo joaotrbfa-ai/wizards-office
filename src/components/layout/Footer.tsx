@@ -1,18 +1,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from './Container'
+import { isSafeHref } from '@/lib/safe-href'
+import { WHATSAPP_LABEL, WHATSAPP_URL } from '@/lib/contato'
 import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { configQuery } from '@/sanity/queries'
 import type { Config } from '@/sanity/types'
-
-const WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=5547997196922'
-const WHATSAPP_LABEL = '+55 47 99719-6922'
 
 export async function Footer() {
   const config = await sanityFetch<Config>({ query: configQuery, tags: [TAGS.config] })
 
   const email = config?.contact?.email ?? 'contato@wizardsoffice.com'
-  const instagramUrl = config?.contact?.instagramUrl ?? 'https://www.instagram.com/wizards.office/'
+  const instagramUrl = isSafeHref(config?.contact?.instagramUrl)
+    ? config.contact.instagramUrl
+    : 'https://www.instagram.com/wizards.office/'
   const instagramHandle = config?.contact?.instagramHandle ?? '@wizards.office'
 
   return (

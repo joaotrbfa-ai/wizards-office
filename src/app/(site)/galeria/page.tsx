@@ -35,7 +35,7 @@ export default async function GaleriaPage() {
           </Reveal>
         </Container>
       </Scene>
-      <GaleriaGrid rows={pagina?.rows ?? []} />
+      <GaleriaGrid imagens={pagina?.imagens} rows={pagina?.rows} />
     </ThemeScope>
   )
 }

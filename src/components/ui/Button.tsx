@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { isSafeHref } from '@/lib/safe-href'
 import { cn } from '@/lib/utils'
 
 type Variant = 'outline' | 'solid' | 'ghost'
@@ -45,6 +46,11 @@ export function Button({
 
   if (rest.href !== undefined) {
     const { href, ...anchorRest } = rest
+    // href pode vir do CMS: fora da allowlist (ex.: javascript:) não vira link.
+    if (!isSafeHref(href)) {
+      console.warn('[Button] href fora da allowlist (use "/rota" ou http(s)://); botão omitido.')
+      return null
+    }
     return (
       <Link href={href} className={classes} {...anchorRest}>
         {children}
