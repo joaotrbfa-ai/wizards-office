@@ -123,6 +123,9 @@ export type GaleriaItem = {
   caption?: string
 }
 
+/** Item do feed da galeria: `projeto` é o nome do projeto vinculado (legenda no hover). */
+export type GaleriaFeedItem = GaleriaItem & { projeto?: string }
+
 export type GaleriaRowLayout =
   | 'full'
   | 'split'
@@ -222,6 +225,8 @@ export type PaginaProjetos = {
 
 export type PaginaGaleria = {
   abertura?: Abertura
+  /** Feed infinito. Vazio/ausente → a página cai nas `rows` legadas. */
+  imagens?: GaleriaFeedItem[]
   rows?: GaleriaRow[]
   ctaFinal?: CtaBlock
   aparencia?: RoleOverrides
