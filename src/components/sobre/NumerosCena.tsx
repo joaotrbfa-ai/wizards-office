@@ -5,8 +5,10 @@ import { cn } from '@/lib/utils'
 import type { MetricaSobre } from '@/sanity/types'
 
 export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
+  // Métrica sem valor ou sem legenda não entra (evita um número vazio ou solto).
+  const metricas = (numeros ?? []).filter((m) => m.valor?.trim() && m.label?.trim())
   // Empty state: não renderiza uma tela inteira quase vazia.
-  if (!numeros?.length) return null
+  if (!metricas.length) return null
 
   return (
     <Scene tone="cream" minHeight="screen">
@@ -19,7 +21,7 @@ export function NumerosCena({ numeros }: { numeros: MetricaSobre[] }) {
         </Reveal>
 
         <RevealGroup className="mt-16 grid grid-cols-1 gap-12 md:mt-24 md:grid-cols-3 md:gap-16">
-          {numeros.map((metrica, i) => (
+          {metricas.map((metrica, i) => (
             <Reveal key={`${metrica.label}-${i}`} className="flex h-full flex-col">
               <span
                 className={cn(

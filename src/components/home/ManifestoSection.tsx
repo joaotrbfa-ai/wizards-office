@@ -5,6 +5,7 @@ import { Reveal, RevealGroup } from '@/components/motion/Reveal'
 import { imageProps } from '@/sanity/image'
 import { NumeroContador } from '@/components/home/NumeroContador'
 import { LineReveal } from '@/components/motion/LineReveal'
+import { cn } from '@/lib/utils'
 import type { Membro, MetricaSobre } from '@/sanity/types'
 
 export interface ManifestoSectionProps {
@@ -20,6 +21,9 @@ export interface ManifestoSectionProps {
  * grid placement (o desktop é reconstruído com col-start/row-start).
  */
 export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSectionProps) {
+  // Métrica sem valor ou sem legenda não entra (evita um contador vazio ou solto).
+  const metricas = numeros.filter((m) => m.valor?.trim() && m.label?.trim())
+
   return (
     <Scene tone="olive" minHeight="auto" className="py-16 md:py-20">
       <Container width="wide">
@@ -82,34 +86,45 @@ export function ManifestoSection({ paragrafos, membros, numeros }: ManifestoSect
               </RevealGroup>
             )}
 
-            {numeros.length > 0 && (
-              <Reveal className={membros.length > 0 ? 'mt-10' : ''}>
-                <div className="border-t border-label/20 pt-8">
-                  <p className="text-sm uppercase tracking-[0.2em] text-label">
-                    Números que nos definem
-                  </p>
-                  <div className="mt-6 grid grid-cols-3 gap-6">
-                    {numeros.map((metrica, i) => (
-                      <div key={`${metrica.label}-${i}`} className="flex flex-col">
-                        {metrica.tipo === 'numero' ? (
-                          <NumeroContador
-                            valor={metrica.valor}
-                            className="font-sans font-bold leading-[0.85] text-heading text-[clamp(1.6rem,3vw,2.6rem)]"
-                          />
-                        ) : (
-                          <span className="font-sans font-bold leading-[0.85] text-heading text-[clamp(1.15rem,2vw,1.75rem)]">
-                            {metrica.valor}
+            {metricas.length > 0 && (
+              <>
+                {/* Sem JavaScript o Reveal e o traço ficam no estilo inicial do
+                    framer-motion (opacity 0 / scaleX 0): este CSS só vale nesse caso
+                    e garante que os números apareçam. */}
+                <noscript
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      '<style>.numeros-manifesto,.numeros-manifesto *{opacity:1!important;transform:none!important}</style>',
+                  }}
+                />
+                <Reveal className={cn('numeros-manifesto', membros.length > 0 && 'mt-10')}>
+                  <div className="border-t border-label/20 pt-8">
+                    <p className="text-sm uppercase tracking-[0.2em] text-label">
+                      Números que nos definem
+                    </p>
+                    <div className="mt-6 grid grid-cols-3 gap-6">
+                      {metricas.map((metrica, i) => (
+                        <div key={`${metrica.label}-${i}`} className="flex flex-col">
+                          {metrica.tipo === 'numero' ? (
+                            <NumeroContador
+                              valor={metrica.valor}
+                              className="font-sans text-[clamp(1.6rem,3vw,2.6rem)] font-bold leading-[0.85] text-heading"
+                            />
+                          ) : (
+                            <span className="font-sans text-[clamp(1.15rem,2vw,1.75rem)] font-bold leading-[0.85] text-heading">
+                              {metrica.valor}
+                            </span>
+                          )}
+                          <LineReveal className="mt-3" />
+                          <span className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
+                            {metrica.label}
                           </span>
-                        )}
-                        <LineReveal className="mt-3" />
-                        <span className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-label">
-                          {metrica.label}
-                        </span>
-                      </div>
-                    ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              </>
             )}
           </div>
         </div>
