@@ -115,3 +115,27 @@ componentes existentes. Páginas internas (`/sobre`, `/servicos`, `/projetos`,
 - Páginas internas (`/sobre`, `/servicos`, `/projetos`, `/galeria`, `/contato`)
   permanecem intactas e acessíveis.
 - Âncoras via `HashScroll` (já existente); menu mobile fecha ao clicar.
+
+## Upgrade de segurança — Next 15.5 (07/11/2026)
+Motivo: `npm audit --omit=dev` com 4 críticas e 18 altas (RCE no Image Optimization
+com AVIF e SVG, `decompress`, `dompurify`, `tar`). Branch `chore/next-15-5`.
+
+- [x] Next 14.2 → 15.5.29 (backport de 03/11/2026; o fix do audit é 16.4.5, major)
+- [x] React 18 → 19 (o App Router do Next 15 exige 19)
+- [x] Sanity 3.99 → 4.22.1 + next-sanity 11.6 + vision 4.22 + color-input 5 (tira `decompress`; `dompurify` 3.4.17, `tar` 7.5.22)
+- [x] zod 4.4 → 4.6.7
+- [x] `params` assíncrono em `/projetos/[slug]`
+- [x] Permissions-Policy + CSP Report-Only no `next.config.mjs` (Studio em /admin com política própria)
+- [x] `npm audit --omit=dev`: 0 críticas (eram 4); 7 altas, todas no CLI do Sanity e no postcss interno do Next
+- [x] `npm run build` e `npm run lint`
+- [x] `next dev`: home, /contato, /projetos/[slug] e demais páginas 200; formulário envia para /api/brief
+
+## Review
+- **Por que 15.5 e não 16:** o 15.5.29 corrige todas as falhas do `next` no audit, inclusive as RCE com AVIF e SVG (até 15.5.27), e ainda recebe backports. O 16 exige migrar o lint para ESLint 9 flat config (`next lint` some), muda a assinatura do `revalidateTag` e o next-sanity 12 pede Sanity 5.
+- **Por que Sanity 4 e não 5:** o Sanity 5 importa `useEffectEvent` do React 19.2 estável. O Next 15.5 usa no App Router a própria cópia do React (19.2.0-canary de ago/2025), que não exporta isso, e o build do /admin quebra. O Sanity 4.22 é a linha de manutenção v4 e aceita React 18 e 19.
+- **Altas restantes:** `@sanity/cli`, `adm-zip`, `@sanity/codegen` com `zod@3` (só rodam no CLI `sanity`, nunca no site) e `postcss` dentro do `next` (só no build). Somem no Next 16 + Sanity 6.
+- **CSP:** Report-Only, só registra no console. Liberado `cloud-1de12d.becdn.net` em `media-src` (o vídeo do hero vem de lá, configurado no Sanity).
+- **Formulário:** sem `RESEND_API_KEY` local; envio válido chega à etapa do e-mail e responde 500 com a mensagem de erro na tela. Inválido 422, JSON ruim 400, honeypot 200.
+- **Não verificado:** Studio logado. Em localhost:3100 o Sanity bloqueia por CORS (a porta 3000 estava com o painel). O Studio carrega e mostra a tela de conexão do projeto.
+- **Achado antigo, fora do escopo:** `/hero-poster.jpg` não existe em `public/` (404 em toda home; é o poster padrão em `Hero.tsx`).
+- **PR #13 aberto** (`fix/security-audit-wizards`) vai conflitar em `package.json`, lockfile e `next.config.mjs`.

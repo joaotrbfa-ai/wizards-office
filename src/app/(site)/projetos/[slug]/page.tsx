@@ -8,7 +8,8 @@ import { sanityFetch, TAGS } from '@/sanity/fetch'
 import { projetoBySlugQuery, projetoSlugsQuery, projetosListQuery } from '@/sanity/queries'
 import type { Projeto, ProjetoCard } from '@/sanity/types'
 
-type Params = { slug: string }
+// Next 15: params chega como Promise.
+type Params = Promise<{ slug: string }>
 
 export async function generateStaticParams() {
   const slugs = await sanityFetch<string[]>({
@@ -23,9 +24,10 @@ export async function generateMetadata({
 }: {
   params: Params
 }): Promise<Metadata> {
+  const { slug } = await params
   const projeto = await sanityFetch<Projeto | null>({
     query: projetoBySlugQuery,
-    params: { slug: params.slug },
+    params: { slug },
     tags: [TAGS.projeto],
   })
   if (!projeto) return { title: { absolute: 'Projeto — Wizards Office' } }
@@ -36,10 +38,11 @@ export async function generateMetadata({
 }
 
 export default async function CasePage({ params }: { params: Params }) {
+  const { slug } = await params
   const [projeto, lista] = await Promise.all([
     sanityFetch<Projeto | null>({
       query: projetoBySlugQuery,
-      params: { slug: params.slug },
+      params: { slug },
       tags: [TAGS.projeto],
     }),
     sanityFetch<ProjetoCard[]>({ query: projetosListQuery, tags: [TAGS.projeto] }),
