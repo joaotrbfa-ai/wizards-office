@@ -1,5 +1,34 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
+// O Next carrega os .env* antes de ler este arquivo. Sem projectId/dataset não dá
+// para restringir o otimizador ao projeto, então falha em vez de liberar o host todo.
+const sanityProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const sanityDataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+if (!sanityProjectId || !sanityDataset) {
+  throw new Error(
+    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID / NEXT_PUBLIC_SANITY_DATASET (images.remotePatterns)',
+  )
+}
+
+/** @type {import('next/dist/shared/lib/image-config').RemotePattern[]} */
+const remotePatterns = [
+  // Só imagens do próprio projeto/dataset (urlFor gera /images/<projectId>/<dataset>/...).
+  // Sem `search`: urlFor adiciona query (auto, fit, w) que varia por uso.
+  {
+    protocol: 'https',
+    hostname: 'cdn.sanity.io',
+    pathname: `/images/${sanityProjectId}/${sanityDataset}/**`,
+  },
+]
+// Unsplash só é usado em /dev/scroll-demo; fora do dev não entra no otimizador.
+if (isDev) {
+  remotePatterns.push({
+    protocol: 'https',
+    hostname: 'images.unsplash.com',
+    pathname: '/photo-*',
+  })
+}
+
 // CSP em Report-Only: o navegador só avisa no console, não bloqueia nada.
 // Serve para observar violações antes de virar a CSP de verdade.
 // 'unsafe-inline' em script-src: o App Router injeta scripts inline sem nonce.
@@ -28,7 +57,7 @@ const studioCsp = [
   "img-src 'self' data: blob: https:",
   "media-src 'self' blob: https://cdn.sanity.io",
   "font-src 'self' data:",
-  'connect-src \'self\' https://*.sanity.io wss://*.sanity.io',
+  "connect-src 'self' https://*.sanity.io wss://*.sanity.io",
   "worker-src 'self' blob:",
   "frame-src 'self' https://*.sanity.io",
   "frame-ancestors 'self'",
@@ -46,16 +75,7 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-    ],
+    remotePatterns,
   },
   async headers() {
     return [

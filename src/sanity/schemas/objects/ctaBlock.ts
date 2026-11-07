@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { isSafeHref } from '@/lib/safe-href'
 
 /** Bloco de CTA reusável (fecho de página com imagem de fundo + título em linhas). */
 export const ctaBlock = defineType({
@@ -44,8 +45,15 @@ export const ctaBlock = defineType({
       name: 'href',
       title: 'Destino do botão',
       type: 'string',
-      description: 'Rota interna (ex.: /contato).',
-      validation: (rule) => rule.required(),
+      description: 'Rota interna (ex.: /contato) ou URL completa começando com https://.',
+      validation: (rule) =>
+        rule
+          .required()
+          .custom((value) =>
+            value === undefined || isSafeHref(value)
+              ? true
+              : 'Use uma rota interna começando com "/" (ex.: /contato) ou uma URL http(s)://.',
+          ),
     }),
     defineField({
       name: 'mostrarScriptMagic',
