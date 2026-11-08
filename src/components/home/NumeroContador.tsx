@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { animate, useInView } from 'framer-motion'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { animate, useInView, useReducedMotionConfig } from 'framer-motion'
 import { EASE_SOFT } from '@/lib/motion'
 
 /** Decompõe "1.500+" em prefixo, alvo numérico e sufixo — preservando o texto ao redor. */
@@ -25,26 +25,41 @@ function formatar(v: number, parsed: NonNullable<ReturnType<typeof parseValor>>)
  * Número que conta do zero até o valor quando entra na viewport. Sufixos/prefixos
  * ("+", "%", "anos", separador de milhar) são preservados. Se o valor não tiver
  * parte numérica, renderiza o texto como está.
+ *
+ * O HTML do servidor já traz o valor FINAL, nunca o zero: sem JavaScript
+ * (buscadores, prévias de link, leitores) o número certo aparece. Só depois de
+ * hidratar, e se o movimento não estiver reduzido, o contador volta a zero
+ * enquanto está fora da tela e conta ao entrar nela. Com prefers-reduced-motion
+ * o valor final fica parado.
  */
 export function NumeroContador({ valor, className }: { valor: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const emVista = useInView(ref, { once: true, amount: 0.5 })
-  const parsed = parseValor(valor)
-  const [display, setDisplay] = useState(parsed ? formatar(0, parsed) : valor)
+  const reduzido = useReducedMotionConfig()
+  const parsed = useMemo(() => parseValor(valor), [valor])
+  const final = parsed ? formatar(parsed.target, parsed) : valor
+  const [display, setDisplay] = useState(final)
 
   useEffect(() => {
-    if (!parsed || !emVista) return
+    if (!parsed || reduzido) {
+      setDisplay(final)
+      return
+    }
+    if (!emVista) {
+      setDisplay(formatar(0, parsed))
+      return
+    }
     const controls = animate(0, parsed.target, {
       duration: 2,
       ease: EASE_SOFT,
       onUpdate: (v) => setDisplay(formatar(Math.round(v), parsed)),
     })
     return () => controls.stop()
-  }, [emVista, parsed?.target]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [parsed, final, reduzido, emVista])
 
   return (
     <span ref={ref} className={className}>
-      {parsed ? display : valor}
+      {display}
     </span>
   )
 }
