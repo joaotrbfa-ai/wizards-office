@@ -60,6 +60,10 @@ export async function Footer() {
               {email}
             </Link>
           </div>
+
+          <p className="text-center text-[0.65rem] uppercase tracking-widest text-muted">
+            © {new Date().getFullYear()} Wizards Office · Todos os direitos reservados
+          </p>
         </div>
       </Container>
     </footer>

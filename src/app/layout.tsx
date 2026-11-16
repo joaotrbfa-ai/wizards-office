@@ -26,6 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL('https://wizardsoffice.com'),
+    // './' resolve para o pathname da rota atual → cada página ganha o próprio canonical.
+    alternates: { canonical: './' },
     title: {
       default: defaultTitle,
       template: seo?.titleTemplate ?? FALLBACK.titleTemplate,
