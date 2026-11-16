@@ -185,6 +185,11 @@ export function BriefForm({
                 </div>
               </fieldset>
 
+              <p className="text-xs leading-relaxed text-label">
+                Usamos seus dados só para responder a este contato. Eles não são compartilhados
+                com terceiros nem usados para envio de marketing.
+              </p>
+
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Button type="submit" variant="solid" size="lg" disabled={status === 'sending'}>
                   {status === 'sending' ? (
